@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>main.c</url>
+            <bookmark id="2">
+                <name/>
+                <line>115</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>mcc_generated_files/i2c_master.c</url>
+            <bookmark id="1">
+                <name/>
+                <line>55</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Projects/OneDrive/Perf%20Clock/MPLAB/mcc_generated_files/pin_manager.h</file>
+            <file>file:/C:/Users/Projects/OneDrive/Perf%20Clock/MPLAB/main.c</file>
+            <file>file:/C:/Users/Projects/OneDrive/Perf%20Clock/MPLAB/mcc_generated_files/eusart.c</file>
+        </group>
+    </open-files>
+</project-private>
