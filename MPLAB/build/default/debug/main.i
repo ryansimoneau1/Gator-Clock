@@ -3939,44 +3939,65 @@ void main() {
 
 
     (INTCONbits.PEIE = 1);
-# 116 "main.c"
+# 154 "main.c"
     while (1) {
         while(1){
 
         do { LATAbits.LATA2 = 1; } while(0);
-        EUSART_Write(0x80);
+        do { LATAbits.LATA4 = 1; } while(0);
+        EUSART_Write(0x20);
+        while(!EUSART_is_tx_done());
+        _delay((unsigned long)((100)*(250000/4000000.0)));
+        EUSART_Write(0xE0);
         while(!EUSART_is_tx_done());
 
         do { LATAbits.LATA1 = 1; } while(0);
+        do { LATAbits.LATA3 = 1; } while(0);
         _delay((unsigned long)((100)*(250000/4000000.0)));
         do { LATAbits.LATA1 = 0; } while(0);
+        do { LATAbits.LATA3 = 0; } while(0);
 
         do { LATAbits.LATA2 = 0; } while(0);
+        do { LATAbits.LATA4 = 0; } while(0);
         _delay((unsigned long)((100)*(250000/4000000.0)));
 
         do { LATAbits.LATA2 = 1; } while(0);
+        do { LATAbits.LATA4 = 1; } while(0);
+        EUSART_Write(0x40);
+        while(!EUSART_is_tx_done());
+        _delay((unsigned long)((100)*(250000/4000000.0)));
         EUSART_Write(0x40);
         while(!EUSART_is_tx_done());
 
         do { LATAbits.LATA1 = 1; } while(0);
+        do { LATAbits.LATA3 = 1; } while(0);
         _delay((unsigned long)((100)*(250000/4000000.0)));
         do { LATAbits.LATA1 = 0; } while(0);
+        do { LATAbits.LATA3 = 0; } while(0);
 
         do { LATAbits.LATA2 = 0; } while(0);
+        do { LATAbits.LATA4 = 0; } while(0);
         _delay((unsigned long)((100)*(250000/4000000.0)));
 
         do { LATAbits.LATA2 = 1; } while(0);
-        EUSART_Write(0x20);
+        do { LATAbits.LATA4 = 1; } while(0);
+        EUSART_Write(0x80);
+        while(!EUSART_is_tx_done());
+        _delay((unsigned long)((100)*(250000/4000000.0)));
+        EUSART_Write(0xE0);
         while(!EUSART_is_tx_done());
 
         do { LATAbits.LATA1 = 1; } while(0);
+        do { LATAbits.LATA3 = 1; } while(0);
         _delay((unsigned long)((100)*(250000/4000000.0)));
         do { LATAbits.LATA1 = 0; } while(0);
+        do { LATAbits.LATA3 = 0; } while(0);
 
         do { LATAbits.LATA2 = 0; } while(0);
+        do { LATAbits.LATA4 = 0; } while(0);
         _delay((unsigned long)((100)*(250000/4000000.0)));
         }
-# 231 "main.c"
+# 290 "main.c"
     }
 }
 

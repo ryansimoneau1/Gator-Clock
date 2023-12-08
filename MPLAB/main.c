@@ -113,40 +113,99 @@ void main() {
     // Start Timer 1
 //    TMR1_StartTimer();
     
+//    // Access Line test
+//    while (1) {
+//        while(1){
+//        SNK_OE_SetHigh();
+//        EUSART_Write(0x80); // Send Access Line Data
+//        while(!EUSART_is_tx_done()); // Wait for data to finish sending
+//        // Latch in Data
+//        SNK_LE_SetHigh();
+//        __delay_us(100);
+//        SNK_LE_SetLow();
+//        //Enable Register Output
+//        SNK_OE_SetLow();
+//        __delay_us(1000000);
+//
+//        SNK_OE_SetHigh();
+//        EUSART_Write(0x40); // Send Access Line Data
+//        while(!EUSART_is_tx_done()); // Wait for data to finish sending
+//        // Latch in Data
+//        SNK_LE_SetHigh();
+//        __delay_us(100);
+//        SNK_LE_SetLow();
+//        //Enable Register Output
+//        SNK_OE_SetLow();
+//        __delay_us(1000000);
+//        
+//        SNK_OE_SetHigh();
+//        EUSART_Write(0x20); // Send Access Line Data
+//        while(!EUSART_is_tx_done()); // Wait for data to finish sending
+//        // Latch in Data
+//        SNK_LE_SetHigh();
+//        __delay_us(100);
+//        SNK_LE_SetLow();
+//        //Enable Register Output
+//        SNK_OE_SetLow();
+//        __delay_us(1000000);
+//        }
+    
+    // Matrix test
     while (1) {
         while(1){
         // SRC Reg Test
         SRC_OE_SetHigh();
-        EUSART_Write(0x80); // Send Common Line Data
+        SNK_OE_SetHigh();
+        EUSART_Write(0x20); // Send Access Line Data
+        while(!EUSART_is_tx_done()); // Wait for data to finish sending
+        __delay_us(100);
+        EUSART_Write(0xE0); // Send Common Line Data
         while(!EUSART_is_tx_done()); // Wait for data to finish sending
         // Latch in Data
         SRC_RCLK_SetHigh();
+        SNK_LE_SetHigh();
         __delay_us(100);
         SRC_RCLK_SetLow();
+        SNK_LE_SetLow();
         //Enable Register Output
         SRC_OE_SetLow();
+        SNK_OE_SetLow();
         __delay_us(100);
         
         SRC_OE_SetHigh();
+        SNK_OE_SetHigh();
+        EUSART_Write(0x40); // Send Access Line Data
+        while(!EUSART_is_tx_done()); // Wait for data to finish sending
+        __delay_us(100);
         EUSART_Write(0x40); // Send Common Line Data
         while(!EUSART_is_tx_done()); // Wait for data to finish sending
         // Latch in Data
         SRC_RCLK_SetHigh();
+        SNK_LE_SetHigh();
         __delay_us(100);
         SRC_RCLK_SetLow();
+        SNK_LE_SetLow();
         //Enable Register Output
         SRC_OE_SetLow();
+        SNK_OE_SetLow();
         __delay_us(100);
         
         SRC_OE_SetHigh();
-        EUSART_Write(0x20); // Send Common Line Data
+        SNK_OE_SetHigh();
+        EUSART_Write(0x80); // Send Access Line Data
+        while(!EUSART_is_tx_done()); // Wait for data to finish sending
+        __delay_us(100);
+        EUSART_Write(0xE0); // Send Common Line Data
         while(!EUSART_is_tx_done()); // Wait for data to finish sending
         // Latch in Data
         SRC_RCLK_SetHigh();
+        SNK_LE_SetHigh();
         __delay_us(100);
         SRC_RCLK_SetLow();
+        SNK_LE_SetLow();
         //Enable Register Output
         SRC_OE_SetLow();
+        SNK_OE_SetLow();
         __delay_us(100);
         }
         

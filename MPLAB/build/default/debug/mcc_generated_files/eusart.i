@@ -3694,7 +3694,7 @@ void EUSART_Initialize(void)
     TXSTA = 0xB4;
 
 
-    SPBRGL = 0x06;
+    SPBRGL = 0x00;
 
 
     SPBRGH = 0x00;

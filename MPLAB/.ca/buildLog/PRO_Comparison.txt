@@ -1,0 +1,55 @@
+make -f nbproject/Makefile-PRO_Comparison.mk SUBPROJECTS= .clean-conf
+make[1]: Entering directory 'C:/Users/Projects/OneDrive/Perf Clock/MPLAB'
+rm -f  -r .ca/build/PRO_Comparison/production
+rm -f  -r .ca/dist/PRO_Comparison/production
+make[1]: Leaving directory 'C:/Users/Projects/OneDrive/Perf Clock/MPLAB'
+[32mCLEAN SUCCESSFUL (total time: 152ms)[0m
+make -f nbproject/Makefile-PRO_Comparison.mk SUBPROJECTS= .build-conf
+make[1]: Entering directory 'C:/Users/Projects/OneDrive/Perf Clock/MPLAB'
+make  -f nbproject/Makefile-PRO_Comparison.mk .ca/dist/PRO_Comparison/production/MPLAB.production.hex
+make[2]: Entering directory 'C:/Users/Projects/OneDrive/Perf Clock/MPLAB'
+"C:\Program Files\Microchip\xc8\v2.45\bin\xc8-cc.exe"  -mcpu=16LF1826 -c   -mdfp="C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_PRO_Comparison=PRO_Comparison  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits   -std=c99 -gdwarf-3 -mstack=compiled:auto:auto -mafrlcsj     -o .ca/build/PRO_Comparison/production/mcc_generated_files/pin_manager.p1 mcc_generated_files/pin_manager.c 
+"C:\Program Files\Microchip\xc8\v2.45\bin\xc8-cc.exe"  -mcpu=16LF1826 -c   -mdfp="C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_PRO_Comparison=PRO_Comparison  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits   -std=c99 -gdwarf-3 -mstack=compiled:auto:auto -mafrlcsj     -o .ca/build/PRO_Comparison/production/mcc_generated_files/mcc.p1 mcc_generated_files/mcc.c 
+"C:\Program Files\Microchip\xc8\v2.45\bin\xc8-cc.exe"  -mcpu=16LF1826 -c   -mdfp="C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_PRO_Comparison=PRO_Comparison  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits   -std=c99 -gdwarf-3 -mstack=compiled:auto:auto -mafrlcsj     -o .ca/build/PRO_Comparison/production/mcc_generated_files/device_config.p1 mcc_generated_files/device_config.c 
+"C:\Program Files\Microchip\xc8\v2.45\bin\xc8-cc.exe"  -mcpu=16LF1826 -c   -mdfp="C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_PRO_Comparison=PRO_Comparison  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits   -std=c99 -gdwarf-3 -mstack=compiled:auto:auto -mafrlcsj     -o .ca/build/PRO_Comparison/production/mcc_generated_files/tmr1.p1 mcc_generated_files/tmr1.c 
+"C:\Program Files\Microchip\xc8\v2.45\bin\xc8-cc.exe"  -mcpu=16LF1826 -c   -mdfp="C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_PRO_Comparison=PRO_Comparison  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits   -std=c99 -gdwarf-3 -mstack=compiled:auto:auto -mafrlcsj     -o .ca/build/PRO_Comparison/production/mcc_generated_files/eusart.p1 mcc_generated_files/eusart.c 
+"C:\Program Files\Microchip\xc8\v2.45\bin\xc8-cc.exe"  -mcpu=16LF1826 -c   -mdfp="C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_PRO_Comparison=PRO_Comparison  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits   -std=c99 -gdwarf-3 -mstack=compiled:auto:auto -mafrlcsj     -o .ca/build/PRO_Comparison/production/main.p1 main.c 
+main.c:88:24: warning: implicit conversion loses integer precision: 'unsigned int' to 'uint8_t' (aka 'unsigned char') [-Wconversion]
+    for(uint8_t i=(rows-1);i>=0;i--){ // start from the top since EUSART is Little Endian
+                ~  ~~~~^~
+1 warning generated.
+"C:\Program Files\Microchip\xc8\v2.45\bin\xc8-cc.exe"  -mcpu=16LF1826 -Wl,-Map=.ca/dist/PRO_Comparison/production/MPLAB.production.map  -DXPRJ_PRO_Comparison=PRO_Comparison  -Wl,--defsym=__MPLAB_BUILD=1   -mdfp="C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits -mafrlcsj -std=c99 -gdwarf-3 -mstack=compiled:auto:auto      -Wl,--memorysummary,.ca/dist/PRO_Comparison/production/memoryfile.xml -o .ca/dist/PRO_Comparison/production/MPLAB.production.elf  .ca/build/PRO_Comparison/production/mcc_generated_files/pin_manager.p1 .ca/build/PRO_Comparison/production/mcc_generated_files/mcc.p1 .ca/build/PRO_Comparison/production/mcc_generated_files/device_config.p1 .ca/build/PRO_Comparison/production/mcc_generated_files/tmr1.p1 .ca/build/PRO_Comparison/production/mcc_generated_files/eusart.p1 .ca/build/PRO_Comparison/production/main.p1     
+main.c:88:: warning: (765) degenerate unsigned comparison
+main.c:88:: warning: (757) constant conditional branch
+main.c:90:: warning: (765) degenerate unsigned comparison
+main.c:90:: warning: (757) constant conditional branch
+mcc_generated_files/pin_manager.c:96:: warning: (520) function "_PIN_MANAGER_IOC" is never called
+mcc_generated_files/tmr1.c:99:: warning: (520) function "_TMR1_StopTimer" is never called
+mcc_generated_files/tmr1.c:105:: warning: (520) function "_TMR1_ReadTimer" is never called
+mcc_generated_files/tmr1.c:120:: warning: (520) function "_TMR1_WriteTimer" is never called
+mcc_generated_files/tmr1.c:142:: warning: (520) function "_TMR1_Reload" is never called
+mcc_generated_files/tmr1.c:147:: warning: (520) function "_TMR1_StartSinglePulseAcquisition" is never called
+mcc_generated_files/tmr1.c:152:: warning: (520) function "_TMR1_CheckGateValueStatus" is never called
+mcc_generated_files/eusart.c:119:: warning: (520) function "_EUSART_is_tx_ready" is never called
+mcc_generated_files/eusart.c:124:: warning: (520) function "_EUSART_is_rx_ready" is never called
+mcc_generated_files/eusart.c:134:: warning: (520) function "_EUSART_get_last_status" is never called
+mcc_generated_files/eusart.c:138:: warning: (520) function "_EUSART_Read" is never called
+main.c:193:: warning: (520) function "_TMR1_ISR" is never called
+
+Memory Summary:
+    Program space        used   1F7h (   503) of   800h words   ( 24.6%)
+    Data space           used    62h (    98) of   100h bytes   ( 38.3%)
+    EEPROM space         used     0h (     0) of   100h bytes   (  0.0%)
+    Configuration bits   used     2h (     2) of     2h words   (100.0%)
+    ID Location space    used     0h (     0) of     4h bytes   (  0.0%)
+
+
+You have compiled using a FREE license.
+With a PRO license, memory use would be:
+    Program space        used   171h (   369) of   800h words   ( 18.0%)
+    Data space           used    60h (    96) of   100h bytes   ( 37.5%)
+
+
+make[2]: Leaving directory 'C:/Users/Projects/OneDrive/Perf Clock/MPLAB'
+make[1]: Leaving directory 'C:/Users/Projects/OneDrive/Perf Clock/MPLAB'
+[32mBUILD SUCCESSFUL (total time: 2s)[0m
