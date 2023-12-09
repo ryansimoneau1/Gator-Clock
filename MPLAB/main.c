@@ -46,47 +46,8 @@
 
 // Variables
 
-volatile uint16_t timer1ReloadVal;
-
-// Matricies are Row x column (mxn) in C: uint8_t matrix[m][n]
-uint8_t CChar[3] = {
-    0b101,
-    0b101,
-    0b111
-};
-uint8_t TChar[3] = {
-    0b100,
-    0b111,
-    0b100
-};
-uint8_t IChar[3] = {
-    0b101,
-    0b111,
-    0b101
-};
-uint8_t LChar[3] = {
-    0b001,
-    0b001,
-    0b111
-};
-uint8_t HChar[3] = {
-    0b111,
-    0b010,
-    0b111
-};
-
-uint8_t NewDataFlag = 0; // Counts # of timer Overflows
-uint8_t AccessLine = 0; // Data for the Access line Shift Register
-volatile uint8_t CommonLine = 0; // Where Common Line data is stored
-volatile uint8_t column = 2 ; // The Column to be illuminated. Stars at Col 0
-
 // Functions
 
-uint8_t CommonLineData(uint8_t ComLinNum,uint8_t *TextMatrix){
-    uint8_t Temp = 0;
-    Temp = (TextMatrix[ComLinNum] << 5);
-    return Temp;
-}
 void main() {
     // initialize the device
     SYSTEM_Initialize();
@@ -208,104 +169,7 @@ void main() {
         SNK_OE_SetLow();
         __delay_us(100);
         }
-        
-        
-//        if(NewDataFlag == 1){
-            
-//            switch(column){
-//                case 2:
-//                    // Disable Common Line and Access Line Registers
-//                    SNK_OE_SetHigh();
-//                    SRC_OE_SetHigh();
-//                    
-////                    AccessLine = 0b10000000;
-////                    CommonLine = CommonLineData(column, TChar); // Get Common Line Data
-////                    EUSART_Write(AccessLine);// Send Access Line Data
-////                    while(!EUSART_is_tx_ready()); // Wait for data to finish sending
-//                    EUSART_Write(0b10000000); // Send Common Line Data
-//                    while(!EUSART_is_tx_ready()); // Wait for data to finish sending
-//                     // Latch Data into Shift Registers
-//                    SRC_RCLK_SetHigh();
-////                    SNK_LE_SetLow();
-//                    __delay_us(1000);
-//                    // Reset Shift Register Latches
-//                    SRC_RCLK_SetLow();
-////                    SNK_LE_SetHigh();
-//                     // Enable Common Line and Access Line Registers
-////                    SNK_OE_SetLow();
-//                    SRC_OE_SetLow();
-//                    column--;
-//                    __delay_us(10000);
-//                case 1:
-//                    // Disable Common Line and Access Line Registers
-//                    SNK_OE_SetHigh();
-//                    SRC_OE_SetHigh();
-//                    
-//                    AccessLine = 0b01000000;
-//                    CommonLine = CommonLineData(column, TChar); // Get Common Line Data
-//                    EUSART_Write(AccessLine);// Send Access Line Data
-//                    while(!EUSART_is_tx_ready()); // Wait for data to finish sending
-//                    EUSART_Write(CommonLine); // Send Common Line Data
-//                    while(!EUSART_is_tx_ready()); // Wait for data to finish sending
-//                     // Latch Data into Shift Registers
-//                    SRC_RCLK_SetHigh();
-//                    SNK_LE_SetLow();
-//                    __delay_us(1000);
-//                    // Reset Shift Register Latches
-//                    SRC_RCLK_SetLow();
-//                    SNK_LE_SetHigh();
-//                     // Enable Common Line and Access Line Registers
-//                    SNK_OE_SetLow();
-//                    SRC_OE_SetLow();
-//                    column--;
-//                    __delay_us(10000);
-//                case 0:
-//                    // Disable Common Line and Access Line Registers
-//                    SNK_OE_SetHigh();
-//                    SRC_OE_SetHigh();
-//                    
-//                    AccessLine = 0b00100000;
-//                    CommonLine = CommonLineData(column, TChar); // Get Common Line Data
-//                    EUSART_Write(AccessLine);// Send Access Line Data
-//                    while(!EUSART_is_tx_ready()); // Wait for data to finish sending
-//                    EUSART_Write(CommonLine); // Send Common Line Data
-//                    while(!EUSART_is_tx_ready()); // Wait for data to finish sending
-//                     // Latch Data into Shift Registers
-//                    SRC_RCLK_SetHigh();
-//                    SNK_LE_SetLow();
-//                    __delay_us(1000);
-//                    // Reset Shift Register Latches
-//                    SRC_RCLK_SetLow();
-//                    SNK_LE_SetHigh();
-//                     // Enable Common Line and Access Line Registers
-//                    SNK_OE_SetLow();
-//                    SRC_OE_SetLow();
-//                    column = 2;
-//                    __delay_us(10000);
-//            }
-            
-//            NewDataFlag = 0; // Reset Data Flag
-//        }
 
-    }
-}
-
-void TMR1_ISR(void)
-{
-
-    // Clear the TMR1 interrupt flag
-    PIR1bits.TMR1IF = 0;
-    TMR1_WriteTimer(timer1ReloadVal);
-
-    NewDataFlag++;
-    column++;
-    if(column > 2){ // Reset column to illuminate
-        column = 0;
-    }
-    
-    if(TMR1_InterruptHandler)
-    {
-        TMR1_InterruptHandler();
     }
 }
 /**
