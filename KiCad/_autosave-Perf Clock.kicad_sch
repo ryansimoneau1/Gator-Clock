@@ -934,7 +934,7 @@
     (uuid 1bcfd6ec-a0ba-4034-afa1-c457619e67c0)
   )
   (text "Access Line Registers for controlling the Scan Period"
-    (at 170.18 158.75 0)
+    (at 124.46 148.59 0)
     (effects (font (size 2 2) (thickness 0.4) bold) (justify left bottom))
     (uuid a06c1181-6508-49ef-b20e-f0a51646e413)
   )

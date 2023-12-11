@@ -3877,45 +3877,74 @@ void OSCILLATOR_Initialize(void);
 # 97 "./mcc_generated_files/mcc.h"
 void WDT_Initialize(void);
 # 44 "main.c" 2
-# 54 "main.c"
+
+
+
+
+
+
+
+typedef uint8_t Uint8;
+
+typedef struct BlockSet{
+    Uint8 ABlock;
+    Uint8 BBlock;
+    Uint8 CBlock;
+    Uint8 DBlock;
+    Uint8 EBlock;
+    Uint8 FBlock;
+    Uint8 GBlock;
+    Uint8 HBlock;
+    Uint8 IBlock;
+    Uint8 JBlock;
+    Uint8 KBlock;
+    Uint8 LBlock;
+    Uint8 MBlock;
+    Uint8 NBlock;
+    Uint8 OBlock;
+    Uint8 PBlock;
+    Uint8 QBlock;
+    Uint8 RBlock;
+    Uint8 SBlock;
+    Uint8 TBlock;
+    Uint8 UBlock;
+}BlockSet;
+
+BlockSet NumberBlocks = {
+    .ABlock = 0b00011110,
+    .BBlock = 0b00100001,
+    .CBlock = 0b00000100,
+    .DBlock = 0b00001100,
+    .EBlock = 0b00010100,
+    .FBlock = 0b00111111,
+    .GBlock = 0b00000010,
+    .HBlock = 0b00100000,
+    .IBlock = 0b00001110,
+    .JBlock = 0b00000001,
+    .KBlock = 0b00000110,
+    .LBlock = 0b00001010,
+    .MBlock = 0b00010010,
+    .NBlock = 0b00100010,
+    .OBlock = 0b00111110,
+    .PBlock = 0b00101110,
+    .QBlock = 0b00110000,
+    .RBlock = 0b00001000,
+    .SBlock = 0b00010000,
+    .TBlock = 0b00100011,
+    .UBlock = 0b00011101,
+};
+
+
 volatile uint16_t timer1ReloadVal;
 
 
-uint8_t ZeroChar[8][6] = {
-    {0,1,1,1,1,0},
-    {1,0,0,0,0,1},
-    {1,0,0,0,0,1},
-    {1,0,0,0,0,1},
-    {1,0,0,0,0,1},
-    {1,0,0,0,0,1},
-    {1,0,0,0,0,1},
-    {0,1,1,1,1,0},
-};
-uint8_t OneChar[8][6] = {
-    {0,0,0,1,0,0},
-    {0,0,1,1,0,0},
-    {0,1,0,1,0,0},
-    {0,0,0,1,0,0},
-    {0,0,0,1,0,0},
-    {0,0,0,1,0,0},
-    {0,0,0,1,0,0},
-    {1,1,1,1,1,1},
-};
-# 158 "main.c"
+
+
 uint8_t NewDataFlag = 0;
 uint8_t AccessLine = 0;
 volatile uint8_t CommonLine = 0;
 volatile uint8_t column = 2 ;
-
-
-
-uint8_t ComLn_Extract_Data(uint8_t Column,uint8_t Character[8][6]){
-    uint8_t ColData = 0;
-    for(uint8_t i = 0; i<8; i++){
-        ColData = (ColData << 1) | (Character[i][Column]);
-    }
-    return ColData;
-}
+# 121 "main.c"
 void main() {
 
     SYSTEM_Initialize();
@@ -3932,11 +3961,7 @@ void main() {
 
 
     (INTCONbits.PEIE = 1);
-# 197 "main.c"
-    uint8_t Col = 0;
-    uint8_t ColData = 0;
-    ColData = ComLn_Extract_Data(Col, ZeroChar);
-    printf("Data stored in Column zero: %d\n", ColData);
+# 150 "main.c"
     while (1) {
 
     }

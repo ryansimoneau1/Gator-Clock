@@ -3,39 +3,17 @@
 [d edition pro ]
 [d chip 16LF1826 ]
 [d frameptr 6 ]
-"1 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\abs.c
-[v _abs abs `(i  1 e 2 0 ]
-"5 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
-[v ___awdiv __awdiv `(i  1 e 2 0 ]
-"5 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
-[v ___awmod __awmod `(i  1 e 2 0 ]
-"1177 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
-[v _vfpfcnvrt vfpfcnvrt `(v  1 s 1 vfpfcnvrt ]
-"1817
-[v _vfprintf vfprintf `(i  1 e 2 0 ]
-"8 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_fputc.c
-[v _fputc fputc `(i  1 e 2 0 ]
-"8 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_fputs.c
-[v _fputs fputs `(i  1 e 2 0 ]
-"5 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\printf.c
-[v _printf printf `(i  1 e 2 0 ]
-"7 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\putch.c
-[v _putch putch `(v  1 e 1 0 ]
 "10 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\sprcadd.c
 [v ___fladd __fladd `(d  1 e 4 0 ]
-"4 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\Umul8.c
-[v ___bmul __bmul `(uc  1 e 1 0 ]
 "4 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\Umul8_16.c
 [v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
 "6 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\pic\__eeprom.c
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"165 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\main.c
-[v _ComLn_Extract_Data ComLn_Extract_Data `(uc  1 e 1 0 ]
-"172
+"121 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"206
+"155
 [v _TMR1_ISR TMR1_ISR `(v  1 e 1 0 ]
 "65 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/eusart.c
 [v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]
@@ -231,22 +209,13 @@
 [v _WPUA WPUA `VEuc  1 e 1 @524 ]
 "3361
 [v _WPUB WPUB `VEuc  1 e 1 @525 ]
-"153 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
-[v _prec prec `i  1 s 2 prec ]
-[v _width width `i  1 s 2 width ]
-"154
-[v _flags flags `uc  1 s 1 flags ]
-"185
-[v _dbuf dbuf `[32]uc  1 s 32 dbuf ]
-"54 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\main.c
+"102 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\main.c
 [v _timer1ReloadVal timer1ReloadVal `VEus  1 e 2 0 ]
-"57
-[v _ZeroChar ZeroChar `[8][6]uc  1 e 48 0 ]
-"158
+"107
 [v _NewDataFlag NewDataFlag `uc  1 e 1 0 ]
-"160
+"109
 [v _CommonLine CommonLine `VEuc  1 e 1 0 ]
-"161
+"110
 [v _column column `VEuc  1 e 1 0 ]
 [s S264 . 1 `uc 1 perr 1 0 :1:0 
 `uc 1 ferr 1 0 :1:1 
@@ -264,95 +233,10 @@
 [v _EUSART_ErrorHandler EUSART_ErrorHandler `*.37(v  1 e 2 0 ]
 "58 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/tmr1.c
 [v _TMR1_InterruptHandler TMR1_InterruptHandler `*.37(v  1 e 2 0 ]
-"172 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\main.c
+"121 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"198
-[v main@ColData ColData `uc  1 a 1 37 ]
-"204
-} 0
-"5 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\printf.c
-[v _printf printf `(i  1 e 2 0 ]
-{
-"8
-[v printf@ap ap `[1]*.4v  1 a 1 34 ]
-"5
-[v printf@fmt fmt `*.25DCuc  1 p 2 30 ]
-"13
-} 0
-"1817 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
-[v _vfprintf vfprintf `(i  1 e 2 0 ]
-{
-"1820
-[v vfprintf@cfmt cfmt `*.25uc  1 a 2 28 ]
-[s S1040 _IO_FILE 0 ]
-"1817
-[v vfprintf@fp fp `*.39S1040  1 p 2 22 ]
-[v vfprintf@fmt fmt `*.25DCuc  1 p 2 24 ]
-[v vfprintf@ap ap `*.4*.4v  1 p 1 26 ]
-"1840
-} 0
-"1177
-[v _vfpfcnvrt vfpfcnvrt `(v  1 s 1 vfpfcnvrt ]
-{
-[u S1053 . 4 `i 1 sint 2 0 `ui 1 uint 2 0 `d 1 f 4 0 ]
-"1188
-[v vfpfcnvrt@convarg convarg `S1053  1 a 4 17 ]
-"1179
-[v vfpfcnvrt@cp cp `*.25uc  1 a 2 15 ]
-[v vfpfcnvrt@c c `uc  1 a 1 21 ]
-"1180
-[v vfpfcnvrt@done done `a  1 a 1 14 ]
-[s S1040 _IO_FILE 0 ]
-"1177
-[v vfpfcnvrt@fp fp `*.39S1040  1 p 2 6 ]
-[v vfpfcnvrt@fmt fmt `*.4*.25uc  1 p 1 8 ]
-[v vfpfcnvrt@ap ap `*.4*.4v  1 p 1 9 ]
-"1814
-} 0
-"8 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_fputc.c
-[v _fputc fputc `(i  1 e 2 0 ]
-{
-[v fputc@c c `i  1 p 2 3 ]
-[u S1018 . 2 `*.39uc 1 buffer 2 0 `*.39DCuc 1 source 2 0 ]
-[s S1021 _IO_FILE 11 `S1018 1 . 2 0 `i 1 count 2 2 `[3]uc 1 ungetbuf 3 4 `i 1 ungetcnt 2 7 `i 1 limit 2 9 ]
-[v fputc@fp fp `*.39S1021  1 p 2 5 ]
-"24
-} 0
-"7 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\putch.c
-[v _putch putch `(v  1 e 1 0 ]
-{
-"9
-} 0
-"1 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\abs.c
-[v _abs abs `(i  1 e 2 0 ]
-{
-[v abs@a a `i  1 p 2 2 ]
-"4
-} 0
-"5 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
-[v ___awmod __awmod `(i  1 e 2 0 ]
-{
-"10
-[v ___awmod@sign sign `uc  1 a 1 1 ]
-[v ___awmod@counter counter `uc  1 a 1 0 ]
-"5
-[v ___awmod@divisor divisor `i  1 p 2 3 ]
-[v ___awmod@dividend dividend `i  1 p 2 5 ]
-"34
-} 0
-"5 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
-[v ___awdiv __awdiv `(i  1 e 2 0 ]
-{
-"10
-[v ___awdiv@quotient quotient `i  1 a 2 2 ]
-"11
-[v ___awdiv@sign sign `uc  1 a 1 1 ]
-[v ___awdiv@counter counter `uc  1 a 1 0 ]
-"5
-[v ___awdiv@divisor divisor `i  1 p 2 3 ]
-[v ___awdiv@dividend dividend `i  1 p 2 5 ]
-"41
+"153
 } 0
 "50 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
@@ -372,7 +256,7 @@
 "177
 [v _TMR1_SetInterruptHandler TMR1_SetInterruptHandler `(v  1 e 1 0 ]
 {
-[v TMR1_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 3 ]
+[v TMR1_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 0 ]
 "179
 } 0
 "55 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/pin_manager.c
@@ -393,57 +277,30 @@
 "167
 [v _EUSART_SetOverrunErrorHandler EUSART_SetOverrunErrorHandler `(v  1 e 1 0 ]
 {
-[v EUSART_SetOverrunErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 3 ]
+[v EUSART_SetOverrunErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 0 ]
 "169
 } 0
 "163
 [v _EUSART_SetFramingErrorHandler EUSART_SetFramingErrorHandler `(v  1 e 1 0 ]
 {
-[v EUSART_SetFramingErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 3 ]
+[v EUSART_SetFramingErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 0 ]
 "165
 } 0
 "171
 [v _EUSART_SetErrorHandler EUSART_SetErrorHandler `(v  1 e 1 0 ]
 {
-[v EUSART_SetErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 3 ]
+[v EUSART_SetErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 0 ]
 "173
-} 0
-"165 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\main.c
-[v _ComLn_Extract_Data ComLn_Extract_Data `(uc  1 e 1 0 ]
-{
-[v ComLn_Extract_Data@Column Column `uc  1 a 1 wreg ]
-"167
-[v ComLn_Extract_Data@i i `uc  1 a 1 4 ]
-"166
-[v ComLn_Extract_Data@ColData ColData `uc  1 a 1 3 ]
-"165
-[v ComLn_Extract_Data@Column Column `uc  1 a 1 wreg ]
-[v ComLn_Extract_Data@Character Character `*.4[6]uc  1 p 1 7 ]
-[v ComLn_Extract_Data@Column Column `uc  1 a 1 2 ]
-"171
-} 0
-"4 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\Umul8.c
-[v ___bmul __bmul `(uc  1 e 1 0 ]
-{
-[v ___bmul@multiplier multiplier `uc  1 a 1 wreg ]
-"6
-[v ___bmul@product product `uc  1 a 1 5 ]
-"4
-[v ___bmul@multiplier multiplier `uc  1 a 1 wreg ]
-[v ___bmul@multiplicand multiplicand `uc  1 p 1 3 ]
-"6
-[v ___bmul@multiplier multiplier `uc  1 a 1 6 ]
-"51
 } 0
 "52 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
 {
 "70
 } 0
-"206 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\main.c
+"155 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\main.c
 [v _TMR1_ISR TMR1_ISR `(v  1 e 1 0 ]
 {
-"223
+"172
 } 0
 "120 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/tmr1.c
 [v _TMR1_WriteTimer TMR1_WriteTimer `(v  1 e 1 0 ]
