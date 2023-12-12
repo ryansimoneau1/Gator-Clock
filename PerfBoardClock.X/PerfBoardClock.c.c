@@ -48,55 +48,8 @@
 // Defines
 #define ROWS 8
 #define COLS 6
-typedef uint8_t Uint8;
 
-typedef struct BlockSet{
-    Uint8 ABlock;
-    Uint8 BBlock;
-    Uint8 CBlock;
-    Uint8 DBlock;
-    Uint8 EBlock;
-    Uint8 FBlock;
-    Uint8 GBlock;
-    Uint8 HBlock;
-    Uint8 IBlock;
-    Uint8 JBlock;
-    Uint8 KBlock;
-    Uint8 LBlock;
-    Uint8 MBlock;
-    Uint8 NBlock;
-    Uint8 OBlock;
-    Uint8 PBlock;
-    Uint8 QBlock;
-    Uint8 RBlock;
-    Uint8 SBlock;
-    Uint8 TBlock;
-    Uint8 UBlock;
-}BlockSet;
 // Variables
-BlockSet NumberBlocks = { // Struct containing building blocks to construct display numbers
-    .ABlock = 0b00011110,
-    .BBlock = 0b00100001,
-    .CBlock = 0b00000100,
-    .DBlock = 0b00001100,
-    .EBlock = 0b00010100,
-    .FBlock = 0b00111111,
-    .GBlock = 0b00000010,
-    .HBlock = 0b00100000,
-    .IBlock = 0b00001110,
-    .JBlock = 0b00000001,
-    .KBlock = 0b00000110,
-    .LBlock = 0b00001010,
-    .MBlock = 0b00010010,
-    .NBlock = 0b00100010,
-    .OBlock = 0b00111110,
-    .PBlock = 0b00101110,
-    .QBlock = 0b00110000,
-    .RBlock = 0b00001000,
-    .SBlock = 0b00010000,
-    .TBlock = 0b00100011,
-    .UBlock = 0b00011101,
-};
 
 
 volatile uint16_t timer1ReloadVal;
