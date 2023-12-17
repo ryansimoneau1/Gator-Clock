@@ -1,0 +1,691 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"18 ./rendering.h
+[; ;./rendering.h: 18: typedef struct BlockSet{
+[s S1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
+[n S1 BlockSet ABlock BBlock CBlock DBlock EBlock FBlock GBlock HBlock IBlock JBlock KBlock LBlock MBlock NBlock OBlock PBlock QBlock RBlock SBlock TBlock UBlock ]
+"12 rendering.c
+[; ;rendering.c: 12: extern BlockSet NumberBlocks = {
+[v _NumberBlocks `S1 ~T0 @X0 1 e ]
+[i _NumberBlocks
+:U ..
+:U ..
+-> -> 30 `i `uc
+-> -> 33 `i `uc
+-> -> 4 `i `uc
+-> -> 12 `i `uc
+-> -> 20 `i `uc
+-> -> 63 `i `uc
+-> -> 2 `i `uc
+-> -> 32 `i `uc
+-> -> 14 `i `uc
+-> -> 1 `i `uc
+-> -> 6 `i `uc
+-> -> 10 `i `uc
+-> -> 18 `i `uc
+-> -> 34 `i `uc
+-> -> 62 `i `uc
+-> -> 46 `i `uc
+-> -> 48 `i `uc
+-> -> 8 `i `uc
+-> -> 16 `i `uc
+-> -> 35 `i `uc
+-> -> 29 `i `uc
+..
+..
+]
+"36
+[; ;rendering.c: 36: Uint8 Hour_deconstruct(const Uint8 access_line, const Uint8 hours){
+[v _Hour_deconstruct `(uc ~T0 @X0 1 ef2`Cuc`Cuc ]
+{
+[e :U _Hour_deconstruct ]
+[v _access_line `Cuc ~T0 @X0 1 r1 ]
+[v _hours `Cuc ~T0 @X0 1 r2 ]
+[f ]
+"37
+[; ;rendering.c: 37:     static Uint8 Output = 0;
+[v F89 `uc ~T0 @X0 1 s Output ]
+[i F89
+-> -> 0 `i `uc
+]
+"39
+[; ;rendering.c: 39:     if(access_line < 6){
+[e $ ! < -> _access_line `i -> 6 `i 3  ]
+{
+"40
+[; ;rendering.c: 40:         Output = hours / 10;
+[e = F89 -> / -> _hours `i -> 10 `i `uc ]
+"41
+[; ;rendering.c: 41:     }
+}
+[e $U 4  ]
+"42
+[; ;rendering.c: 42:     else{
+[e :U 3 ]
+{
+"43
+[; ;rendering.c: 43:         Output = hours % 10;
+[e = F89 -> % -> _hours `i -> 10 `i `uc ]
+"44
+[; ;rendering.c: 44:     }
+}
+[e :U 4 ]
+"45
+[; ;rendering.c: 45:     return Output;
+[e ) F89 ]
+[e $UE 2  ]
+"46
+[; ;rendering.c: 46: }
+[e :UE 2 ]
+}
+"48
+[; ;rendering.c: 48: Uint8 Character_Line(const Uint8 access_line){
+[v _Character_Line `(uc ~T0 @X0 1 ef1`Cuc ]
+{
+[e :U _Character_Line ]
+[v _access_line `Cuc ~T0 @X0 1 r1 ]
+[f ]
+"49
+[; ;rendering.c: 49:     static Uint8 character_line = 0;
+[v F92 `uc ~T0 @X0 1 s character_line ]
+[i F92
+-> -> 0 `i `uc
+]
+"51
+[; ;rendering.c: 51:     if(access_line < 6){
+[e $ ! < -> _access_line `i -> 6 `i 6  ]
+{
+"52
+[; ;rendering.c: 52:         character_line = access_line;
+[e = F92 _access_line ]
+"53
+[; ;rendering.c: 53:     }
+}
+[e $U 7  ]
+"54
+[; ;rendering.c: 54:     else{
+[e :U 6 ]
+{
+"55
+[; ;rendering.c: 55:         character_line = access_line - 6;
+[e = F92 -> - -> _access_line `i -> 6 `i `uc ]
+"56
+[; ;rendering.c: 56:     }
+}
+[e :U 7 ]
+"58
+[; ;rendering.c: 58:     character_line += 2;
+[e =+ F92 -> -> 2 `i `uc ]
+"59
+[; ;rendering.c: 59:     return character_line;
+[e ) F92 ]
+[e $UE 5  ]
+"60
+[; ;rendering.c: 60: }
+[e :UE 5 ]
+}
+"87
+[; ;rendering.c: 87: Uint8 LHalf_NumBuilder(const Uint8 character_line,const BlockSet *Block, const Uint8 hours){
+[v _LHalf_NumBuilder `(uc ~T0 @X0 1 ef3`Cuc`*CS1`Cuc ]
+{
+[e :U _LHalf_NumBuilder ]
+[v _character_line `Cuc ~T0 @X0 1 r1 ]
+[v _Block `*CS1 ~T0 @X0 1 r2 ]
+[v _hours `Cuc ~T0 @X0 1 r3 ]
+[f ]
+"88
+[; ;rendering.c: 88:     static Uint8 Output = 0;
+[v F97 `uc ~T0 @X0 1 s Output ]
+[i F97
+-> -> 0 `i `uc
+]
+"98
+[; ;rendering.c: 98:     if(hours == 0){
+[e $ ! == -> _hours `i -> 0 `i 9  ]
+{
+"99
+[; ;rendering.c: 99:        Output = ((Block->ABlock << (character_line)) & 0b10000000);
+[e = F97 -> & << -> . *U _Block 0 `i -> _character_line `i -> 128 `i `uc ]
+"100
+[; ;rendering.c: 100:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"101
+[; ;rendering.c: 101:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"102
+[; ;rendering.c: 102:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"103
+[; ;rendering.c: 103:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"104
+[; ;rendering.c: 104:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"105
+[; ;rendering.c: 105:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"106
+[; ;rendering.c: 106:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"107
+[; ;rendering.c: 107:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"108
+[; ;rendering.c: 108:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"109
+[; ;rendering.c: 109:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"110
+[; ;rendering.c: 110:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"111
+[; ;rendering.c: 111:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"112
+[; ;rendering.c: 112:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"113
+[; ;rendering.c: 113:        Output |= ((Block->ABlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 0 `i -> _character_line `i -> 128 `i `uc ]
+"114
+[; ;rendering.c: 114:     }
+}
+[e :U 9 ]
+"116
+[; ;rendering.c: 116:     if(hours == 1){
+[e $ ! == -> _hours `i -> 1 `i 10  ]
+{
+"118
+[; ;rendering.c: 118:        Output = ((Block->FBlock << (character_line)) & 0b10000000);
+[e = F97 -> & << -> . *U _Block 5 `i -> _character_line `i -> 128 `i `uc ]
+"119
+[; ;rendering.c: 119:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"121
+[; ;rendering.c: 121:        Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 2 `i -> _character_line `i -> 128 `i `uc ]
+"122
+[; ;rendering.c: 122:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"124
+[; ;rendering.c: 124:        Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 2 `i -> _character_line `i -> 128 `i `uc ]
+"125
+[; ;rendering.c: 125:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"127
+[; ;rendering.c: 127:        Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 2 `i -> _character_line `i -> 128 `i `uc ]
+"128
+[; ;rendering.c: 128:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"130
+[; ;rendering.c: 130:        Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 2 `i -> _character_line `i -> 128 `i `uc ]
+"131
+[; ;rendering.c: 131:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"133
+[; ;rendering.c: 133:        Output |= ((Block->EBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 4 `i -> _character_line `i -> 128 `i `uc ]
+"134
+[; ;rendering.c: 134:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"136
+[; ;rendering.c: 136:        Output |= ((Block->DBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 3 `i -> _character_line `i -> 128 `i `uc ]
+"137
+[; ;rendering.c: 137:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"139
+[; ;rendering.c: 139:        Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 2 `i -> _character_line `i -> 128 `i `uc ]
+"141
+[; ;rendering.c: 141:     }
+}
+[e :U 10 ]
+"142
+[; ;rendering.c: 142:     if(hours == 2){
+[e $ ! == -> _hours `i -> 2 `i 11  ]
+{
+"144
+[; ;rendering.c: 144:        Output = ((Block->FBlock << (character_line)) & 0b10000000);
+[e = F97 -> & << -> . *U _Block 5 `i -> _character_line `i -> 128 `i `uc ]
+"145
+[; ;rendering.c: 145:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"147
+[; ;rendering.c: 147:        Output |= ((Block->HBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 7 `i -> _character_line `i -> 128 `i `uc ]
+"148
+[; ;rendering.c: 148:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"150
+[; ;rendering.c: 150:        Output |= ((Block->SBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 18 `i -> _character_line `i -> 128 `i `uc ]
+"151
+[; ;rendering.c: 151:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"153
+[; ;rendering.c: 153:        Output |= ((Block->DBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 3 `i -> _character_line `i -> 128 `i `uc ]
+"154
+[; ;rendering.c: 154:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"156
+[; ;rendering.c: 156:        Output |= ((Block->GBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 6 `i -> _character_line `i -> 128 `i `uc ]
+"157
+[; ;rendering.c: 157:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"159
+[; ;rendering.c: 159:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"160
+[; ;rendering.c: 160:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"162
+[; ;rendering.c: 162:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"163
+[; ;rendering.c: 163:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"165
+[; ;rendering.c: 165:        Output |= ((Block->ABlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 0 `i -> _character_line `i -> 128 `i `uc ]
+"167
+[; ;rendering.c: 167:     }
+}
+[e :U 11 ]
+"168
+[; ;rendering.c: 168:     if(hours == 3){
+[e $ ! == -> _hours `i -> 3 `i 12  ]
+{
+"170
+[; ;rendering.c: 170:        Output = ((Block->ABlock << (character_line)) & 0b10000000);
+[e = F97 -> & << -> . *U _Block 0 `i -> _character_line `i -> 128 `i `uc ]
+"171
+[; ;rendering.c: 171:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"173
+[; ;rendering.c: 173:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"174
+[; ;rendering.c: 174:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"176
+[; ;rendering.c: 176:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"177
+[; ;rendering.c: 177:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"179
+[; ;rendering.c: 179:        Output |= ((Block->JBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 9 `i -> _character_line `i -> 128 `i `uc ]
+"180
+[; ;rendering.c: 180:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"182
+[; ;rendering.c: 182:        Output |= ((Block->IBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 8 `i -> _character_line `i -> 128 `i `uc ]
+"183
+[; ;rendering.c: 183:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"185
+[; ;rendering.c: 185:        Output |= ((Block->EBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 4 `i -> _character_line `i -> 128 `i `uc ]
+"186
+[; ;rendering.c: 186:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"188
+[; ;rendering.c: 188:        Output |= ((Block->GBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 6 `i -> _character_line `i -> 128 `i `uc ]
+"189
+[; ;rendering.c: 189:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"191
+[; ;rendering.c: 191:        Output |= ((Block->FBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 5 `i -> _character_line `i -> 128 `i `uc ]
+"193
+[; ;rendering.c: 193:     }
+}
+[e :U 12 ]
+"194
+[; ;rendering.c: 194:     if(hours == 4){
+[e $ ! == -> _hours `i -> 4 `i 13  ]
+{
+"196
+[; ;rendering.c: 196:        Output = ((Block->GBlock << (character_line)) & 0b10000000);
+[e = F97 -> & << -> . *U _Block 6 `i -> _character_line `i -> 128 `i `uc ]
+"197
+[; ;rendering.c: 197:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"199
+[; ;rendering.c: 199:        Output |= ((Block->GBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 6 `i -> _character_line `i -> 128 `i `uc ]
+"200
+[; ;rendering.c: 200:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"202
+[; ;rendering.c: 202:        Output |= ((Block->GBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 6 `i -> _character_line `i -> 128 `i `uc ]
+"203
+[; ;rendering.c: 203:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"205
+[; ;rendering.c: 205:        Output |= ((Block->FBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 5 `i -> _character_line `i -> 128 `i `uc ]
+"206
+[; ;rendering.c: 206:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"208
+[; ;rendering.c: 208:        Output |= ((Block->NBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 13 `i -> _character_line `i -> 128 `i `uc ]
+"209
+[; ;rendering.c: 209:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"211
+[; ;rendering.c: 211:        Output |= ((Block->MBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 12 `i -> _character_line `i -> 128 `i `uc ]
+"212
+[; ;rendering.c: 212:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"214
+[; ;rendering.c: 214:        Output |= ((Block->LBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 11 `i -> _character_line `i -> 128 `i `uc ]
+"215
+[; ;rendering.c: 215:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"217
+[; ;rendering.c: 217:        Output |= ((Block->KBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 10 `i -> _character_line `i -> 128 `i `uc ]
+"219
+[; ;rendering.c: 219:     }
+}
+[e :U 13 ]
+"220
+[; ;rendering.c: 220:     if(hours == 5){
+[e $ ! == -> _hours `i -> 5 `i 14  ]
+{
+"222
+[; ;rendering.c: 222:        Output = ((Block->ABlock << (character_line)) & 0b10000000);
+[e = F97 -> & << -> . *U _Block 0 `i -> _character_line `i -> 128 `i `uc ]
+"223
+[; ;rendering.c: 223:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"225
+[; ;rendering.c: 225:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"226
+[; ;rendering.c: 226:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"228
+[; ;rendering.c: 228:        Output |= ((Block->JBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 9 `i -> _character_line `i -> 128 `i `uc ]
+"229
+[; ;rendering.c: 229:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"231
+[; ;rendering.c: 231:        Output |= ((Block->JBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 9 `i -> _character_line `i -> 128 `i `uc ]
+"232
+[; ;rendering.c: 232:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"234
+[; ;rendering.c: 234:        Output |= ((Block->OBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 14 `i -> _character_line `i -> 128 `i `uc ]
+"235
+[; ;rendering.c: 235:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"237
+[; ;rendering.c: 237:        Output |= ((Block->HBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 7 `i -> _character_line `i -> 128 `i `uc ]
+"238
+[; ;rendering.c: 238:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"240
+[; ;rendering.c: 240:        Output |= ((Block->HBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 7 `i -> _character_line `i -> 128 `i `uc ]
+"241
+[; ;rendering.c: 241:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"243
+[; ;rendering.c: 243:        Output |= ((Block->FBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 5 `i -> _character_line `i -> 128 `i `uc ]
+"245
+[; ;rendering.c: 245:     }
+}
+[e :U 14 ]
+"246
+[; ;rendering.c: 246:     if(hours == 6){
+[e $ ! == -> _hours `i -> 6 `i 15  ]
+{
+"248
+[; ;rendering.c: 248:        Output = ((Block->ABlock << (character_line)) & 0b10000000);
+[e = F97 -> & << -> . *U _Block 0 `i -> _character_line `i -> 128 `i `uc ]
+"249
+[; ;rendering.c: 249:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"251
+[; ;rendering.c: 251:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"252
+[; ;rendering.c: 252:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"254
+[; ;rendering.c: 254:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"255
+[; ;rendering.c: 255:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"257
+[; ;rendering.c: 257:        Output |= ((Block->QBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 16 `i -> _character_line `i -> 128 `i `uc ]
+"258
+[; ;rendering.c: 258:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"260
+[; ;rendering.c: 260:        Output |= ((Block->PBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 15 `i -> _character_line `i -> 128 `i `uc ]
+"261
+[; ;rendering.c: 261:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"263
+[; ;rendering.c: 263:        Output |= ((Block->HBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 7 `i -> _character_line `i -> 128 `i `uc ]
+"264
+[; ;rendering.c: 264:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"266
+[; ;rendering.c: 266:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"267
+[; ;rendering.c: 267:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"269
+[; ;rendering.c: 269:        Output |= ((Block->ABlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 0 `i -> _character_line `i -> 128 `i `uc ]
+"271
+[; ;rendering.c: 271:     }
+}
+[e :U 15 ]
+"272
+[; ;rendering.c: 272:     if(hours == 7){
+[e $ ! == -> _hours `i -> 7 `i 16  ]
+{
+"274
+[; ;rendering.c: 274:        Output = ((Block->HBlock << (character_line)) & 0b10000000);
+[e = F97 -> & << -> . *U _Block 7 `i -> _character_line `i -> 128 `i `uc ]
+"275
+[; ;rendering.c: 275:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"277
+[; ;rendering.c: 277:        Output |= ((Block->HBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 7 `i -> _character_line `i -> 128 `i `uc ]
+"278
+[; ;rendering.c: 278:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"280
+[; ;rendering.c: 280:        Output |= ((Block->SBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 18 `i -> _character_line `i -> 128 `i `uc ]
+"281
+[; ;rendering.c: 281:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"283
+[; ;rendering.c: 283:        Output |= ((Block->RBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 17 `i -> _character_line `i -> 128 `i `uc ]
+"284
+[; ;rendering.c: 284:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"286
+[; ;rendering.c: 286:        Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 2 `i -> _character_line `i -> 128 `i `uc ]
+"287
+[; ;rendering.c: 287:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"289
+[; ;rendering.c: 289:        Output |= ((Block->GBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 6 `i -> _character_line `i -> 128 `i `uc ]
+"290
+[; ;rendering.c: 290:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"292
+[; ;rendering.c: 292:        Output |= ((Block->JBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 9 `i -> _character_line `i -> 128 `i `uc ]
+"293
+[; ;rendering.c: 293:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"295
+[; ;rendering.c: 295:        Output |= ((Block->FBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 5 `i -> _character_line `i -> 128 `i `uc ]
+"297
+[; ;rendering.c: 297:     }
+}
+[e :U 16 ]
+"298
+[; ;rendering.c: 298:     if(hours == 8){
+[e $ ! == -> _hours `i -> 8 `i 17  ]
+{
+"300
+[; ;rendering.c: 300:        Output = ((Block->ABlock << (character_line)) & 0b10000000);
+[e = F97 -> & << -> . *U _Block 0 `i -> _character_line `i -> 128 `i `uc ]
+"301
+[; ;rendering.c: 301:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"303
+[; ;rendering.c: 303:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"304
+[; ;rendering.c: 304:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"306
+[; ;rendering.c: 306:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"307
+[; ;rendering.c: 307:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"309
+[; ;rendering.c: 309:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"310
+[; ;rendering.c: 310:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"312
+[; ;rendering.c: 312:        Output |= ((Block->ABlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 0 `i -> _character_line `i -> 128 `i `uc ]
+"313
+[; ;rendering.c: 313:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"315
+[; ;rendering.c: 315:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"316
+[; ;rendering.c: 316:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"318
+[; ;rendering.c: 318:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"319
+[; ;rendering.c: 319:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"321
+[; ;rendering.c: 321:        Output |= ((Block->ABlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 0 `i -> _character_line `i -> 128 `i `uc ]
+"323
+[; ;rendering.c: 323:     }
+}
+[e :U 17 ]
+"324
+[; ;rendering.c: 324:     if(hours == 9){
+[e $ ! == -> _hours `i -> 9 `i 18  ]
+{
+"326
+[; ;rendering.c: 326:        Output = ((Block->ABlock << (character_line)) & 0b10000000);
+[e = F97 -> & << -> . *U _Block 0 `i -> _character_line `i -> 128 `i `uc ]
+"327
+[; ;rendering.c: 327:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"329
+[; ;rendering.c: 329:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"330
+[; ;rendering.c: 330:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"332
+[; ;rendering.c: 332:        Output |= ((Block->JBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 9 `i -> _character_line `i -> 128 `i `uc ]
+"333
+[; ;rendering.c: 333:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"335
+[; ;rendering.c: 335:        Output |= ((Block->UBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 20 `i -> _character_line `i -> 128 `i `uc ]
+"336
+[; ;rendering.c: 336:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"338
+[; ;rendering.c: 338:        Output |= ((Block->TBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 19 `i -> _character_line `i -> 128 `i `uc ]
+"339
+[; ;rendering.c: 339:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"341
+[; ;rendering.c: 341:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"342
+[; ;rendering.c: 342:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"344
+[; ;rendering.c: 344:        Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 1 `i -> _character_line `i -> 128 `i `uc ]
+"345
+[; ;rendering.c: 345:        Output >>= 1;
+[e =>> F97 -> -> 1 `i `uc ]
+"347
+[; ;rendering.c: 347:        Output |= ((Block->ABlock << (character_line)) & 0b10000000);
+[e =| F97 -> & << -> . *U _Block 0 `i -> _character_line `i -> 128 `i `uc ]
+"348
+[; ;rendering.c: 348:     }
+}
+[e :U 18 ]
+"350
+[; ;rendering.c: 350:     return Output;
+[e ) F97 ]
+[e $UE 8  ]
+"352
+[; ;rendering.c: 352: }
+[e :UE 8 ]
+}
+"354
+[; ;rendering.c: 354: Uint8 RHalf_NumBuilder(Uint8 access_line,const BlockSet *Block, Uint8 minutes){
+[v _RHalf_NumBuilder `(uc ~T0 @X0 1 ef3`uc`*CS1`uc ]
+{
+[e :U _RHalf_NumBuilder ]
+[v _access_line `uc ~T0 @X0 1 r1 ]
+[v _Block `*CS1 ~T0 @X0 1 r2 ]
+[v _minutes `uc ~T0 @X0 1 r3 ]
+[f ]
+"356
+[; ;rendering.c: 356: }
+[e :UE 19 ]
+}
