@@ -3636,9 +3636,9 @@ extern __bank0 __bit __timeout;
 # 50 "./mcc_generated_files/mcc.h" 2
 
 # 1 "./mcc_generated_files/pin_manager.h" 1
-# 148 "./mcc_generated_files/pin_manager.h"
+# 166 "./mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
-# 160 "./mcc_generated_files/pin_manager.h"
+# 178 "./mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_IOC(void);
 # 51 "./mcc_generated_files/mcc.h" 2
 
@@ -3807,11 +3807,66 @@ char *ctermid(char *);
 char *tempnam(const char *, const char *);
 # 8 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\conio.h" 2 3
 # 54 "./mcc_generated_files/mcc.h" 2
-# 69 "./mcc_generated_files/mcc.h"
+
+# 1 "./mcc_generated_files/interrupt_manager.h" 1
+# 55 "./mcc_generated_files/mcc.h" 2
+
+# 1 "./mcc_generated_files/tmr0.h" 1
+# 98 "./mcc_generated_files/tmr0.h"
+void TMR0_Initialize(void);
+# 129 "./mcc_generated_files/tmr0.h"
+uint8_t TMR0_ReadTimer(void);
+# 168 "./mcc_generated_files/tmr0.h"
+void TMR0_WriteTimer(uint8_t timerVal);
+# 204 "./mcc_generated_files/tmr0.h"
+void TMR0_Reload(void);
+# 219 "./mcc_generated_files/tmr0.h"
+void TMR0_ISR(void);
+# 238 "./mcc_generated_files/tmr0.h"
+ void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
+# 256 "./mcc_generated_files/tmr0.h"
+extern void (*TMR0_InterruptHandler)(void);
+# 274 "./mcc_generated_files/tmr0.h"
+void TMR0_DefaultInterruptHandler(void);
+# 56 "./mcc_generated_files/mcc.h" 2
+
+# 1 "./mcc_generated_files/eusart.h" 1
+# 75 "./mcc_generated_files/eusart.h"
+typedef union {
+    struct {
+        unsigned perr : 1;
+        unsigned ferr : 1;
+        unsigned oerr : 1;
+        unsigned reserved : 5;
+    };
+    uint8_t status;
+}eusart_status_t;
+# 111 "./mcc_generated_files/eusart.h"
+void EUSART_Initialize(void);
+# 159 "./mcc_generated_files/eusart.h"
+_Bool EUSART_is_tx_ready(void);
+# 207 "./mcc_generated_files/eusart.h"
+_Bool EUSART_is_rx_ready(void);
+# 254 "./mcc_generated_files/eusart.h"
+_Bool EUSART_is_tx_done(void);
+# 302 "./mcc_generated_files/eusart.h"
+eusart_status_t EUSART_get_last_status(void);
+# 322 "./mcc_generated_files/eusart.h"
+uint8_t EUSART_Read(void);
+# 342 "./mcc_generated_files/eusart.h"
+void EUSART_Write(uint8_t txData);
+# 362 "./mcc_generated_files/eusart.h"
+void EUSART_SetFramingErrorHandler(void (* interruptHandler)(void));
+# 380 "./mcc_generated_files/eusart.h"
+void EUSART_SetOverrunErrorHandler(void (* interruptHandler)(void));
+# 398 "./mcc_generated_files/eusart.h"
+void EUSART_SetErrorHandler(void (* interruptHandler)(void));
+# 57 "./mcc_generated_files/mcc.h" 2
+# 72 "./mcc_generated_files/mcc.h"
 void SYSTEM_Initialize(void);
-# 82 "./mcc_generated_files/mcc.h"
+# 85 "./mcc_generated_files/mcc.h"
 void OSCILLATOR_Initialize(void);
-# 94 "./mcc_generated_files/mcc.h"
+# 97 "./mcc_generated_files/mcc.h"
 void WDT_Initialize(void);
 # 44 "PerfBoardClock.c" 2
 
@@ -3823,6 +3878,12 @@ typedef uint8_t Uint8;
 typedef uint16_t Uint16;
 typedef uint32_t Uint32;
 
+typedef struct Render{
+    Uint8 Common_Line_One;
+    Uint8 Common_Line_Two;
+    Uint8 Access_Line_one;
+    Uint8 Access_Line_Two;
+}Render;
 
 typedef struct BlockSet{
     Uint8 ABlock;
@@ -3848,29 +3909,53 @@ typedef struct BlockSet{
     Uint8 UBlock;
 }BlockSet;
 
+typedef struct TensOnes{
+    Uint8 HourOnes;
+    Uint8 HourTens;
+    Uint8 MinuteOnes;
+    Uint8 MinuteTens;
+}TensOnes;
+
+extern Render renderer_outputs;
+extern TensOnes tod_outputs;
 extern BlockSet NumberBlocks;
 
 
-Uint8 Hour_deconstruct(const Uint8 access_line, const Uint8 hours);
-
-Uint8 Character_Line(const Uint8 access_line);
+Uint8 Time_deconstruct(const Uint8 access_line, const Uint8 hours, const Uint8 minutes, TensOnes *output);
 
 
+Uint8 DigitAssembler(const Uint8 character_line,const BlockSet *Block, const Uint8 time);
 
 
-
-Uint8 LHalf_NumBuilder(const Uint8 character_line,const BlockSet *Block, const Uint8 hours);
-
-Uint8 RHalf_NumBuilder(Uint8 access_line,const BlockSet *Block, Uint8 minutes);
+Uint8 Brightness(Uint8 access_line);
 
 
-Uint8 LHalf_Brightness(Uint8 access_line);
-
-Uint8 RHalf_Brightness(Uint8 access_line);
-
-
-Uint32 Renderer(Uint8 LH_Num, Uint8 RH_Num, Uint8 LH_Bright, Uint8 RH_Bright);
+void Renderer(Uint8 left_common_line, Uint8 right_common_line, Uint8 access_line, Render *shift_reg_outputs);
 # 47 "PerfBoardClock.c" 2
+
+# 1 "./clock.h" 1
+# 13 "./clock.h"
+typedef uint8_t Uint8;
+typedef uint32_t Uint32;
+
+typedef struct Clock{
+    Uint8 Hours;
+    Uint8 Minutes;
+} Clock;
+
+extern Clock time_of_day;
+
+
+void TOD(Clock *Time_Of_Day);
+
+
+
+Uint32 RotaryEncoder(Uint8 L_Turn, Uint8 R_Turn, Uint8 Click, Uint32 CurrentTime);
+# 48 "PerfBoardClock.c" 2
+
+
+Uint8 AccessLine = 0;
+Uint8 TimeSlot = 0;
 
 
 
@@ -3885,17 +3970,17 @@ Uint8 character_line = 0;
 void main() {
 
     SYSTEM_Initialize();
-# 78 "PerfBoardClock.c"
+# 83 "PerfBoardClock.c"
     Uint8 AccessLine = 9;
-    Uint8 Hours = 13;
+    Uint8 Hours = 11;
+    Uint8 Minutes = 35;
 
 
-    display_num = Hour_deconstruct(AccessLine, Hours);
-    char_line = Character_Line(AccessLine);
 
-    character_line = LHalf_NumBuilder(char_line, &NumberBlocks, display_num);
 
     while (1) {
+
+
 
     }
 }

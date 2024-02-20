@@ -45,10 +45,15 @@
 #include <xc.h>
 #include <stdio.h>
 #include "rendering.h"
+#include "clock.h"
+
+Uint8 AccessLine  = 0;
+Uint8 TimeSlot    = 0;
 
 // Defines
 
 // Variables
+
 Uint8 display_num = 0;
 Uint8 char_line = 0;
 Uint8 character_line = 0;
@@ -76,18 +81,24 @@ void main() {
 //    TMR1_StartTimer();
     
     Uint8 AccessLine = 9;
-    Uint8 Hours = 13;
+    Uint8 Hours = 11;
+    Uint8 Minutes = 35;
 
 //    NumBlockData = StructData(&NumberBlocks);
-    display_num = Hour_deconstruct(AccessLine, Hours);
-    char_line = Character_Line(AccessLine);
 
-    character_line = LHalf_NumBuilder(char_line, &NumberBlocks, display_num);
     
     while (1) {
+
+
 
     }
 }
 /**
  End of File
  */
+
+// scan period timer interrupt
+
+
+
+// time of day timer interrupt

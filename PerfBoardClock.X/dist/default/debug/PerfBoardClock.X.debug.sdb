@@ -23,14 +23,14 @@
 [v _WDT_Initialize WDT_Initialize `(v  1 e 1 0 ]
 "55 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
-"58 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\PerfBoardClock.c
+"74 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\PerfBoardClock.c
 [v _main main `(v  1 e 1 0 ]
-"36 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\rendering.c
-[v _Hour_deconstruct Hour_deconstruct `(uc  1 e 1 0 ]
-"48
-[v _Character_Line Character_Line `(uc  1 e 1 0 ]
-"87
-[v _LHalf_NumBuilder LHalf_NumBuilder `(uc  1 e 1 0 ]
+"48 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\rendering.c
+[v _Time_deconstruct Time_deconstruct `(uc  1 e 1 0 ]
+"65
+[v _NumBuilder NumBuilder `(uc  1 e 1 0 ]
+"265
+[v _Renderer Renderer `(v  1 e 1 0 ]
 "1080 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8\pic\include\proc\pic16lf1826.h
 [v _TRISA TRISA `VEuc  1 e 1 @140 ]
 "1142
@@ -76,65 +76,38 @@
 [v _WPUA WPUA `VEuc  1 e 1 @524 ]
 "3361
 [v _WPUB WPUB `VEuc  1 e 1 @525 ]
-"52 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\PerfBoardClock.c
+"68 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\PerfBoardClock.c
 [v _display_num display_num `uc  1 e 1 0 ]
-"53
-[v _char_line char_line `uc  1 e 1 0 ]
-"54
+"70
 [v _character_line character_line `uc  1 e 1 0 ]
 [s S91 BlockSet 21 `uc 1 ABlock 1 0 `uc 1 BBlock 1 1 `uc 1 CBlock 1 2 `uc 1 DBlock 1 3 `uc 1 EBlock 1 4 `uc 1 FBlock 1 5 `uc 1 GBlock 1 6 `uc 1 HBlock 1 7 `uc 1 IBlock 1 8 `uc 1 JBlock 1 9 `uc 1 KBlock 1 10 `uc 1 LBlock 1 11 `uc 1 MBlock 1 12 `uc 1 NBlock 1 13 `uc 1 OBlock 1 14 `uc 1 PBlock 1 15 `uc 1 QBlock 1 16 `uc 1 RBlock 1 17 `uc 1 SBlock 1 18 `uc 1 TBlock 1 19 `uc 1 UBlock 1 20 ]
-"12 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\rendering.c
+"9 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\rendering.c
 [v _NumberBlocks NumberBlocks `S91  1 e 21 0 ]
-"58 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\PerfBoardClock.c
+[s S113 TensOnes 4 `uc 1 HourOnes 1 0 `uc 1 HourTens 1 1 `uc 1 MinuteOnes 1 2 `uc 1 MinuteTens 1 3 ]
+"33
+[v _tod_outputs tod_outputs `S113  1 e 4 0 ]
+[s S118 Render 4 `uc 1 Common_Line_One 1 0 `uc 1 Common_Line_Two 1 1 `uc 1 Access_Line_one 1 2 `uc 1 Access_Line_Two 1 3 ]
+"40
+[v _renderer_outputs renderer_outputs `S118  1 e 4 0 ]
+"74 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\PerfBoardClock.c
 [v _main main `(v  1 e 1 0 ]
 {
-"90
+"108
 } 0
-"50 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/mcc.c
-[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+"48 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\rendering.c
+[v _Time_deconstruct Time_deconstruct `(uc  1 e 1 0 ]
 {
-"56
-} 0
-"68
-[v _WDT_Initialize WDT_Initialize `(v  1 e 1 0 ]
-{
-"72
-} 0
-"55 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/pin_manager.c
-[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
-{
-"94
-} 0
-"58 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/mcc.c
-[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
-{
-"66
-} 0
-"87 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\rendering.c
-[v _LHalf_NumBuilder LHalf_NumBuilder `(uc  1 e 1 0 ]
-{
-[v LHalf_NumBuilder@character_line character_line `DCuc  1 a 1 wreg ]
-[v LHalf_NumBuilder@character_line character_line `DCuc  1 a 1 wreg ]
-[s S91 BlockSet 21 `uc 1 ABlock 1 0 `uc 1 BBlock 1 1 `uc 1 CBlock 1 2 `uc 1 DBlock 1 3 `uc 1 EBlock 1 4 `uc 1 FBlock 1 5 `uc 1 GBlock 1 6 `uc 1 HBlock 1 7 `uc 1 IBlock 1 8 `uc 1 JBlock 1 9 `uc 1 KBlock 1 10 `uc 1 LBlock 1 11 `uc 1 MBlock 1 12 `uc 1 NBlock 1 13 `uc 1 OBlock 1 14 `uc 1 PBlock 1 15 `uc 1 QBlock 1 16 `uc 1 RBlock 1 17 `uc 1 SBlock 1 18 `uc 1 TBlock 1 19 `uc 1 UBlock 1 20 ]
-[v LHalf_NumBuilder@Block Block `*.4DCS91  1 p 1 0 ]
-[v LHalf_NumBuilder@hours hours `DCuc  1 p 1 1 ]
-"88
-[v LHalf_NumBuilder@Output Output `uc  1 s 1 Output ]
-"98
-[v LHalf_NumBuilder@character_line character_line `DCuc  1 a 1 4 ]
-"352
-} 0
-"36
-[v _Hour_deconstruct Hour_deconstruct `(uc  1 e 1 0 ]
-{
-[v Hour_deconstruct@access_line access_line `DCuc  1 a 1 wreg ]
-[v Hour_deconstruct@access_line access_line `DCuc  1 a 1 wreg ]
-[v Hour_deconstruct@hours hours `DCuc  1 p 1 9 ]
-"37
-[v Hour_deconstruct@Output Output `uc  1 s 1 Output ]
-"39
-[v Hour_deconstruct@access_line access_line `DCuc  1 a 1 12 ]
-"46
+[v Time_deconstruct@access_line access_line `DCuc  1 a 1 wreg ]
+[v Time_deconstruct@access_line access_line `DCuc  1 a 1 wreg ]
+[v Time_deconstruct@hours hours `DCuc  1 p 1 9 ]
+[v Time_deconstruct@minutes minutes `DCuc  1 p 1 10 ]
+[s S113 TensOnes 4 `uc 1 HourOnes 1 0 `uc 1 HourTens 1 1 `uc 1 MinuteOnes 1 2 `uc 1 MinuteTens 1 3 ]
+[v Time_deconstruct@output output `*.4S113  1 p 1 11 ]
+"49
+[v Time_deconstruct@character_line character_line `uc  1 s 1 character_line ]
+"51
+[v Time_deconstruct@access_line access_line `DCuc  1 a 1 0 ]
+"62
 } 0
 "5 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
@@ -160,14 +133,49 @@
 [v ___awdiv@dividend dividend `i  1 p 2 2 ]
 "41
 } 0
-"48 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\rendering.c
-[v _Character_Line Character_Line `(uc  1 e 1 0 ]
+"50 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 {
-[v Character_Line@access_line access_line `DCuc  1 a 1 wreg ]
-[v Character_Line@access_line access_line `DCuc  1 a 1 wreg ]
-"49
-[v Character_Line@character_line character_line `uc  1 s 1 character_line ]
-"51
-[v Character_Line@access_line access_line `DCuc  1 a 1 1 ]
-"60
+"56
+} 0
+"68
+[v _WDT_Initialize WDT_Initialize `(v  1 e 1 0 ]
+{
+"72
+} 0
+"55 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+{
+"94
+} 0
+"58 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/mcc.c
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
+{
+"66
+} 0
+"265 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\rendering.c
+[v _Renderer Renderer `(v  1 e 1 0 ]
+{
+[v Renderer@left_common_line left_common_line `uc  1 a 1 wreg ]
+[v Renderer@left_common_line left_common_line `uc  1 a 1 wreg ]
+[v Renderer@right_common_line right_common_line `uc  1 p 1 0 ]
+[v Renderer@access_line access_line `uc  1 p 1 1 ]
+[v Renderer@shift_reg_outputs shift_reg_outputs `*.4S118  1 p 1 2 ]
+"267
+[v Renderer@left_common_line left_common_line `uc  1 a 1 6 ]
+"278
+} 0
+"65
+[v _NumBuilder NumBuilder `(uc  1 e 1 0 ]
+{
+[v NumBuilder@character_line character_line `DCuc  1 a 1 wreg ]
+[v NumBuilder@character_line character_line `DCuc  1 a 1 wreg ]
+[s S91 BlockSet 21 `uc 1 ABlock 1 0 `uc 1 BBlock 1 1 `uc 1 CBlock 1 2 `uc 1 DBlock 1 3 `uc 1 EBlock 1 4 `uc 1 FBlock 1 5 `uc 1 GBlock 1 6 `uc 1 HBlock 1 7 `uc 1 IBlock 1 8 `uc 1 JBlock 1 9 `uc 1 KBlock 1 10 `uc 1 LBlock 1 11 `uc 1 MBlock 1 12 `uc 1 NBlock 1 13 `uc 1 OBlock 1 14 `uc 1 PBlock 1 15 `uc 1 QBlock 1 16 `uc 1 RBlock 1 17 `uc 1 SBlock 1 18 `uc 1 TBlock 1 19 `uc 1 UBlock 1 20 ]
+[v NumBuilder@Block Block `*.4DCS91  1 p 1 0 ]
+[v NumBuilder@time time `DCuc  1 p 1 1 ]
+"66
+[v NumBuilder@Output Output `uc  1 s 1 Output ]
+"68
+[v NumBuilder@character_line character_line `DCuc  1 a 1 4 ]
+"259
 } 0

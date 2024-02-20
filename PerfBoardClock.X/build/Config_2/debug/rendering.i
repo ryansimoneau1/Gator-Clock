@@ -7,7 +7,12 @@
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "rendering.c" 2
-# 10 "rendering.c"
+
+
+
+
+
+
 # 1 "./rendering.h" 1
 # 11 "./rendering.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\stdint.h" 1 3
@@ -122,6 +127,12 @@ typedef uint8_t Uint8;
 typedef uint16_t Uint16;
 typedef uint32_t Uint32;
 
+typedef struct Render{
+    Uint8 Common_Line_One;
+    Uint8 Common_Line_Two;
+    Uint8 Access_Line_one;
+    Uint8 Access_Line_Two;
+}Render;
 
 typedef struct BlockSet{
     Uint8 ABlock;
@@ -147,29 +158,29 @@ typedef struct BlockSet{
     Uint8 UBlock;
 }BlockSet;
 
+typedef struct TensOnes{
+    Uint8 HourOnes;
+    Uint8 HourTens;
+    Uint8 MinuteOnes;
+    Uint8 MinuteTens;
+}TensOnes;
+
+extern Render renderer_outputs;
+extern TensOnes tod_outputs;
 extern BlockSet NumberBlocks;
 
 
-Uint8 Hour_deconstruct(const Uint8 access_line, const Uint8 hours);
-
-Uint8 Character_Line(const Uint8 access_line);
+Uint8 Time_deconstruct(const Uint8 access_line, const Uint8 hours, const Uint8 minutes, TensOnes *output);
 
 
+Uint8 DigitAssembler(const Uint8 character_line,const BlockSet *Block, const Uint8 time);
 
 
-
-Uint8 LHalf_NumBuilder(const Uint8 character_line,const BlockSet *Block, const Uint8 hours);
-
-Uint8 RHalf_NumBuilder(Uint8 access_line,const BlockSet *Block, Uint8 minutes);
+Uint8 Brightness(Uint8 access_line);
 
 
-Uint8 LHalf_Brightness(Uint8 access_line);
-
-Uint8 RHalf_Brightness(Uint8 access_line);
-
-
-Uint32 Renderer(Uint8 LH_Num, Uint8 RH_Num, Uint8 LH_Bright, Uint8 RH_Bright);
-# 10 "rendering.c" 2
+void Renderer(Uint8 left_common_line, Uint8 right_common_line, Uint8 access_line, Render *shift_reg_outputs);
+# 7 "rendering.c" 2
 
 
 extern BlockSet NumberBlocks = {
@@ -196,291 +207,60 @@ extern BlockSet NumberBlocks = {
     .UBlock = 0b00011101,
 };
 
-Uint8 Hour_deconstruct(const Uint8 access_line, const Uint8 hours){
-    static Uint8 Output = 0;
+extern TensOnes tod_outputs = {
+    .HourOnes = 0,
+    .HourTens = 0,
+    .MinuteOnes = 0,
+    .MinuteTens = 0
+};
 
-    if(access_line < 6){
-        Output = hours / 10;
-    }
-    else{
-        Output = hours % 10;
-    }
-    return Output;
+extern Render renderer_outputs = {
+   .Common_Line_One = 0,
+   .Common_Line_Two = 0,
+   .Access_Line_one = 0,
+   .Access_Line_Two = 0
+};
+
+
+Uint8 Time_deconstruct(const Uint8 access_line, const Uint8 hours, const Uint8 minutes, TensOnes *output){
+   static Uint8 character_line = 0;
+
+   if(access_line < 6){
+      character_line = access_line;
+      output->HourTens = hours / 10;
+      output->MinuteTens = minutes / 10;
+   }
+   else{
+      character_line = access_line - 6;
+      output->HourOnes = hours % 10;
+      output->MinuteOnes = minutes % 10;
+   }
+   return character_line;
 }
 
-Uint8 Character_Line(const Uint8 access_line){
-    static Uint8 character_line = 0;
 
-    if(access_line < 6){
-        character_line = access_line;
-    }
-    else{
-        character_line = access_line - 6;
-    }
-
-    character_line += 2;
-    return character_line;
-}
-# 87 "rendering.c"
-Uint8 LHalf_NumBuilder(const Uint8 character_line,const BlockSet *Block, const Uint8 hours){
-    static Uint8 Output = 0;
-# 98 "rendering.c"
-    if(hours == 0){
-       Output = ((Block->ABlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
-    }
-
-    if(hours == 1){
-
-       Output = ((Block->FBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->EBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->DBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
-
-    }
-    if(hours == 2){
-
-       Output = ((Block->FBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->HBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->SBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->DBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->GBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
-
-    }
-    if(hours == 3){
-
-       Output = ((Block->ABlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->JBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->IBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->EBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->GBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->FBlock << (character_line)) & 0b10000000);
-
-    }
-    if(hours == 4){
-
-       Output = ((Block->GBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->GBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->GBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->FBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->NBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->MBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->LBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->KBlock << (character_line)) & 0b10000000);
-
-    }
-    if(hours == 5){
-
-       Output = ((Block->ABlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->JBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->JBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->OBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->HBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->HBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->FBlock << (character_line)) & 0b10000000);
-
-    }
-    if(hours == 6){
-
-       Output = ((Block->ABlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->QBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->PBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->HBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
-
-    }
-    if(hours == 7){
-
-       Output = ((Block->HBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->HBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->SBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->RBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->GBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->JBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->FBlock << (character_line)) & 0b10000000);
-
-    }
-    if(hours == 8){
-
-       Output = ((Block->ABlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
-
-    }
-    if(hours == 9){
-
-       Output = ((Block->ABlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->JBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->UBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->TBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-
-       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
-    }
-
+Uint8 DigitAssembler(const Uint8 character_line,const BlockSet *Block, const Uint8 digit){
+    Uint8 Output = 0;
+# 257 "rendering.c"
     return Output;
 
 }
 
-Uint8 RHalf_NumBuilder(Uint8 access_line,const BlockSet *Block, Uint8 minutes){
+
+
+
+
+void Renderer(Uint8 left_common_line, Uint8 right_common_line, Uint8 access_line, Render *shift_reg_outputs){
+
+   if(access_line < 8){
+      shift_reg_outputs->Access_Line_one = 0b10000000 >> access_line;
+      shift_reg_outputs->Access_Line_Two = 0;
+   }else{
+      shift_reg_outputs->Access_Line_one = 0;
+      shift_reg_outputs->Access_Line_Two = 0b10000000 >> (access_line - 8);
+   }
+
+   shift_reg_outputs->Common_Line_One = left_common_line;
+   shift_reg_outputs->Common_Line_Two = right_common_line;
 
 }

@@ -8,16 +8,23 @@
 #ifndef CLOCK_H
 #define	CLOCK_H
 
+#include <stdint.h>
+
 typedef uint8_t Uint8;
 typedef uint32_t Uint32;
 
-// Time of day Builder. Determines the time based on timer 0
-Uint32 TOD(Uint32 time_of_day, Uint8 T_Tick);
+typedef struct Clock{
+    Uint8 Hours;
+    Uint8 Minutes;
+} Clock;
 
-// Takes the time of day and represents the tens and ones place of Hours and Minutes for the Renderer to output to the display
-Uint8 Clock_Out(Uint32 time_of_day);
+extern Clock time_of_day;
 
-// Rotary Encoder. Takes input from the rotary encoder to reset the clock
+// Determines the time based on timer 0
+void TOD(Clock *Time_Of_Day);
+
+
+// Rotary Encoder. Takes input from the rotary encoder to modify the clock
 Uint32 RotaryEncoder(Uint8 L_Turn, Uint8 R_Turn, Uint8 Click, Uint32 CurrentTime);
 
 #endif	/* CLOCK_H */

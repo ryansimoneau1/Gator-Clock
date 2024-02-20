@@ -2,14 +2,11 @@
  includes all functions required to render text to the LED Display
  
  
- 
- 
- 
  */
 
 #include "rendering.h"
 
-extern BlockSet NumberBlocks = { // Struct containing building blocks to construct display numbers
+const BlockSet NumberBlocks = { // Struct containing building blocks to construct display numbers
     .ABlock = 0b00011110,
     .BBlock = 0b00100001,
     .CBlock = 0b00000100,
@@ -26,275 +23,392 @@ extern BlockSet NumberBlocks = { // Struct containing building blocks to constru
     .NBlock = 0b00100010,
     .OBlock = 0b00111110,
     .PBlock = 0b00101110,
-    .QBlock = 0b00110000,
+    .QBlock = 0b00110001,
     .RBlock = 0b00001000,
     .SBlock = 0b00010000,
     .TBlock = 0b00100011,
     .UBlock = 0b00011101,
 };
+CharacterSet Characters = {
 
-Uint8 Hour_deconstruct(const Uint8 access_line, const Uint8 hours){
-    static Uint8 Output = 0;
+.CharacterZero = {
+    0b00011110,
+    0b00100001,
+    0b00100001,
+    0b00100001,
+    0b00100001,
+    0b00100001,
+    0b00100001,
+    0b00011110},
 
-    if(access_line < 6){    // 10s place of Hr to be displayed
-        Output = hours / 10;
-    }
-    else{                   // 1s place of Hr to be displayed
-        Output = hours % 10;
-    }
+.CharacterOne = {
+    0b00000100,
+    0b00001100,
+    0b00010100,
+    0b00000100,
+    0b00000100,
+    0b00000100,
+    0b00000100,
+    0b00111111},
+    
+.CharacterTwo = {
+    0b00011110,
+    0b00100001,
+    0b00100001,
+    0b00000010,
+    0b00001100,
+    0b00010000,
+    0b00100000,
+    0b00111111},
+
+.CharacterThree = {
+    0b00111111,
+    0b00000010,
+    0b00000100,
+    0b00001110,
+    0b00000001,
+    0b00100001,
+    0b00100001,
+    0b00011110},
+
+.CharacterFour = {
+    0b00000110,
+    0b00001010,
+    0b00010010,
+    0b00100010,
+    0b00111111,
+    0b00000100,
+    0b00000100,
+    0b00000100},
+
+.CharacterFive = {
+    0b00111111,
+    0b00100000,
+    0b00100000,
+    0b00111110,
+    0b00000001,
+    0b00000001,
+    0b00100001,
+    0b00011110},
+
+.CharacterSix = {
+    0b00011110,
+    0b00100001,
+    0b00100000,
+    0b00101110,
+    0b00110001,
+    0b00100001,
+    0b00100001,
+    0b00011110},
+
+.CharacterSeven = {
+    0b00111111,
+    0b00000001,
+    0b00000010,
+    0b00000100,
+    0b00001000,
+    0b00010000,
+    0b00100000,
+    0b00100000},
+
+.CharacterEight = {
+    0b00011110,
+    0b00100001,
+    0b00100001,
+    0b00011110,
+    0b00100001,
+    0b00100001,
+    0b00100001,
+    0b00011110},
+
+.CharacterNine = {
+    0b00011110,
+    0b00100001,
+    0b00100001,
+    0b00100011,
+    0b00011101,
+    0b00000001,
+    0b00100001,
+    0b00011110}
+};
+
+
+const Uint8 DigitOne[8]
+
+extern TensOnes tod_outputs = {
+    .HourOnes = 0,
+    .HourTens = 0,
+    .MinuteOnes = 0,
+    .MinuteTens = 0
+};
+
+
+// Takes time and breaks into 10s and 1s place
+Uint8 Time_deconstruct(const Uint8 access_line, const Uint8 hours, const Uint8 minutes, TensOnes *output){
+   static Uint8 character_line = 0; // Accounts for Access line offset
+
+   if(access_line < 6){
+      character_line = access_line;
+      output->HourTens = hours / 10;
+      output->MinuteTens = minutes / 10;
+   }
+   else{
+      character_line = access_line - 6;
+      output->HourOnes = hours % 10;
+      output->MinuteOnes = minutes % 10;
+   }
+   return character_line;
+}
+
+// Constructs the digits to be rendered on the display based on primitives contained within BlockSet
+Uint8 DigitAssembler(const Uint8 character_line,const BlockSet *Block, const Uint8  digit){
+    Uint8 Output = 0;
+
+   //  if( digit == 0){
+   //     Output = ((Block->ABlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->ABlock << (character_line)) & 0b10000000);
+   //  }
+
+   //  if( digit == 1){
+
+   //     Output = ((Block->FBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->EBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->DBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+
+   //  }
+   //  if( digit == 2){
+
+   //     Output = ((Block->FBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->HBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->SBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->DBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->GBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->ABlock << (character_line)) & 0b10000000);
+
+   //  }
+   //  if( digit == 3){
+
+   //     Output = ((Block->ABlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->JBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->IBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->EBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->GBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->FBlock << (character_line)) & 0b10000000);
+
+   //  }
+   //  if( digit == 4){
+
+   //     Output = ((Block->GBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->GBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->GBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->FBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->NBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->MBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->LBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->KBlock << (character_line)) & 0b10000000);
+
+   //  }
+   //  if( digit == 5){
+
+   //     Output = ((Block->ABlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->JBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->JBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->OBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->HBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->HBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->FBlock << (character_line)) & 0b10000000);
+
+   //  }
+   //  if( digit == 6){
+
+   //     Output = ((Block->ABlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->QBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->PBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->HBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->ABlock << (character_line)) & 0b10000000);
+
+   //  }
+   //  if( digit == 7){
+
+   //     Output = ((Block->HBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->HBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->SBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->RBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->GBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->JBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->FBlock << (character_line)) & 0b10000000);
+
+   //  }
+   //  if( digit == 8){
+
+   //     Output = ((Block->ABlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->ABlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->ABlock << (character_line)) & 0b10000000);
+
+   //  }
+   //  if( digit == 9){
+
+   //     Output = ((Block->ABlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->JBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->UBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->TBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+   //     Output >>= 1;
+   //     Output |= ((Block->ABlock << (character_line)) & 0b10000000);
+   //  }
+
     return Output;
-}
-
-Uint8 Character_Line(const Uint8 access_line){
-    static Uint8 character_line = 0; // Accounts for Access line offset
-
-    if(access_line < 6){    // 10s place of Hr to be displayed
-        character_line = access_line;
-    }
-    else{                   // 1s place of Hr to be displayed
-        character_line = access_line - 6;
-    }
-    
-    character_line += 2; // characters are 6 bit wide. accounts for upper 2 MSbs
-    return character_line;
-}
-
-//Uint8 StructData(const BlockSet *Block){
-//    static Uint8 Data = 0;
-//    
-//    Data  = ((Block->ABlock << (2)) & 0b10000000);
-//    Data >>= 1;
-//    Data |= ((Block->BBlock << (2)) & 0b10000000);
-//    Data >>= 1;
-//    Data |= ((Block->BBlock << (2)) & 0b10000000);
-//    Data >>= 1;
-//    Data |= ((Block->BBlock << (2)) & 0b10000000);
-//    Data >>= 1;
-//    Data |= ((Block->BBlock << (2)) & 0b10000000);
-//    Data >>= 1;
-//    Data |= ((Block->BBlock << (2)) & 0b10000000);
-//    Data >>= 1;
-//    Data |= ((Block->BBlock << (2)) & 0b10000000);
-//    Data >>= 1;
-//    Data |= ((Block->BBlock << (2)) & 0b10000000);
-//    Data >>= 1;
-//    Data |= ((Block->ABlock << (2)) & 0b10000000);
-//    
-//    return Data;
-//}
-
-// Number Builder for the left half of the display
-Uint8 LHalf_NumBuilder(const Uint8 character_line,const BlockSet *Block, const Uint8 hours){
-    static Uint8 Output = 0;
-    /*
-     Clock sends time in HrHr:MinMin format (ex. 1230)
-     * based on Access Line number, NumBuilder determines what number to construct
-     *      ex: AcLn = 7 => the # 2 from 1230 at the 2nd column
-     * NumBuilder then bit manipulates Number Blocks associated with the number 2
-     *      find the appropriate logical shift value by considering the Access Line offset due to the number's position on the screen and the extra 2 most significant bits in the Number Blocks
-     
-     */
-    
-    if(hours == 0){
-       Output = ((Block->ABlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
-    }
-
-    if(hours == 1){
-
-       Output = ((Block->FBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->EBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->DBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
-
-    }
-    if(hours == 2){
-
-       Output = ((Block->FBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->HBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->SBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->DBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->GBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
-
-    }
-    if(hours == 3){
-
-       Output = ((Block->ABlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->JBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->IBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->EBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->GBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->FBlock << (character_line)) & 0b10000000);
-
-    }
-    if(hours == 4){
-
-       Output = ((Block->GBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->GBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->GBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->FBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->NBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->MBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->LBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->KBlock << (character_line)) & 0b10000000);
-
-    }
-    if(hours == 5){
-
-       Output = ((Block->ABlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->JBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->JBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->OBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->HBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->HBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->FBlock << (character_line)) & 0b10000000);
-
-    }
-    if(hours == 6){
-
-       Output = ((Block->ABlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->QBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->PBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->HBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
-
-    }
-    if(hours == 7){
-
-       Output = ((Block->HBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->HBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->SBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->RBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->GBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->JBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->FBlock << (character_line)) & 0b10000000);
-
-    }
-    if(hours == 8){
-
-       Output = ((Block->ABlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
-
-    }
-    if(hours == 9){
-
-       Output = ((Block->ABlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->JBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->UBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->TBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-       Output >>= 1;
-       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
-    }
-
-    return Output;
 
 }
-// Number Builder for the right half of the display
-Uint8 RHalf_NumBuilder(Uint8 access_line,const BlockSet *Block, Uint8 minutes){
-    
+
+// Adjusts the PWM depending on LED Color
+DisplayBrightness BrightnessCTRL(Uint8 AccessLine){
+    DisplayBrightness LEDBrightness = {
+    .LED_Left_Brightness     = ORANGE,
+    .LED_Right_Brightness    = BLUE
+    };
+    if(AccessLine > 5){
+        LEDBrightness.LED_Left_Brightness   = BLUE;
+    }
+    if(AccessLine == 12){
+        LEDBrightness.LED_Left_Brightness   = WHITE;
+    }
+    if(AccessLine < 7){
+        LEDBrightness.LED_Right_Brightness  = ORANGE;
+    }
+    if(AccessLine == 0){
+        LEDBrightness.LED_Right_Brightness  = WHITE;
+    }
+    return LEDBrightness;
 }
 
-// Brightness control for the left half of the display
+Uint8 FlipByte(Uint8 byte){
+    Uint8 FlippedByte = 0;
 
-// Brightness control for the right half of the display
+}
 
+// Inputs from Digit Assembler and brightness control to determine what data to send out per tick of the Timer 1 clock
+RendererOutputs Renderer(Uint8 access_line, Uint8 time_Slot, DisplayBrightness *LEDBrightness){
 
-// Renderer. Takes in info from left/right number builders and brightness control to determine what data to send out per tick of the Timer 1 clock
+    Uint8 Left_Test_LEDData = 0b01000000; // Constant Test Data to send to the Display Common Line Registers
+    Uint8 Right_Test_LEDData = 0b0000010;
+
+RendererOutputs LED_Data = {
+    .Left_Common_Line_Data  = 0,
+    .Right_Common_Line_Data = 0,
+    .AccessLine.Full_Access_Line = (1 >> access_line)
+
+};
+
+if(LEDBrightness->LED_Left_Brightness >= time_Slot){
+    LED_Data.Left_Common_Line_Data  = Left_Test_LEDData;
+
+}else{
+    LED_Data.Left_Common_Line_Data = 0;
+}
+
+if(LEDBrightness->LED_Right_Brightness >= time_Slot){
+    LED_Data.Right_Common_Line_Data  = Right_Test_LEDData;
+
+}else{
+    LED_Data.Right_Common_Line_Data = 0;
+}
+
+    return LED_Data;
+}

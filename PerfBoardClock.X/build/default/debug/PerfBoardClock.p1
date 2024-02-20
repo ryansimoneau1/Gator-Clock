@@ -1,24 +1,42 @@
 Version 4.0 HI-TECH Software Intermediate Code
+"50 PerfBoardClock.c
+[; ;PerfBoardClock.c: 50: typedef struct Ctrl_Flags{
+[s S285 `uc 1 `uc 1 `uc 1 ]
+[n S285 Ctrl_Flags time_of_day scan_period time_slot ]
 [p mainexit ]
 "69 ./mcc_generated_files/mcc.h
 [; ;./mcc_generated_files/mcc.h: 69: void SYSTEM_Initialize(void);
 [v _SYSTEM_Initialize `(v ~T0 @X0 0 ef ]
-"45 ./rendering.h
-[; ;./rendering.h: 45: Uint8 Hour_deconstruct(const Uint8 access_line, const Uint8 hours);
-[v _Hour_deconstruct `(uc ~T0 @X0 0 ef2`Cuc`Cuc ]
-"47
-[; ;./rendering.h: 47: Uint8 Character_Line(const Uint8 access_line);
-[v _Character_Line `(uc ~T0 @X0 0 ef1`Cuc ]
-"18
-[; ;./rendering.h: 18: typedef struct BlockSet{
-[s S281 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
-[n S281 BlockSet ABlock BBlock CBlock DBlock EBlock FBlock GBlock HBlock IBlock JBlock KBlock LBlock MBlock NBlock OBlock PBlock QBlock RBlock SBlock TBlock UBlock ]
-"53
-[; ;./rendering.h: 53: Uint8 LHalf_NumBuilder(const Uint8 character_line,const BlockSet *Block, const Uint8 hours);
-[v _LHalf_NumBuilder `(uc ~T0 @X0 0 ef3`Cuc`*CS281`Cuc ]
-"42
-[; ;./rendering.h: 42: extern BlockSet NumberBlocks;
-[v _NumberBlocks `S281 ~T0 @X0 0 e ]
+"48 ./rendering.h
+[; ;./rendering.h: 48: typedef struct TensOnes{
+[s S283 `uc 1 `uc 1 `uc 1 `uc 1 ]
+[n S283 TensOnes HourOnes HourTens MinuteOnes MinuteTens ]
+"60
+[; ;./rendering.h: 60: Uint8 Time_deconstruct(const Uint8 access_line, const Uint8 hours, const Uint8 minutes, TensOnes *output);
+[v _Time_deconstruct `(uc ~T0 @X0 0 ef4`Cuc`Cuc`Cuc`*S283 ]
+"56
+[; ;./rendering.h: 56: extern TensOnes tod_outputs;
+[v _tod_outputs `S283 ~T0 @X0 0 e ]
+"24
+[; ;./rendering.h: 24: typedef struct BlockSet{
+[s S282 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
+[n S282 BlockSet ABlock BBlock CBlock DBlock EBlock FBlock GBlock HBlock IBlock JBlock KBlock LBlock MBlock NBlock OBlock PBlock QBlock RBlock SBlock TBlock UBlock ]
+"63
+[; ;./rendering.h: 63: Uint8 NumBuilder(const Uint8 character_line,const BlockSet *Block, const Uint8 time);
+[v _NumBuilder `(uc ~T0 @X0 0 ef3`Cuc`*CS282`Cuc ]
+"57
+[; ;./rendering.h: 57: extern BlockSet NumberBlocks;
+[v _NumberBlocks `S282 ~T0 @X0 0 e ]
+"17
+[; ;./rendering.h: 17: typedef struct Render{
+[s S281 `uc 1 `uc 1 `uc 1 `uc 1 ]
+[n S281 Render Common_Line_One Common_Line_Two Access_Line_one Access_Line_Two ]
+"69
+[; ;./rendering.h: 69: void Renderer(Uint8 left_common_line, Uint8 right_common_line, Uint8 access_line, Render *shift_reg_outputs);
+[v _Renderer `(v ~T0 @X0 0 ef4`uc`uc`uc`*S281 ]
+"55
+[; ;./rendering.h: 55: extern Render renderer_outputs;
+[v _renderer_outputs `S281 ~T0 @X0 0 e ]
 "54 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8\pic\include\proc\pic16lf1826.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8\pic\include\proc\pic16lf1826.h: 54: __asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
@@ -388,62 +406,78 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5254
 [; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8\pic\include\proc\pic16lf1826.h: 5254: __asm("TOSH equ 0FEFh");
 [; <" TOSH equ 0FEFh ;# ">
-"52 PerfBoardClock.c
-[; ;PerfBoardClock.c: 52: Uint8 display_num = 0;
+"62 PerfBoardClock.c
+[; ;PerfBoardClock.c: 62: Ctrl_Flags Flags = {
+[v _Flags `S285 ~T0 @X0 1 e ]
+[i _Flags
+:U ..
+:U ..
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+..
+]
+"68
+[; ;PerfBoardClock.c: 68: Uint8 display_num = 0;
 [v _display_num `uc ~T0 @X0 1 e ]
 [i _display_num
 -> -> 0 `i `uc
 ]
-"53
-[; ;PerfBoardClock.c: 53: Uint8 char_line = 0;
+"69
+[; ;PerfBoardClock.c: 69: Uint8 char_line = 0;
 [v _char_line `uc ~T0 @X0 1 e ]
 [i _char_line
 -> -> 0 `i `uc
 ]
-"54
-[; ;PerfBoardClock.c: 54: Uint8 character_line = 0;
+"70
+[; ;PerfBoardClock.c: 70: Uint8 character_line = 0;
 [v _character_line `uc ~T0 @X0 1 e ]
 [i _character_line
 -> -> 0 `i `uc
 ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"58
-[; ;PerfBoardClock.c: 58: void main() {
+"74
+[; ;PerfBoardClock.c: 74: void main() {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"60
-[; ;PerfBoardClock.c: 60:     SYSTEM_Initialize();
+"76
+[; ;PerfBoardClock.c: 76:     SYSTEM_Initialize();
 [e ( _SYSTEM_Initialize ..  ]
-"78
-[; ;PerfBoardClock.c: 78:     Uint8 AccessLine = 9;
+"94
+[; ;PerfBoardClock.c: 94:     Uint8 AccessLine = 9;
 [v _AccessLine `uc ~T0 @X0 1 a ]
 [e = _AccessLine -> -> 9 `i `uc ]
-"79
-[; ;PerfBoardClock.c: 79:     Uint8 Hours = 13;
+"95
+[; ;PerfBoardClock.c: 95:     Uint8 Hours = 11;
 [v _Hours `uc ~T0 @X0 1 a ]
-[e = _Hours -> -> 13 `i `uc ]
-"82
-[; ;PerfBoardClock.c: 82:     display_num = Hour_deconstruct(AccessLine, Hours);
-[e = _display_num ( _Hour_deconstruct (2 , _AccessLine _Hours ]
-"83
-[; ;PerfBoardClock.c: 83:     char_line = Character_Line(AccessLine);
-[e = _char_line ( _Character_Line (1 _AccessLine ]
-"85
-[; ;PerfBoardClock.c: 85:     character_line = LHalf_NumBuilder(char_line, &NumberBlocks, display_num);
-[e = _character_line ( _LHalf_NumBuilder (3 , , _char_line -> &U _NumberBlocks `*CS281 _display_num ]
-"87
-[; ;PerfBoardClock.c: 87:     while (1) {
-[e :U 284 ]
+[e = _Hours -> -> 11 `i `uc ]
+"96
+[; ;PerfBoardClock.c: 96:     Uint8 Minutes = 35;
+[v _Minutes `uc ~T0 @X0 1 a ]
+[e = _Minutes -> -> 35 `i `uc ]
+"99
+[; ;PerfBoardClock.c: 99:     display_num = Time_deconstruct(AccessLine, Hours, Minutes, &tod_outputs);
+[e = _display_num ( _Time_deconstruct (4 , , , _AccessLine _Hours _Minutes &U _tod_outputs ]
+"101
+[; ;PerfBoardClock.c: 101:     character_line = NumBuilder(char_line, &NumberBlocks, display_num);
+[e = _character_line ( _NumBuilder (3 , , _char_line -> &U _NumberBlocks `*CS282 _display_num ]
+"103
+[; ;PerfBoardClock.c: 103:     Renderer(character_line, character_line, AccessLine, &renderer_outputs);
+[e ( _Renderer (4 , , , _character_line _character_line _AccessLine &U _renderer_outputs ]
+"105
+[; ;PerfBoardClock.c: 105:     while (1) {
+[e :U 288 ]
 {
-"89
-[; ;PerfBoardClock.c: 89:     }
+"107
+[; ;PerfBoardClock.c: 107:     }
 }
-[e :U 283 ]
-[e $U 284  ]
-[e :U 285 ]
-"90
-[; ;PerfBoardClock.c: 90: }
-[e :UE 282 ]
+[e :U 287 ]
+[e $U 288  ]
+[e :U 289 ]
+"108
+[; ;PerfBoardClock.c: 108: }
+[e :UE 286 ]
 }

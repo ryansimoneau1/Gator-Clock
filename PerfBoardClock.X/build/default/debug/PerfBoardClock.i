@@ -3823,6 +3823,12 @@ typedef uint8_t Uint8;
 typedef uint16_t Uint16;
 typedef uint32_t Uint32;
 
+typedef struct Render{
+    Uint8 Common_Line_One;
+    Uint8 Common_Line_Two;
+    Uint8 Access_Line_one;
+    Uint8 Access_Line_Two;
+}Render;
 
 typedef struct BlockSet{
     Uint8 ABlock;
@@ -3848,33 +3854,68 @@ typedef struct BlockSet{
     Uint8 UBlock;
 }BlockSet;
 
+typedef struct TensOnes{
+    Uint8 HourOnes;
+    Uint8 HourTens;
+    Uint8 MinuteOnes;
+    Uint8 MinuteTens;
+}TensOnes;
+
+extern Render renderer_outputs;
+extern TensOnes tod_outputs;
 extern BlockSet NumberBlocks;
 
 
-Uint8 Hour_deconstruct(const Uint8 access_line, const Uint8 hours);
-
-Uint8 Character_Line(const Uint8 access_line);
+Uint8 Time_deconstruct(const Uint8 access_line, const Uint8 hours, const Uint8 minutes, TensOnes *output);
 
 
+Uint8 NumBuilder(const Uint8 character_line,const BlockSet *Block, const Uint8 time);
 
 
-
-Uint8 LHalf_NumBuilder(const Uint8 character_line,const BlockSet *Block, const Uint8 hours);
-
-Uint8 RHalf_NumBuilder(Uint8 access_line,const BlockSet *Block, Uint8 minutes);
+Uint8 Brightness(Uint8 access_line);
 
 
-Uint8 LHalf_Brightness(Uint8 access_line);
-
-Uint8 RHalf_Brightness(Uint8 access_line);
-
-
-Uint32 Renderer(Uint8 LH_Num, Uint8 RH_Num, Uint8 LH_Bright, Uint8 RH_Bright);
+void Renderer(Uint8 left_common_line, Uint8 right_common_line, Uint8 access_line, Render *shift_reg_outputs);
 # 47 "PerfBoardClock.c" 2
 
+# 1 "./clock.h" 1
+# 13 "./clock.h"
+typedef uint8_t Uint8;
+typedef uint32_t Uint32;
+
+typedef struct Clock{
+    Uint8 Hours;
+    Uint8 Minutes;
+} Clock;
+
+extern Clock time_of_day;
+
+
+void TOD(Clock *Time_Of_Day);
 
 
 
+Uint32 RotaryEncoder(Uint8 L_Turn, Uint8 R_Turn, Uint8 Click, Uint32 CurrentTime);
+# 48 "PerfBoardClock.c" 2
+
+
+typedef struct Ctrl_Flags{
+
+  Uint8 time_of_day;
+  Uint8 scan_period;
+  Uint8 time_slot;
+
+
+}Ctrl_Flags;
+
+
+
+
+Ctrl_Flags Flags = {
+  .time_slot = 0,
+  .scan_period = 0,
+  .time_slot = 0
+};
 
 Uint8 display_num = 0;
 Uint8 char_line = 0;
@@ -3885,15 +3926,17 @@ Uint8 character_line = 0;
 void main() {
 
     SYSTEM_Initialize();
-# 78 "PerfBoardClock.c"
+# 94 "PerfBoardClock.c"
     Uint8 AccessLine = 9;
-    Uint8 Hours = 13;
+    Uint8 Hours = 11;
+    Uint8 Minutes = 35;
 
 
-    display_num = Hour_deconstruct(AccessLine, Hours);
-    char_line = Character_Line(AccessLine);
+    display_num = Time_deconstruct(AccessLine, Hours, Minutes, &tod_outputs);
 
-    character_line = LHalf_NumBuilder(char_line, &NumberBlocks, display_num);
+    character_line = NumBuilder(char_line, &NumberBlocks, display_num);
+
+    Renderer(character_line, character_line, AccessLine, &renderer_outputs);
 
     while (1) {
 

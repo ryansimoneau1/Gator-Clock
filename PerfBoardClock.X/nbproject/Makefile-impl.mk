@@ -27,7 +27,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=PerfBoardClock.X
 
 # Active Configuration
-DEFAULTCONF=default
+DEFAULTCONF=Config_2
 CONF=${DEFAULTCONF}
 
 # All Configurations

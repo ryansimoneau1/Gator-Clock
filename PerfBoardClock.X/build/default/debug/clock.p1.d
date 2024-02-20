@@ -1,2 +1,3 @@
 build/default/debug/clock.p1:  \
-clock.c 
+clock.c  \
+clock.h 
