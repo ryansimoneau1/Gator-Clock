@@ -46,16 +46,17 @@ typedef struct BlockSet{
 }BlockSet;
 
 typedef struct CharacterSet{
-    const Uint8 CharacterZero[8];
-    const Uint8 CharacterOne[8];
-    const Uint8 CharacterTwo[8];
-    const Uint8 CharacterThree[8];
-    const Uint8 CharacterFour[8];
-    const Uint8 CharacterFive[8];
-    const Uint8 CharacterSix[8];
-    const Uint8 CharacterSeven[8];
-    const Uint8 CharacterEight[8];
-    const Uint8 CharacterNine[8]
+    const Uint8 CharacterZero[6];
+    const Uint8 CharacterOne[6];
+    const Uint8 CharacterTwo[6];
+    const Uint8 CharacterThree[6];
+    const Uint8 CharacterFour[6];
+    const Uint8 CharacterFive[6];
+    const Uint8 CharacterSix[6];
+    const Uint8 CharacterSeven[6];
+    const Uint8 CharacterEight[6];
+    const Uint8 CharacterNine[6];
+    const Uint8 CharacterDots;
 }CharacterSet;
 
 typedef struct TensOnes{
@@ -65,26 +66,25 @@ typedef struct TensOnes{
     Uint8 MinuteTens;
 }TensOnes;
 
-typedef struct RendererOutputs{
-    Uint8 Left_Common_Line_Data;
-    Uint8 Right_Common_Line_Data;
 
-    typedef union AccessLine{
-        Uint16 Full_Access_Line;
-        typedef struct AccessLineMembers{
-            Uint8 Access_Line_Low;
-            Uint8 Access_Line_High;
-        }AccessLineMembers;
-    }AccessLine;
-}RendererOutputs;
 
 typedef struct DisplayBrightness{
     Uint8 LED_Left_Brightness;
     Uint8 LED_Right_Brightness;
 }DisplayBrightness;
 
+typedef struct RendererOutputs{
+    Uint8 Left_Common_Line_Data;
+    Uint8 Right_Common_Line_Data;
 
-
+    union AccessLine{
+        Uint16 Full_Access_Line;
+        struct AccessLineMembers{
+            Uint8 Access_Line_Low;
+            Uint8 Access_Line_High;
+        }AccessLineMembers;
+    }AccessLine;
+}RendererOutputs;
 
 extern TensOnes tod_outputs;
 extern BlockSet NumberBlocks;
@@ -93,16 +93,16 @@ extern BlockSet NumberBlocks;
 Uint8 Time_deconstruct(const Uint8 access_line, const Uint8 hours, const Uint8 minutes, TensOnes *output);
 
 // Constructs the digits to be rendered on the display based on primitives contained within BlockSet
-Uint8 DigitAssembler(const Uint8 character_line,const BlockSet *Block, const Uint8 time);
+Uint8 DigitAssembler(const Uint8 access_line, CharacterSet* Characters, const Uint8  digit);
 
 // Controls the scan period PWM 
 DisplayBrightness BrightnessCTRL(Uint8 access_line);
 
 // Flips Display driver bytes to accomodate little endian USART
-Uint8 FlipByte(Uint8 byte);
+Uint8 ReverseByte(Uint8 byte);
 
 // Inputs from Digit Assembler and brightness control to determine what data to send out per tick of the Timer 1 clock
-RendererOutputs Renderer(Uint8 access_line, Uint8 time_Slot, DisplayBrightness *LEDBrightness);
+RendererOutputs Renderer(Uint8 access_line, Uint8 time_Slot);
 
 #endif	/* FUNCTIONS_H */
 
