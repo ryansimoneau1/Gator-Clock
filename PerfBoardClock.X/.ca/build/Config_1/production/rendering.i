@@ -155,7 +155,7 @@ Uint8 Hour_deconstruct(const Uint8 access_line, const Uint8 hours);
 Uint8 Character_Line(const Uint8 access_line);
 
 
-Uint8 StructData(const BlockSet *Block);
+
 
 
 Uint8 LHalf_NumBuilder(const Uint8 character_line,const BlockSet *Block, const Uint8 hours);
@@ -197,7 +197,7 @@ extern BlockSet NumberBlocks = {
 };
 
 Uint8 Hour_deconstruct(const Uint8 access_line, const Uint8 hours){
-    Uint8 Output = 0;
+    static Uint8 Output = 0;
 
     if(access_line < 6){
         Output = hours / 10;
@@ -209,7 +209,7 @@ Uint8 Hour_deconstruct(const Uint8 access_line, const Uint8 hours){
 }
 
 Uint8 Character_Line(const Uint8 access_line){
-    Uint8 character_line = 0;
+    static Uint8 character_line = 0;
 
     if(access_line < 6){
         character_line = access_line;
@@ -221,124 +221,200 @@ Uint8 Character_Line(const Uint8 access_line){
     character_line += 2;
     return character_line;
 }
-
-Uint8 StructData(const BlockSet *Block){
-    static Uint8 Data = 0;
-
-    Data = ((Block->ABlock << (2)));
-    return Data;
-}
-
-
+# 87 "rendering.c"
 Uint8 LHalf_NumBuilder(const Uint8 character_line,const BlockSet *Block, const Uint8 hours){
-    Uint8 Output = 0;
-# 81 "rendering.c"
-    if (hours == 0) {
-        Output = ((Block->ABlock << (character_line)) & 0b10000000);
-        Output |= ((Block->BBlock << (character_line)) & 0b01000000);
-        Output |= ((Block->BBlock << (character_line)) & 0b00100000);
-        Output |= ((Block->BBlock << (character_line)) & 0b00010000);
-        Output |= ((Block->BBlock << (character_line)) & 0b00001000);
-        Output |= ((Block->BBlock << (character_line)) & 0b00000100);
-        Output |= ((Block->BBlock << (character_line)) & 0b00000010);
-        Output |= ((Block->ABlock << (character_line)) & 0b00000001);
+    static Uint8 Output = 0;
+# 98 "rendering.c"
+    if(hours == 0){
+       Output = ((Block->ABlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
     }
+
     if(hours == 1){
-        Output = ((Block->FBlock << (character_line)) & 0b10000000);
-        Output |= ((Block->CBlock << (character_line)) & 0b01000000);
-        Output |= ((Block->CBlock << (character_line)) & 0b00100000);
-        Output |= ((Block->CBlock << (character_line)) & 0b00010000);
-        Output |= ((Block->CBlock << (character_line)) & 0b00001000);
-        Output |= ((Block->EBlock << (character_line)) & 0b00000100);
-        Output |= ((Block->DBlock << (character_line)) & 0b00000010);
-        Output |= ((Block->CBlock << (character_line)) & 0b00000001);
+
+       Output = ((Block->FBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->EBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->DBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+
     }
-    if (hours == 2) {
-        Output = ((Block->ABlock << (character_line)) & 0b10000000);
-        Output |= ((Block->BBlock << (character_line)) & 0b01000000);
-        Output |= ((Block->CBlock << (character_line)) & 0b00100000);
-        Output |= ((Block->DBlock << (character_line)) & 0b00010000);
-        Output |= ((Block->GBlock << (character_line)) & 0b00001000);
-        Output |= ((Block->BBlock << (character_line)) & 0b00000100);
-        Output |= ((Block->HBlock << (character_line)) & 0b00000010);
-        Output |= ((Block->FBlock << (character_line)) & 0b00000001);
+    if(hours == 2){
+
+       Output = ((Block->FBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->HBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->SBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->DBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->GBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
+
     }
-    if (hours == 3) {
-        Output = ((Block->FBlock << (character_line)) & 0b10000000);
-        Output |= ((Block->GBlock << (character_line)) & 0b01000000);
-        Output |= ((Block->EBlock << (character_line)) & 0b00100000);
-        Output |= ((Block->IBlock << (character_line)) & 0b00010000);
-        Output |= ((Block->JBlock << (character_line)) & 0b00001000);
-        Output |= ((Block->BBlock << (character_line)) & 0b00000100);
-        Output |= ((Block->BBlock << (character_line)) & 0b00000010);
-        Output |= ((Block->ABlock << (character_line)) & 0b00000001);
-}
-    if (hours == 4) {
-        Output = ((Block->KBlock << (character_line)) & 0b10000000);
-        Output |= ((Block->LBlock << (character_line)) & 0b01000000);
-        Output |= ((Block->MBlock << (character_line)) & 0b00100000);
-        Output |= ((Block->NBlock << (character_line)) & 0b00010000);
-        Output |= ((Block->FBlock << (character_line)) & 0b00001000);
-        Output |= ((Block->GBlock << (character_line)) & 0b00000100);
-        Output |= ((Block->GBlock << (character_line)) & 0b00000010);
-        Output |= ((Block->GBlock << (character_line)) & 0b00000001);
-}
-    if (hours == 5) {
-        Output = ((Block->FBlock << (character_line)) & 0b10000000);
-        Output |= ((Block->HBlock << (character_line)) & 0b01000000);
-        Output |= ((Block->HBlock << (character_line)) & 0b00100000);
-        Output |= ((Block->OBlock << (character_line)) & 0b00010000);
-        Output |= ((Block->JBlock << (character_line)) & 0b00001000);
-        Output |= ((Block->JBlock << (character_line)) & 0b00000100);
-        Output |= ((Block->BBlock << (character_line)) & 0b00000010);
-        Output |= ((Block->ABlock << (character_line)) & 0b00000001);
+    if(hours == 3){
+
+       Output = ((Block->ABlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->JBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->IBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->EBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->GBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->FBlock << (character_line)) & 0b10000000);
+
+    }
+    if(hours == 4){
+
+       Output = ((Block->GBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->GBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->GBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->FBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->NBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->MBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->LBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->KBlock << (character_line)) & 0b10000000);
+
+    }
+    if(hours == 5){
+
+       Output = ((Block->ABlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->JBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->JBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->OBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->HBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->HBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->FBlock << (character_line)) & 0b10000000);
+
+    }
+    if(hours == 6){
+
+       Output = ((Block->ABlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->QBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->PBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->HBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
+
+    }
+    if(hours == 7){
+
+       Output = ((Block->HBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->HBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->SBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->RBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->CBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->GBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->JBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->FBlock << (character_line)) & 0b10000000);
+
+    }
+    if(hours == 8){
+
+       Output = ((Block->ABlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
+
+    }
+    if(hours == 9){
+
+       Output = ((Block->ABlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->JBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->UBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->TBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->BBlock << (character_line)) & 0b10000000);
+       Output >>= 1;
+       Output |= ((Block->ABlock << (character_line)) & 0b10000000);
     }
 
-if (hours == 6) {
-        Output = ((Block->ABlock << (character_line)) & 0b10000000);
-        Output |= ((Block->BBlock << (character_line)) & 0b01000000);
-        Output |= ((Block->HBlock << (character_line)) & 0b00100000);
-        Output |= ((Block->PBlock << (character_line)) & 0b00010000);
-        Output |= ((Block->QBlock << (character_line)) & 0b00001000);
-        Output |= ((Block->BBlock << (character_line)) & 0b00000100);
-        Output |= ((Block->BBlock << (character_line)) & 0b00000010);
-        Output |= ((Block->ABlock << (character_line)) & 0b00000001);
-}
-
-if (hours == 7) {
-        Output = ((Block->FBlock << (character_line)) & 0b10000000);
-        Output |= ((Block->JBlock << (character_line)) & 0b01000000);
-        Output |= ((Block->GBlock << (character_line)) & 0b00100000);
-        Output |= ((Block->CBlock << (character_line)) & 0b00010000);
-        Output |= ((Block->RBlock << (character_line)) & 0b00001000);
-        Output |= ((Block->SBlock << (character_line)) & 0b00000100);
-        Output |= ((Block->HBlock << (character_line)) & 0b00000010);
-        Output |= ((Block->HBlock << (character_line)) & 0b00000001);
-}
-
-if (hours == 8) {
-        Output = ((Block->ABlock << (character_line)) & 0b10000000);
-        Output |= ((Block->BBlock << (character_line)) & 0b01000000);
-        Output |= ((Block->BBlock << (character_line)) & 0b00100000);
-        Output |= ((Block->ABlock << (character_line)) & 0b00010000);
-        Output |= ((Block->BBlock << (character_line)) & 0b00001000);
-        Output |= ((Block->BBlock << (character_line)) & 0b00000100);
-        Output |= ((Block->BBlock << (character_line)) & 0b00000010);
-        Output |= ((Block->ABlock << (character_line)) & 0b00000001);
-}
-
-if (hours == 9) {
-        Output = ((Block->ABlock << (character_line)) & 0b10000000);
-        Output |= ((Block->BBlock << (character_line)) & 0b01000000);
-        Output |= ((Block->BBlock << (character_line)) & 0b00100000);
-        Output |= ((Block->TBlock << (character_line)) & 0b00010000);
-        Output |= ((Block->UBlock << (character_line)) & 0b00001000);
-        Output |= ((Block->JBlock << (character_line)) & 0b00000100);
-        Output |= ((Block->BBlock << (character_line)) & 0b00000010);
-        Output |= ((Block->ABlock << (character_line)) & 0b00000001);
-}
-
-
+    return Output;
 
 }
 
