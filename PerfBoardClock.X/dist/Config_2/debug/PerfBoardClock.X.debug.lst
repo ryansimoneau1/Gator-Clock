@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.45 build 20230818022343 
-                                                                                               Fri Feb 23 17:27:20 2024
+                                                                                               Fri Feb 23 17:38:17 2024
 
 Microchip MPLAB XC8 C Compiler v2.45 (Free license) build 20230818022343 Og9 
      1                           	processor	16LF1826
@@ -1219,43 +1219,43 @@ Microchip MPLAB XC8 C Compiler v2.45 (Free license) build 20230818022343 Og9
   1205     0070                     ?_EUSART_Initialize:	
   1206                           ; 1 bytes @ 0x0
   1207                           
-  1208     0070                     ?_RenderingTimer_ISR:	
+  1208     0070                     ?_TMR0_ISR:	
   1209                           ; 1 bytes @ 0x0
   1210                           
-  1211     0070                     ??_RenderingTimer_ISR:	
+  1211     0070                     ?_TMR0_DefaultInterruptHandler:	
   1212                           ; 1 bytes @ 0x0
   1213                           
-  1214     0070                     ?_TMR0_WriteTimer:	
+  1214     0070                     ??_TMR0_DefaultInterruptHandler:	
   1215                           ; 1 bytes @ 0x0
   1216                           
-  1217     0070                     ?_EUSART_Write:	
+  1217     0070                     ?_RenderingTimer_ISR:	
   1218                           ; 1 bytes @ 0x0
   1219                           
-  1220     0070                     ?_EUSART_is_tx_done:	
+  1220     0070                     ??_RenderingTimer_ISR:	
   1221                           ; 1 bytes @ 0x0
   1222                           
-  1223     0070                     ?_TMR0_ISR:	
+  1223     0070                     ?_PIN_MANAGER_Initialize:	
   1224                           ; 1 bytes @ 0x0
   1225                           
-  1226     0070                     ?_TMR0_DefaultInterruptHandler:	
+  1226     0070                     ?_SYSTEM_Initialize:	
   1227                           ; 1 bytes @ 0x0
   1228                           
-  1229     0070                     ??_TMR0_DefaultInterruptHandler:	
+  1229     0070                     ?_INTERRUPT_InterruptManager:	
   1230                           ; 1 bytes @ 0x0
   1231                           
-  1232     0070                     ?_PIN_MANAGER_Initialize:	
+  1232     0070                     ?_TMR0_WriteTimer:	
   1233                           ; 1 bytes @ 0x0
   1234                           
-  1235     0070                     ?_SYSTEM_Initialize:	
+  1235     0070                     ?_EUSART_is_tx_done:	
   1236                           ; 1 bytes @ 0x0
   1237                           
-  1238     0070                     ?_ReverseByte:	
+  1238     0070                     ?_EUSART_Write:	
   1239                           ; 1 bytes @ 0x0
   1240                           
-  1241     0070                     ?_main:	
+  1241     0070                     ?_ReverseByte:	
   1242                           ; 1 bytes @ 0x0
   1243                           
-  1244     0070                     ?_INTERRUPT_InterruptManager:	
+  1244     0070                     ?_main:	
   1245                           ; 1 bytes @ 0x0
   1246                           
   1247                           
@@ -1265,37 +1265,37 @@ Microchip MPLAB XC8 C Compiler v2.45 (Free license) build 20230818022343 Og9
   1251     0071                     ??_WDT_Initialize:	
   1252                           ; 1 bytes @ 0x1
   1253                           
-  1254     0071                     ?_TMR0_SetInterruptHandler:	
+  1254     0071                     ??_TMR0_ISR:	
   1255                           ; 1 bytes @ 0x1
   1256                           
-  1257     0071                     ??_TMR0_WriteTimer:	
+  1257     0071                     ?_TMR0_SetInterruptHandler:	
   1258                           ; 1 bytes @ 0x1
   1259                           
-  1260     0071                     ??_EUSART_Write:	
+  1260     0071                     ?_EUSART_SetFramingErrorHandler:	
   1261                           ; 1 bytes @ 0x1
   1262                           
-  1263     0071                     ??_EUSART_is_tx_done:	
+  1263     0071                     ?_EUSART_SetOverrunErrorHandler:	
   1264                           ; 1 bytes @ 0x1
   1265                           
-  1266     0071                     ??_TMR0_ISR:	
+  1266     0071                     ?_EUSART_SetErrorHandler:	
   1267                           ; 1 bytes @ 0x1
   1268                           
-  1269     0071                     ?_EUSART_SetFramingErrorHandler:	
+  1269     0071                     ??_PIN_MANAGER_Initialize:	
   1270                           ; 1 bytes @ 0x1
   1271                           
-  1272     0071                     ?_EUSART_SetOverrunErrorHandler:	
+  1272     0071                     ??_INTERRUPT_InterruptManager:	
   1273                           ; 1 bytes @ 0x1
   1274                           
-  1275     0071                     ?_EUSART_SetErrorHandler:	
+  1275     0071                     ??_TMR0_WriteTimer:	
   1276                           ; 1 bytes @ 0x1
   1277                           
-  1278     0071                     ??_PIN_MANAGER_Initialize:	
+  1278     0071                     ??_EUSART_is_tx_done:	
   1279                           ; 1 bytes @ 0x1
   1280                           
-  1281     0071                     ??_ReverseByte:	
+  1281     0071                     ??_EUSART_Write:	
   1282                           ; 1 bytes @ 0x1
   1283                           
-  1284     0071                     ??_INTERRUPT_InterruptManager:	
+  1284     0071                     ??_ReverseByte:	
   1285                           ; 1 bytes @ 0x1
   1286                           
   1287     0071                     ?_BrightnessCTRL:	
@@ -1826,7 +1826,7 @@ Microchip MPLAB XC8 C Compiler v2.45 (Free license) build 20230818022343 Og9
   1807 ;;		line 125 in file "mcc_generated_files/tmr0.c"
   1808 ;; Parameters:    Size  Location     Type
   1809 ;;  InterruptHan    2    1[COMMON] PTR FTN()void 
-  1810 ;;		 -> TMR0_DefaultInterruptHandler(1), RenderingTimer_ISR(1), 
+  1810 ;;		 -> RenderingTimer_ISR(1), TMR0_DefaultInterruptHandler(1), 
   1811 ;; Auto vars:     Size  Location     Type
   1812 ;;		None
   1813 ;; Return value:  Size  Location     Type
@@ -1848,8 +1848,8 @@ Microchip MPLAB XC8 C Compiler v2.45 (Free license) build 20230818022343 Og9
   1829 ;; This function calls:
   1830 ;;		Nothing
   1831 ;; This function is called by:
-  1832 ;;		_main
-  1833 ;;		_TMR0_Initialize
+  1832 ;;		_TMR0_Initialize
+  1833 ;;		_main
   1834 ;; This function uses a non-reentrant model
   1835 ;;
   1836                           
@@ -2308,13 +2308,13 @@ Microchip MPLAB XC8 C Compiler v2.45 (Free license) build 20230818022343 Og9
   2286     0033  3000               	movlw	0
   2287     0034  00A1               	movwf	??_Renderer+1
   2288     0035  0A3E               	incf	Renderer@access_line,w
-  2289     0036  2839               	goto	u574
-  2290     0037                     u575:
+  2289     0036  2839               	goto	u584
+  2290     0037                     u585:
   2291     0037  35A0               	lslf	??_Renderer,f
   2292     0038  0DA1               	rlf	??_Renderer+1,f
-  2293     0039                     u574:
+  2293     0039                     u584:
   2294     0039  0B89               	decfsz	9,f
-  2295     003A  2837               	goto	u575
+  2295     003A  2837               	goto	u585
   2296     003B  0820               	movf	??_Renderer,w
   2297     003C  00C2               	movwf	Renderer@LED_Data+2
   2298     003D  0821               	movf	??_Renderer+1,w
@@ -2328,10 +2328,10 @@ Microchip MPLAB XC8 C Compiler v2.45 (Free license) build 20230818022343 Og9
   2306     0043  300D               	movlw	13
   2307     0044  00A0               	movwf	??_Renderer
   2308     0045  3000               	movlw	0
-  2309     0046                     u580:
+  2309     0046                     u590:
   2310     0046  001E               	movwi fsr1++
   2311     0047  0BA0               	decfsz	??_Renderer,f
-  2312     0048  2846               	goto	u580
+  2312     0048  2846               	goto	u590
   2313                           
   2314                           ;rendering.c: 199: Uint8 Right_DisplayData[13] = {0};
   2315     0049  302F               	movlw	low Renderer@Right_DisplayData
@@ -2341,14 +2341,14 @@ Microchip MPLAB XC8 C Compiler v2.45 (Free license) build 20230818022343 Og9
   2319     004D  300D               	movlw	13
   2320     004E  00A0               	movwf	??_Renderer
   2321     004F  3000               	movlw	0
-  2322     0050                     u590:
+  2322     0050                     u600:
   2323     0050  001E               	movwi fsr1++
   2324     0051  0BA0               	decfsz	??_Renderer,f
-  2325     0052  2850               	goto	u590
+  2325     0052  2850               	goto	u600
   2326                           
   2327                           ;rendering.c: 201: for(Uint8 i = 0; i < 13; i++){
   2328     0053  01BF               	clrf	Renderer@i
-  2329     0054                     l1440:
+  2329     0054                     l1450:
   2330                           
   2331                           ;rendering.c: 202:     Left_DisplayData[i] = DisplayBuffer[i];
   2332     0054  083F               	movf	Renderer@i,w
@@ -2387,7 +2387,7 @@ Microchip MPLAB XC8 C Compiler v2.45 (Free license) build 20230818022343 Og9
   2365     0071  300D               	movlw	13
   2366     0072  023F               	subwf	Renderer@i,w
   2367     0073  1C03               	skipc
-  2368     0074  2854               	goto	l1440
+  2368     0074  2854               	goto	l1450
   2369                           
   2370                           ;rendering.c: 206: DisplayBrightness LEDBrightness = BrightnessCTRL(access_line);
   2371     0075  083E               	movf	Renderer@access_line,w
@@ -2401,7 +2401,7 @@ Microchip MPLAB XC8 C Compiler v2.45 (Free license) build 20230818022343 Og9
   2379     007B  0876               	movf	Renderer@time_Slot,w
   2380     007C  023C               	subwf	Renderer@LEDBrightness,w
   2381     007D  1C03               	skipc
-  2382     007E  2886               	goto	l1452
+  2382     007E  2886               	goto	l1462
   2383                           
   2384                           ;rendering.c: 209:     LED_Data.Left_Common_Line_Data = Left_DisplayData[access_line];
   2385     007F  083E               	movf	Renderer@access_line,w
@@ -2412,18 +2412,18 @@ Microchip MPLAB XC8 C Compiler v2.45 (Free license) build 20230818022343 Og9
   2390     0084  00C0               	movwf	Renderer@LED_Data
   2391                           
   2392                           ;rendering.c: 211: }else{
-  2393     0085  2887               	goto	l1454
-  2394     0086                     l1452:
+  2393     0085  2887               	goto	l1464
+  2394     0086                     l1462:
   2395                           
   2396                           ;rendering.c: 212:     LED_Data.Left_Common_Line_Data = 0;
   2397     0086  01C0               	clrf	Renderer@LED_Data
-  2398     0087                     l1454:
+  2398     0087                     l1464:
   2399                           
   2400                           ;rendering.c: 215: if(LEDBrightness.LED_Right_Brightness >= time_Slot){
   2401     0087  0876               	movf	Renderer@time_Slot,w
   2402     0088  023D               	subwf	Renderer@LEDBrightness+1,w
   2403     0089  1C03               	skipc
-  2404     008A  2892               	goto	l1458
+  2404     008A  2892               	goto	l1468
   2405                           
   2406                           ;rendering.c: 216:     LED_Data.Right_Common_Line_Data = Right_DisplayData[access_line];
   2407     008B  083E               	movf	Renderer@access_line,w
@@ -2434,12 +2434,12 @@ Microchip MPLAB XC8 C Compiler v2.45 (Free license) build 20230818022343 Og9
   2412     0090  00C1               	movwf	Renderer@LED_Data+1
   2413                           
   2414                           ;rendering.c: 218: }else{
-  2415     0091  2893               	goto	l1460
-  2416     0092                     l1458:
+  2415     0091  2893               	goto	l1470
+  2416     0092                     l1468:
   2417                           
   2418                           ;rendering.c: 219:     LED_Data.Right_Common_Line_Data = 0;
   2419     0092  01C1               	clrf	Renderer@LED_Data+1
-  2420     0093                     l1460:
+  2420     0093                     l1470:
   2421                           
   2422                           ;rendering.c: 223: LED_Data.Left_Common_Line_Data = ReverseByte(LED_Data.Left_Common_Lin
       +                          e_Data);
@@ -2540,7 +2540,7 @@ Microchip MPLAB XC8 C Compiler v2.45 (Free license) build 20230818022343 Og9
   2514     013F  0871               	movf	??_ReverseByte,w
   2515     0140  0573               	andwf	ReverseByte@byte,w
   2516     0141  1903               	btfsc	3,2
-  2517     0142  2950               	goto	l91
+  2517     0142  2950               	goto	l228
   2518                           
   2519                           ;rendering.c: 182:             ReversedByte |= (1 << (7-i));
   2520     0143  3001               	movlw	1
@@ -2558,7 +2558,7 @@ Microchip MPLAB XC8 C Compiler v2.45 (Free license) build 20230818022343 Og9
   2532     014D  00F2               	movwf	??_ReverseByte+1
   2533     014E  0872               	movf	??_ReverseByte+1,w
   2534     014F  04F4               	iorwf	ReverseByte@ReversedByte,f
-  2535     0150                     l91:	
+  2535     0150                     l228:	
   2536                           ;rendering.c: 183:         }
   2537                           
   2538                           
@@ -2770,14 +2770,14 @@ Microchip MPLAB XC8 C Compiler v2.45 (Free license) build 20230818022343 Og9
   2743                           
   2744                           ;mcc_generated_files/eusart.c: 141:     RCSTAbits.CREN = 0;
   2745     01FC  121D               	bcf	29,4	;volatile
-  2746     01FD                     l297:	
+  2746     01FD                     l171:	
   2747                           ;mcc_generated_files/eusart.c: 143:     {;mcc_generated_files/eusart.c: 144:     }
   2748                           
   2749                           
   2750                           ;mcc_generated_files/eusart.c: 142:     while(0 == PIR1bits.TXIF)
   2751     01FD  0020               	movlb	0	; select bank0
   2752     01FE  1E11               	btfss	17,4	;volatile
-  2753     01FF  29FD               	goto	l297
+  2753     01FF  29FD               	goto	l171
   2754                           
   2755                           ;mcc_generated_files/eusart.c: 146:     TXREG = txData;
   2756     0200  0871               	movf	EUSART_Write@txData,w
@@ -2830,12 +2830,12 @@ Microchip MPLAB XC8 C Compiler v2.45 (Free license) build 20230818022343 Og9
       +                          s.TMR0IF == 1)
   2803     0006  1A8B               	btfsc	11,5	;volatile
   2804     0007  1D0B               	btfss	11,2	;volatile
-  2805     0008  280A               	goto	i1l192
+  2805     0008  280A               	goto	i1l66
   2806                           
   2807                           ;mcc_generated_files/interrupt_manager.c: 56:     {;mcc_generated_files/interrupt_manage
       +                          r.c: 57:         TMR0_ISR();
   2808     0009  21EB               	fcall	_TMR0_ISR
-  2809     000A                     i1l192:	
+  2809     000A                     i1l66:	
   2810                           ;mcc_generated_files/interrupt_manager.c: 58:     }
   2811                           
   2812     000A  107E               	bcf	126,0	;clear compiler interrupt flag (level 1)
@@ -3350,34 +3350,34 @@ SFR31                0      0       0      32        0.0%
 
 
 Microchip Technology PIC Macro Assembler V2.45 build 20230818022343 
-Symbol Table                                                                                   Fri Feb 23 17:27:20 2024
+Symbol Table                                                                                   Fri Feb 23 17:38:17 2024
 
                                   main@Display 00BA                                     _AccessLine 0065  
-                              ReverseByte@byte 0073                                             l91 0150  
-                              _timer0ReloadVal 007B                                            l297 01FD  
-                                          u534 013D                                            u535 013C  
-                                          u554 014A                                            u555 0149  
-                                          u580 0046                                            u590 0050  
-                                          u574 0039                                            u575 0037  
+                              ReverseByte@byte 0073                                _timer0ReloadVal 007B  
+                                          l171 01FD                                            l228 0150  
+                                          u600 0050                                            u534 013D  
+                                          u535 013C                                            u554 014A  
+                                          u555 0149                                            u590 0046  
+                                          u584 0039                                            u585 0037  
                ?_EUSART_SetFramingErrorHandler 0071                                            wreg 0009  
                                          l1400 0176                                           l1410 0138  
-                                         l1500 00DB                                           l1440 0054  
-                                         l1504 00E5                                           l1460 0093  
-                                         l1452 0086                                           l1454 0087  
-                                         l1392 016B                                           l1458 0092  
-                                         l1396 0171                                           l1388 0165  
+                                         l1500 00DB                                           l1504 00E5  
+                                         l1450 0054                                           l1470 0093  
+                                         l1462 0086                                           l1392 016B  
+                                         l1464 0087                                           l1396 0171  
+                                         l1388 0165                                           l1468 0092  
                                          l1492 00C7                                           l1484 00B1  
                                          l1496 00D1                                           _LATA 010C  
-                                         _LATB 010D                                           _TMR0 0015  
-                                         _WPUA 020C                                           _WPUB 020D  
-                                   _Characters 00F8                                           _main 00A8  
-                                         fsr0h 0005                                           fsr1h 0007  
-                                         indf0 0000                                           fsr0l 0004  
-                                         indf1 0001                                           fsr1l 0006  
-                                         btemp 007E                                           start 000C  
-                      __end_of_TMR0_Initialize 01EB                 ??_TMR0_DefaultInterruptHandler 0070  
-                                ?_EUSART_Write 0070                  __end_of_OSCILLATOR_Initialize 020B  
-                                        ?_main 0070                                          i1l192 000A  
+                                         _LATB 010D                                           i1l66 000A  
+                                         _TMR0 0015                                           _WPUA 020C  
+                                         _WPUB 020D                                     _Characters 00F8  
+                                         _main 00A8                                           fsr0h 0005  
+                                         fsr1h 0007                                           indf0 0000  
+                                         fsr0l 0004                                           indf1 0001  
+                                         fsr1l 0006                                           btemp 007E  
+                                         start 000C                        __end_of_TMR0_Initialize 01EB  
+               ??_TMR0_DefaultInterruptHandler 0070                                  ?_EUSART_Write 0070  
+                __end_of_OSCILLATOR_Initialize 020B                                          ?_main 0070  
                               _TMR0_WriteTimer 0233                                          _RCSTA 019D  
                                         _TRISA 008C                                          _TRISB 008D  
                                         _TXREG 019A                                          _TXSTA 019E  
