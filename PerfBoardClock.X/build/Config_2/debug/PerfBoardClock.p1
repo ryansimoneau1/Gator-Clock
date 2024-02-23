@@ -3,6 +3,55 @@ Version 4.0 HI-TECH Software Intermediate Code
 "72 ./mcc_generated_files/mcc.h
 [; ;./mcc_generated_files/mcc.h: 72: void SYSTEM_Initialize(void);
 [v _SYSTEM_Initialize `(v ~T0 @X0 0 ef ]
+"98 ./mcc_generated_files/tmr0.h
+[; ;./mcc_generated_files/tmr0.h: 98: void TMR0_Initialize(void);
+[v _TMR0_Initialize `(v ~T0 @X0 0 ef ]
+[v F2382 `(v ~T0 @X0 0 tf ]
+"238
+[; ;./mcc_generated_files/tmr0.h: 238:  void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
+[v _TMR0_SetInterruptHandler `(v ~T0 @X0 0 ef1`*F2382 ]
+"50 PerfBoardClock.c
+[; ;PerfBoardClock.c: 50: void RenderingTimer_ISR(void);
+[v _RenderingTimer_ISR `(v ~T0 @X0 0 ef ]
+"168 ./mcc_generated_files/tmr0.h
+[; ;./mcc_generated_files/tmr0.h: 168: void TMR0_WriteTimer(uint8_t timerVal);
+[v _TMR0_WriteTimer `(v ~T0 @X0 0 ef1`uc ]
+"70 ./rendering.h
+[; ;./rendering.h: 70:         struct AccessLineMembers{
+[s S287 `uc 1 `uc 1 ]
+[n S287 AccessLineMembers Access_Line_Low Access_Line_High ]
+"68
+[; ;./rendering.h: 68:     union AccessLine{
+[u S286 `us 1 `S287 1 ]
+[n S286 AccessLine Full_Access_Line AccessLineMembers ]
+"64
+[; ;./rendering.h: 64: typedef struct RendererOutputs{
+[s S285 `uc 1 `uc 1 `S286 1 ]
+[n S285 RendererOutputs Left_Common_Line_Data Right_Common_Line_Data AccessLine ]
+"92
+[; ;./rendering.h: 92: RendererOutputs Renderer(Uint8 access_line, Uint8 time_Slot, Uint8 *DisplayBuffer);
+[v _Renderer `(S285 ~T0 @X0 0 ef3`uc`uc`*uc ]
+"1901 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8\pic\include\proc\pic16lf1826.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8\pic\include\proc\pic16lf1826.h: 1901:     struct {
+[s S102 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S102 . LATA0 LATA1 LATA2 LATA3 LATA4 . LATA6 LATA7 ]
+"1900
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8\pic\include\proc\pic16lf1826.h: 1900: typedef union {
+[u S101 `S102 1 ]
+[n S101 . . ]
+"1912
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8\pic\include\proc\pic16lf1826.h: 1912: extern volatile LATAbits_t LATAbits __attribute__((address(0x10C)));
+[v _LATAbits `VS101 ~T0 @X0 0 e@268 ]
+"342 ./mcc_generated_files/eusart.h
+[; ;./mcc_generated_files/eusart.h: 342: void EUSART_Write(uint8_t txData);
+[v _EUSART_Write `(v ~T0 @X0 0 ef1`uc ]
+"254
+[; ;./mcc_generated_files/eusart.h: 254: _Bool EUSART_is_tx_done(void);
+[v _EUSART_is_tx_done `(a ~T0 @X0 0 ef ]
+[v F202 `(v ~T0 @X0 1 tf1`ul ]
+"20 C:\Program Files\Microchip\xc8\v2.45\pic\include\builtins.h
+[v __delay `JF202 ~T0 @X0 0 e ]
+[p i __delay ]
 "54 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8\pic\include\proc\pic16lf1826.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8\pic\include\proc\pic16lf1826.h: 54: __asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
@@ -372,69 +421,236 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5254
 [; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8\pic\include\proc\pic16lf1826.h: 5254: __asm("TOSH equ 0FEFh");
 [; <" TOSH equ 0FEFh ;# ">
-"50 PerfBoardClock.c
-[; ;PerfBoardClock.c: 50: Uint8 AccessLine = 0;
+"52 PerfBoardClock.c
+[; ;PerfBoardClock.c: 52: Uint8 AccessLine = 0;
 [v _AccessLine `uc ~T0 @X0 1 e ]
 [i _AccessLine
 -> -> 0 `i `uc
 ]
-"51
-[; ;PerfBoardClock.c: 51: Uint8 TimeSlot = 0;
+"53
+[; ;PerfBoardClock.c: 53: Uint8 TimeSlot = 0;
 [v _TimeSlot `uc ~T0 @X0 1 e ]
 [i _TimeSlot
 -> -> 0 `i `uc
 ]
-"57
-[; ;PerfBoardClock.c: 57: Uint8 display_num = 0;
-[v _display_num `uc ~T0 @X0 1 e ]
-[i _display_num
--> -> 0 `i `uc
-]
-"58
-[; ;PerfBoardClock.c: 58: Uint8 char_line = 0;
-[v _char_line `uc ~T0 @X0 1 e ]
-[i _char_line
--> -> 0 `i `uc
-]
-"59
-[; ;PerfBoardClock.c: 59: Uint8 character_line = 0;
-[v _character_line `uc ~T0 @X0 1 e ]
-[i _character_line
--> -> 0 `i `uc
+"54
+[; ;PerfBoardClock.c: 54: Uint8 DisplayBuffer[26] = {
+[v _DisplayBuffer `uc ~T0 @X0 -> 26 `i e ]
+[i _DisplayBuffer
+:U ..
+-> -> 128 `i `uc
+-> -> 132 `i `uc
+-> -> 130 `i `uc
+-> -> 255 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 198 `i `uc
+-> -> 161 `i `uc
+-> -> 145 `i `uc
+-> -> 145 `i `uc
+-> -> 137 `i `uc
+-> -> 134 `i `uc
+-> -> 102 `i `uc
+-> -> 102 `i `uc
+-> -> 97 `i `uc
+-> -> 129 `i `uc
+-> -> 137 `i `uc
+-> -> 141 `i `uc
+-> -> 139 `i `uc
+-> -> 113 `i `uc
+-> -> 126 `i `uc
+-> -> 129 `i `uc
+-> -> 129 `i `uc
+-> -> 129 `i `uc
+-> -> 129 `i `uc
+-> -> 126 `i `uc
+..
 ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"63
-[; ;PerfBoardClock.c: 63: void main() {
+"88
+[; ;PerfBoardClock.c: 88: void main() {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"65
-[; ;PerfBoardClock.c: 65:     SYSTEM_Initialize();
-[e ( _SYSTEM_Initialize ..  ]
-"83
-[; ;PerfBoardClock.c: 83:     Uint8 AccessLine = 9;
-[v _AccessLine `uc ~T0 @X0 1 a ]
-[e = _AccessLine -> -> 9 `i `uc ]
-"84
-[; ;PerfBoardClock.c: 84:     Uint8 Hours = 11;
-[v _Hours `uc ~T0 @X0 1 a ]
-[e = _Hours -> -> 11 `i `uc ]
-"85
-[; ;PerfBoardClock.c: 85:     Uint8 Minutes = 35;
-[v _Minutes `uc ~T0 @X0 1 a ]
-[e = _Minutes -> -> 35 `i `uc ]
 "90
-[; ;PerfBoardClock.c: 90:     while (1) {
-[e :U 289 ]
-{
+[; ;PerfBoardClock.c: 90:     SYSTEM_Initialize();
+[e ( _SYSTEM_Initialize ..  ]
 "94
-[; ;PerfBoardClock.c: 94:     }
-}
-[e :U 288 ]
-[e $U 289  ]
-[e :U 290 ]
+[; ;PerfBoardClock.c: 94:    TMR0_Initialize();
+[e ( _TMR0_Initialize ..  ]
 "95
-[; ;PerfBoardClock.c: 95: }
-[e :UE 287 ]
+[; ;PerfBoardClock.c: 95:    TMR0_SetInterruptHandler(RenderingTimer_ISR);
+[e ( _TMR0_SetInterruptHandler (1 &U _RenderingTimer_ISR ]
+"107
+[; ;PerfBoardClock.c: 107:    TMR0_WriteTimer(191);
+[e ( _TMR0_WriteTimer (1 -> -> 191 `i `uc ]
+"111
+[; ;PerfBoardClock.c: 111: RendererOutputs Display;
+[v _Display `S285 ~T0 @X0 1 a ]
+"114
+[; ;PerfBoardClock.c: 114:     while (1) {
+[e :U 290 ]
+{
+"116
+[; ;PerfBoardClock.c: 116:       Display = Renderer(AccessLine, TimeSlot, DisplayBuffer);
+[e = _Display ( _Renderer (3 , , _AccessLine _TimeSlot &U _DisplayBuffer ]
+"119
+[; ;PerfBoardClock.c: 119:         do { LATAbits.LATA0 = 1; } while(0);
+[e :U 294 ]
+{
+[e = . . _LATAbits 0 0 -> -> 1 `i `uc ]
+}
+[e :U 293 ]
+"120
+[; ;PerfBoardClock.c: 120:         do { LATAbits.LATA6 = 1; } while(0);
+[e :U 297 ]
+{
+[e = . . _LATAbits 0 6 -> -> 1 `i `uc ]
+}
+[e :U 296 ]
+"121
+[; ;PerfBoardClock.c: 121:         EUSART_Write(Display.AccessLine.AccessLineMembers.Access_Line_High);
+[e ( _EUSART_Write (1 . . . _Display 2 1 1 ]
+"122
+[; ;PerfBoardClock.c: 122:         while(!EUSART_is_tx_done());
+[e $U 298  ]
+[e :U 299 ]
+[e :U 298 ]
+[e $ ! != -> ( _EUSART_is_tx_done ..  `i -> 0 `i 299  ]
+[e :U 300 ]
+"123
+[; ;PerfBoardClock.c: 123:         _delay((unsigned long)((100)*(250000/4000000.0)));
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 250000 `l `d .4000000.0 `ul ]
+"124
+[; ;PerfBoardClock.c: 124:         EUSART_Write(Display.AccessLine.AccessLineMembers.Access_Line_Low);
+[e ( _EUSART_Write (1 . . . _Display 2 1 0 ]
+"125
+[; ;PerfBoardClock.c: 125:         while(!EUSART_is_tx_done());
+[e $U 301  ]
+[e :U 302 ]
+[e :U 301 ]
+[e $ ! != -> ( _EUSART_is_tx_done ..  `i -> 0 `i 302  ]
+[e :U 303 ]
+"126
+[; ;PerfBoardClock.c: 126:         _delay((unsigned long)((100)*(250000/4000000.0)));
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 250000 `l `d .4000000.0 `ul ]
+"127
+[; ;PerfBoardClock.c: 127:         EUSART_Write(Display.Right_Common_Line_Data);
+[e ( _EUSART_Write (1 . _Display 1 ]
+"128
+[; ;PerfBoardClock.c: 128:         while(!EUSART_is_tx_done());
+[e $U 304  ]
+[e :U 305 ]
+[e :U 304 ]
+[e $ ! != -> ( _EUSART_is_tx_done ..  `i -> 0 `i 305  ]
+[e :U 306 ]
+"129
+[; ;PerfBoardClock.c: 129:         _delay((unsigned long)((100)*(250000/4000000.0)));
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 250000 `l `d .4000000.0 `ul ]
+"130
+[; ;PerfBoardClock.c: 130:         EUSART_Write(Display.Left_Common_Line_Data);
+[e ( _EUSART_Write (1 . _Display 0 ]
+"131
+[; ;PerfBoardClock.c: 131:         while(!EUSART_is_tx_done());
+[e $U 307  ]
+[e :U 308 ]
+[e :U 307 ]
+[e $ ! != -> ( _EUSART_is_tx_done ..  `i -> 0 `i 308  ]
+[e :U 309 ]
+"133
+[; ;PerfBoardClock.c: 133:         do { LATAbits.LATA1 = 1; } while(0);
+[e :U 312 ]
+{
+[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
+}
+[e :U 311 ]
+"134
+[; ;PerfBoardClock.c: 134:         do { LATAbits.LATA7 = 1; } while(0);
+[e :U 315 ]
+{
+[e = . . _LATAbits 0 7 -> -> 1 `i `uc ]
+}
+[e :U 314 ]
+"135
+[; ;PerfBoardClock.c: 135:         _delay((unsigned long)((100)*(250000/4000000.0)));
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 250000 `l `d .4000000.0 `ul ]
+"136
+[; ;PerfBoardClock.c: 136:         do { LATAbits.LATA1 = 0; } while(0);
+[e :U 318 ]
+{
+[e = . . _LATAbits 0 1 -> -> 0 `i `uc ]
+}
+[e :U 317 ]
+"137
+[; ;PerfBoardClock.c: 137:         do { LATAbits.LATA7 = 0; } while(0);
+[e :U 321 ]
+{
+[e = . . _LATAbits 0 7 -> -> 0 `i `uc ]
+}
+[e :U 320 ]
+"139
+[; ;PerfBoardClock.c: 139:         do { LATAbits.LATA0 = 0; } while(0);
+[e :U 324 ]
+{
+[e = . . _LATAbits 0 0 -> -> 0 `i `uc ]
+}
+[e :U 323 ]
+"140
+[; ;PerfBoardClock.c: 140:         do { LATAbits.LATA6 = 0; } while(0);
+[e :U 327 ]
+{
+[e = . . _LATAbits 0 6 -> -> 0 `i `uc ]
+}
+[e :U 326 ]
+"141
+[; ;PerfBoardClock.c: 141:         _delay((unsigned long)((100)*(250000/4000000.0)));
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 250000 `l `d .4000000.0 `ul ]
+"143
+[; ;PerfBoardClock.c: 143:     }
+}
+[e :U 289 ]
+[e $U 290  ]
+[e :U 291 ]
+"144
+[; ;PerfBoardClock.c: 144: }
+[e :UE 288 ]
+}
+"150
+[; ;PerfBoardClock.c: 150: void RenderingTimer_ISR(){
+[v _RenderingTimer_ISR `(v ~T0 @X0 1 ef ]
+{
+[e :U _RenderingTimer_ISR ]
+[f ]
+"152
+[; ;PerfBoardClock.c: 152:     TimeSlot++;
+[e ++ _TimeSlot -> -> 1 `i `uc ]
+"154
+[; ;PerfBoardClock.c: 154:   if(TimeSlot > 4){
+[e $ ! > -> _TimeSlot `i -> 4 `i 329  ]
+{
+"155
+[; ;PerfBoardClock.c: 155:     TimeSlot = 0;
+[e = _TimeSlot -> -> 0 `i `uc ]
+"156
+[; ;PerfBoardClock.c: 156:     AccessLine++;
+[e ++ _AccessLine -> -> 1 `i `uc ]
+"157
+[; ;PerfBoardClock.c: 157:     if(AccessLine > 13){
+[e $ ! > -> _AccessLine `i -> 13 `i 330  ]
+{
+"158
+[; ;PerfBoardClock.c: 158:       AccessLine = 0;
+[e = _AccessLine -> -> 0 `i `uc ]
+"159
+[; ;PerfBoardClock.c: 159:     }
+}
+[e :U 330 ]
+"160
+[; ;PerfBoardClock.c: 160:   }
+}
+[e :U 329 ]
+"161
+[; ;PerfBoardClock.c: 161: }
+[e :UE 328 ]
 }

@@ -3873,114 +3873,162 @@ void WDT_Initialize(void);
 
 
 # 1 "./rendering.h" 1
-# 13 "./rendering.h"
+# 31 "./rendering.h"
 typedef uint8_t Uint8;
 typedef uint16_t Uint16;
 typedef uint32_t Uint32;
 
-typedef struct Render{
-    Uint8 Common_Line_One;
-    Uint8 Common_Line_Two;
-    Uint8 Access_Line_one;
-    Uint8 Access_Line_Two;
-}Render;
+typedef struct CharacterSet{
+    const Uint8 CharacterZero[6];
+    const Uint8 CharacterOne[6];
+    const Uint8 CharacterTwo[6];
+    const Uint8 CharacterThree[6];
+    const Uint8 CharacterFour[6];
+    const Uint8 CharacterFive[6];
+    const Uint8 CharacterSix[6];
+    const Uint8 CharacterSeven[6];
+    const Uint8 CharacterEight[6];
+    const Uint8 CharacterNine[6];
+    const Uint8 CharacterDots;
+}CharacterSet;
+# 59 "./rendering.h"
+typedef struct DisplayBrightness{
+    Uint8 LED_Left_Brightness;
+    Uint8 LED_Right_Brightness;
+}DisplayBrightness;
 
-typedef struct BlockSet{
-    Uint8 ABlock;
-    Uint8 BBlock;
-    Uint8 CBlock;
-    Uint8 DBlock;
-    Uint8 EBlock;
-    Uint8 FBlock;
-    Uint8 GBlock;
-    Uint8 HBlock;
-    Uint8 IBlock;
-    Uint8 JBlock;
-    Uint8 KBlock;
-    Uint8 LBlock;
-    Uint8 MBlock;
-    Uint8 NBlock;
-    Uint8 OBlock;
-    Uint8 PBlock;
-    Uint8 QBlock;
-    Uint8 RBlock;
-    Uint8 SBlock;
-    Uint8 TBlock;
-    Uint8 UBlock;
-}BlockSet;
+typedef struct RendererOutputs{
+    Uint8 Left_Common_Line_Data;
+    Uint8 Right_Common_Line_Data;
 
-typedef struct TensOnes{
-    Uint8 HourOnes;
-    Uint8 HourTens;
-    Uint8 MinuteOnes;
-    Uint8 MinuteTens;
-}TensOnes;
-
-extern Render renderer_outputs;
-extern TensOnes tod_outputs;
-extern BlockSet NumberBlocks;
+    union AccessLine{
+        Uint16 Full_Access_Line;
+        struct AccessLineMembers{
+            Uint8 Access_Line_Low;
+            Uint8 Access_Line_High;
+        }AccessLineMembers;
+    }AccessLine;
+}RendererOutputs;
 
 
-Uint8 Time_deconstruct(const Uint8 access_line, const Uint8 hours, const Uint8 minutes, TensOnes *output);
 
 
-Uint8 DigitAssembler(const Uint8 character_line,const BlockSet *Block, const Uint8 time);
 
 
-Uint8 Brightness(Uint8 access_line);
+
+void DisplayBuffGen(const CharacterSet* Characters, Uint8 digit, Uint8 *DisplayBuffer);
 
 
-void Renderer(Uint8 left_common_line, Uint8 right_common_line, Uint8 access_line, Render *shift_reg_outputs);
+DisplayBrightness BrightnessCTRL(Uint8 access_line);
+
+
+Uint8 ReverseByte(Uint8 byte);
+
+
+RendererOutputs Renderer(Uint8 access_line, Uint8 time_Slot, Uint8 *DisplayBuffer);
 # 47 "PerfBoardClock.c" 2
 
-# 1 "./clock.h" 1
-# 13 "./clock.h"
-typedef uint8_t Uint8;
-typedef uint32_t Uint32;
-
-typedef struct Clock{
-    Uint8 Hours;
-    Uint8 Minutes;
-} Clock;
-
-extern Clock time_of_day;
 
 
-void TOD(Clock *Time_Of_Day);
-
-
-
-Uint32 RotaryEncoder(Uint8 L_Turn, Uint8 R_Turn, Uint8 Click, Uint32 CurrentTime);
-# 48 "PerfBoardClock.c" 2
-
+void RenderingTimer_ISR(void);
 
 Uint8 AccessLine = 0;
 Uint8 TimeSlot = 0;
+Uint8 DisplayBuffer[26] = {
+  0b10000000,
+  0b10000100,
+  0b10000010,
+  0b11111111,
+  0b10000000,
+  0b10000000,
+  0b11000110,
+  0b10100001,
+  0b10010001,
+  0b10010001,
+  0b10001001,
+  0b10000110,
+  0b01100110,
+  0b01100110,
+  0b01100001,
+  0b10000001,
+  0b10001001,
+  0b10001101,
+  0b10001011,
+  0b01110001,
+  0b01111110,
+  0b10000001,
+  0b10000001,
+  0b10000001,
+  0b10000001,
+  0b01111110
+};
 
 
 
-
-
-Uint8 display_num = 0;
-Uint8 char_line = 0;
-Uint8 character_line = 0;
 
 
 
 void main() {
 
     SYSTEM_Initialize();
-# 83 "PerfBoardClock.c"
-    Uint8 AccessLine = 9;
-    Uint8 Hours = 11;
-    Uint8 Minutes = 35;
 
 
+
+   TMR0_Initialize();
+   TMR0_SetInterruptHandler(RenderingTimer_ISR);
+# 107 "PerfBoardClock.c"
+   TMR0_WriteTimer(191);
+
+
+
+RendererOutputs Display;
 
 
     while (1) {
 
+      Display = Renderer(AccessLine, TimeSlot, DisplayBuffer);
 
+
+        do { LATAbits.LATA0 = 1; } while(0);
+        do { LATAbits.LATA6 = 1; } while(0);
+        EUSART_Write(Display.AccessLine.AccessLineMembers.Access_Line_High);
+        while(!EUSART_is_tx_done());
+        _delay((unsigned long)((100)*(250000/4000000.0)));
+        EUSART_Write(Display.AccessLine.AccessLineMembers.Access_Line_Low);
+        while(!EUSART_is_tx_done());
+        _delay((unsigned long)((100)*(250000/4000000.0)));
+        EUSART_Write(Display.Right_Common_Line_Data);
+        while(!EUSART_is_tx_done());
+        _delay((unsigned long)((100)*(250000/4000000.0)));
+        EUSART_Write(Display.Left_Common_Line_Data);
+        while(!EUSART_is_tx_done());
+
+        do { LATAbits.LATA1 = 1; } while(0);
+        do { LATAbits.LATA7 = 1; } while(0);
+        _delay((unsigned long)((100)*(250000/4000000.0)));
+        do { LATAbits.LATA1 = 0; } while(0);
+        do { LATAbits.LATA7 = 0; } while(0);
+
+        do { LATAbits.LATA0 = 0; } while(0);
+        do { LATAbits.LATA6 = 0; } while(0);
+        _delay((unsigned long)((100)*(250000/4000000.0)));
 
     }
+}
+
+
+
+
+
+void RenderingTimer_ISR(){
+
+    TimeSlot++;
+
+  if(TimeSlot > 4){
+    TimeSlot = 0;
+    AccessLine++;
+    if(AccessLine > 13){
+      AccessLine = 0;
+    }
+  }
 }

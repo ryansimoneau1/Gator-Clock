@@ -5,7 +5,7 @@
  */
 
 #include "rendering.h"
-CharacterSet Characters = { // could these all be fliped on their side to make the digit assembler implementation more simple?
+const CharacterSet Characters = { // could these all be flipped on their side to make the digit assembler implementation more simple?
 
 .CharacterZero = {
     0b01111110,
@@ -115,72 +115,41 @@ CharacterSet Characters = { // could these all be fliped on their side to make t
 // }
 
 // Constructs the digits to be rendered on the display based on primitives contained within BlockSet
-Uint8 DigitAssembler(const Uint8 access_line, CharacterSet* Characters, const Uint8  digit){
-    Uint8 Output = 0;
-    Uint8 character_line = 0;
-    Uint8 CharArray[8] = {0};
+void DisplayBuffGen(const CharacterSet* Characters, Uint8 digit, Uint8 *DisplayBuffer){ // Under Construction :}
     Uint8* Ptr = 0;
 
-    if(access_line < 7){
-        character_line = access_line;
-    }
-    if(access_line < 0xC){
-        character_line = access_line - 6; // this implementation fails to account for right side dots
-    }
-    if(access_line == 0xC){
-        character_line = 0; // should accomodate left side dots
+    for(Uint8 i = 0; i < 26; i++){
+        DisplayBuffer[i] = 0;
     }
 
     switch (digit){
-        case 0:
+        case Zero:
             Ptr = Characters->CharacterZero;
-        case 1:
+        case One:
             Ptr = Characters->CharacterOne;
-        case 2:
+        case Two:
             Ptr = Characters->CharacterTwo;
-        case 3:
+        case Three:
             Ptr = Characters->CharacterThree;
-        case 4:
+        case Four:
             Ptr = Characters->CharacterFour;
-        case 5:
+        case Five:
             Ptr = Characters->CharacterFive;
-        case 6:
+        case Six:
             Ptr = Characters->CharacterSix;
-        case 7:
+        case Seven:
             Ptr = Characters->CharacterSeven;
-        case 8:
+        case Eight:
             Ptr = Characters->CharacterEight;
-        case 9:
+        case Nine:
             Ptr = Characters->CharacterNine;
+        case Dots:
+            Ptr = Characters->CharacterDots;    
     }
 
-    for(Uint8 i = 0; i < 8; i++){
-        CharArray[i] = Ptr[i];
+    for(Uint8 i = 0; i < 26; i++){
+        DisplayBuffer[i] = Ptr[i];
     }
-
-    for(Uint8 i = 0; i < 8; i++){
-        Output |= CharArray[i] // left shift by some amount based on the character_line. should build out a single output
-    }
-
-   //  if( digit == 0){
-   //     Output = ((Block->ABlock << (character_line)) & 0b10000000);
-   //     Output >>= 1;
-   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-   //     Output >>= 1;
-   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-   //     Output >>= 1;
-   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-   //     Output >>= 1;
-   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-   //     Output >>= 1;
-   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-   //     Output >>= 1;
-   //     Output |= ((Block->BBlock << (character_line)) & 0b10000000);
-   //     Output >>= 1;
-   //     Output |= ((Block->ABlock << (character_line)) & 0b10000000);
-   //  }
-
-    return Output;
 
 }
 
@@ -217,10 +186,7 @@ Uint8 ReverseByte(Uint8 byte){
 }
 
 // Inputs from Digit Assembler and brightness control to determine what data to send out per tick of the Timer 1 clock
-RendererOutputs Renderer(Uint8 access_line, Uint8 time_Slot){
-
-    Uint8 Left_Test_LEDData = 0b01000000; // Constant Test Data to send to the Display Common Line Registers
-    Uint8 Right_Test_LEDData = 0b0000010;
+RendererOutputs Renderer(Uint8 access_line, Uint8 time_Slot, Uint8 *DisplayBuffer){
 
 RendererOutputs LED_Data = {
     .Left_Common_Line_Data  = 0,
@@ -229,17 +195,25 @@ RendererOutputs LED_Data = {
 
 };
 
+Uint8 Left_DisplayData[13]  = {0}; // Constant Test Data to send to the Display Common Line Registers
+Uint8 Right_DisplayData[13] = {0};
+
+for(Uint8 i = 0; i < 13; i++){
+    Left_DisplayData[i]     = DisplayBuffer[i];
+    Right_DisplayData[i]    = DisplayBuffer[i + 13];
+}
+
 DisplayBrightness LEDBrightness = BrightnessCTRL(access_line);
 
 if(LEDBrightness.LED_Left_Brightness >= time_Slot){
-    LED_Data.Left_Common_Line_Data  = Left_Test_LEDData;
+    LED_Data.Left_Common_Line_Data  = Left_DisplayData[access_line];
 
 }else{
     LED_Data.Left_Common_Line_Data = 0;
 }
 
 if(LEDBrightness.LED_Right_Brightness >= time_Slot){
-    LED_Data.Right_Common_Line_Data  = Right_Test_LEDData;
+    LED_Data.Right_Common_Line_Data  = Right_DisplayData[access_line];
 
 }else{
     LED_Data.Right_Common_Line_Data = 0;

@@ -1,194 +1,506 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"24 ./rendering.h
-[; ;./rendering.h: 24: typedef struct BlockSet{
-[s S2 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
-[n S2 BlockSet ABlock BBlock CBlock DBlock EBlock FBlock GBlock HBlock IBlock JBlock KBlock LBlock MBlock NBlock OBlock PBlock QBlock RBlock SBlock TBlock UBlock ]
-"48
-[; ;./rendering.h: 48: typedef struct TensOnes{
-[s S3 `uc 1 `uc 1 `uc 1 `uc 1 ]
-[n S3 TensOnes HourOnes HourTens MinuteOnes MinuteTens ]
-"17
-[; ;./rendering.h: 17: typedef struct Render{
-[s S1 `uc 1 `uc 1 `uc 1 `uc 1 ]
-[n S1 Render Common_Line_One Common_Line_Two Access_Line_one Access_Line_Two ]
-"9 rendering.c
-[; ;rendering.c: 9: extern BlockSet NumberBlocks = {
-[v _NumberBlocks `S2 ~T0 @X0 1 e ]
-[i _NumberBlocks
-:U ..
-:U ..
--> -> 30 `i `uc
--> -> 33 `i `uc
--> -> 4 `i `uc
--> -> 12 `i `uc
--> -> 20 `i `uc
--> -> 63 `i `uc
--> -> 2 `i `uc
--> -> 32 `i `uc
--> -> 14 `i `uc
--> -> 1 `i `uc
--> -> 6 `i `uc
--> -> 10 `i `uc
--> -> 18 `i `uc
--> -> 34 `i `uc
--> -> 62 `i `uc
--> -> 46 `i `uc
--> -> 48 `i `uc
--> -> 8 `i `uc
--> -> 16 `i `uc
--> -> 35 `i `uc
--> -> 29 `i `uc
-..
-..
-]
-"33
-[; ;rendering.c: 33: extern TensOnes tod_outputs = {
-[v _tod_outputs `S3 ~T0 @X0 1 e ]
-[i _tod_outputs
-:U ..
-:U ..
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
-..
-..
-]
-"40
-[; ;rendering.c: 40: extern Render renderer_outputs = {
-[v _renderer_outputs `S1 ~T0 @X0 1 e ]
-[i _renderer_outputs
-:U ..
-:U ..
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
-..
-..
-]
-"48
-[; ;rendering.c: 48: Uint8 Time_deconstruct(const Uint8 access_line, const Uint8 hours, const Uint8 minutes, TensOnes *output){
-[v _Time_deconstruct `(uc ~T0 @X0 1 ef4`Cuc`Cuc`Cuc`*S3 ]
-{
-[e :U _Time_deconstruct ]
-[v _access_line `Cuc ~T0 @X0 1 r1 ]
-[v _hours `Cuc ~T0 @X0 1 r2 ]
-[v _minutes `Cuc ~T0 @X0 1 r3 ]
-[v _output `*S3 ~T0 @X0 1 r4 ]
-[f ]
-"49
-[; ;rendering.c: 49:    static Uint8 character_line = 0;
-[v F101 `uc ~T0 @X0 1 s character_line ]
-[i F101
--> -> 0 `i `uc
-]
-"51
-[; ;rendering.c: 51:    if(access_line < 6){
-[e $ ! < -> _access_line `i -> 6 `i 5  ]
-{
-"52
-[; ;rendering.c: 52:       character_line = access_line;
-[e = F101 _access_line ]
-"53
-[; ;rendering.c: 53:       output->HourTens = hours / 10;
-[e = . *U _output 1 -> / -> _hours `i -> 10 `i `uc ]
-"54
-[; ;rendering.c: 54:       output->MinuteTens = minutes / 10;
-[e = . *U _output 3 -> / -> _minutes `i -> 10 `i `uc ]
-"55
-[; ;rendering.c: 55:    }
-}
-[e $U 6  ]
-"56
-[; ;rendering.c: 56:    else{
-[e :U 5 ]
-{
-"57
-[; ;rendering.c: 57:       character_line = access_line - 6;
-[e = F101 -> - -> _access_line `i -> 6 `i `uc ]
-"58
-[; ;rendering.c: 58:       output->HourOnes = hours % 10;
-[e = . *U _output 0 -> % -> _hours `i -> 10 `i `uc ]
+"35 ./rendering.h
+[; ;./rendering.h: 35: typedef struct CharacterSet{
+[s S1 `Cuc -> 6 `i `Cuc -> 6 `i `Cuc -> 6 `i `Cuc -> 6 `i `Cuc -> 6 `i `Cuc -> 6 `i `Cuc -> 6 `i `Cuc -> 6 `i `Cuc -> 6 `i `Cuc -> 6 `i `Cuc 1 ]
+[n S1 CharacterSet CharacterZero CharacterOne CharacterTwo CharacterThree CharacterFour CharacterFive CharacterSix CharacterSeven CharacterEight CharacterNine CharacterDots ]
 "59
-[; ;rendering.c: 59:       output->MinuteOnes = minutes % 10;
-[e = . *U _output 2 -> % -> _minutes `i -> 10 `i `uc ]
-"60
-[; ;rendering.c: 60:    }
-}
-[e :U 6 ]
-"61
-[; ;rendering.c: 61:    return character_line;
-[e ) F101 ]
-[e $UE 4  ]
-"62
-[; ;rendering.c: 62: }
-[e :UE 4 ]
-}
-"65
-[; ;rendering.c: 65: Uint8 DigitAssembler(const Uint8 character_line,const BlockSet *Block, const Uint8 digit){
-[v _DigitAssembler `(uc ~T0 @X0 1 ef3`Cuc`*CS2`Cuc ]
+[; ;./rendering.h: 59: typedef struct DisplayBrightness{
+[s S2 `uc 1 `uc 1 ]
+[n S2 DisplayBrightness LED_Left_Brightness LED_Right_Brightness ]
+"70
+[; ;./rendering.h: 70:         struct AccessLineMembers{
+[s S5 `uc 1 `uc 1 ]
+[n S5 AccessLineMembers Access_Line_Low Access_Line_High ]
+"68
+[; ;./rendering.h: 68:     union AccessLine{
+[u S4 `us 1 `S5 1 ]
+[n S4 AccessLine Full_Access_Line AccessLineMembers ]
+"64
+[; ;./rendering.h: 64: typedef struct RendererOutputs{
+[s S3 `uc 1 `uc 1 `S4 1 ]
+[n S3 RendererOutputs Left_Common_Line_Data Right_Common_Line_Data AccessLine ]
+"8 rendering.c
+[; ;rendering.c: 8: const CharacterSet Characters = {
+[v _Characters `CS1 ~T0 @X0 1 e ]
+[i _Characters
+:U ..
+:U ..
+:U ..
+-> -> 126 `i `uc
+-> -> 129 `i `uc
+-> -> 129 `i `uc
+-> -> 129 `i `uc
+-> -> 129 `i `uc
+-> -> 126 `i `uc
+..
+:U ..
+-> -> 128 `i `uc
+-> -> 132 `i `uc
+-> -> 130 `i `uc
+-> -> 255 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+..
+:U ..
+-> -> 198 `i `uc
+-> -> 161 `i `uc
+-> -> 145 `i `uc
+-> -> 145 `i `uc
+-> -> 137 `i `uc
+-> -> 134 `i `uc
+..
+:U ..
+-> -> 97 `i `uc
+-> -> 129 `i `uc
+-> -> 137 `i `uc
+-> -> 141 `i `uc
+-> -> 139 `i `uc
+-> -> 113 `i `uc
+..
+:U ..
+-> -> 24 `i `uc
+-> -> 20 `i `uc
+-> -> 18 `i `uc
+-> -> 17 `i `uc
+-> -> 255 `i `uc
+-> -> 16 `i `uc
+..
+:U ..
+-> -> 79 `i `uc
+-> -> 137 `i `uc
+-> -> 137 `i `uc
+-> -> 137 `i `uc
+-> -> 137 `i `uc
+-> -> 113 `i `uc
+..
+:U ..
+-> -> 126 `i `uc
+-> -> 145 `i `uc
+-> -> 137 `i `uc
+-> -> 137 `i `uc
+-> -> 137 `i `uc
+-> -> 114 `i `uc
+..
+:U ..
+-> -> 193 `i `uc
+-> -> 33 `i `uc
+-> -> 17 `i `uc
+-> -> 9 `i `uc
+-> -> 5 `i `uc
+-> -> 3 `i `uc
+..
+:U ..
+-> -> 118 `i `uc
+-> -> 137 `i `uc
+-> -> 137 `i `uc
+-> -> 137 `i `uc
+-> -> 137 `i `uc
+-> -> 118 `i `uc
+..
+:U ..
+-> -> 78 `i `uc
+-> -> 145 `i `uc
+-> -> 145 `i `uc
+-> -> 145 `i `uc
+-> -> 137 `i `uc
+-> -> 126 `i `uc
+..
+-> -> 102 `i `uc
+..
+..
+]
+"118
+[; ;rendering.c: 118: void DisplayBuffGen(const CharacterSet* Characters, Uint8 digit, Uint8 *DisplayBuffer){
+[v _DisplayBuffGen `(v ~T0 @X0 1 ef3`*CS1`uc`*uc ]
 {
-[e :U _DigitAssembler ]
-[v _character_line `Cuc ~T0 @X0 1 r1 ]
-[v _Block `*CS2 ~T0 @X0 1 r2 ]
-[v _digit `Cuc ~T0 @X0 1 r3 ]
+[e :U _DisplayBuffGen ]
+[v _Characters `*CS1 ~T0 @X0 1 r1 ]
+[v _digit `uc ~T0 @X0 1 r2 ]
+[v _DisplayBuffer `*uc ~T0 @X0 1 r3 ]
 [f ]
-"66
-[; ;rendering.c: 66:     Uint8 Output = 0;
-[v _Output `uc ~T0 @X0 1 a ]
-[e = _Output -> -> 0 `i `uc ]
-"257
-[; ;rendering.c: 257:     return Output;
-[e ) _Output ]
-[e $UE 7  ]
-"259
-[; ;rendering.c: 259: }
-[e :UE 7 ]
+"119
+[; ;rendering.c: 119:     Uint8* Ptr = 0;
+[v _Ptr `*uc ~T0 @X0 1 a ]
+[e = _Ptr -> -> 0 `i `*uc ]
+"121
+[; ;rendering.c: 121:     for(Uint8 i = 0; i < 26; i++){
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 26 `i 7  ]
+[e $U 8  ]
+[e :U 7 ]
+{
+"122
+[; ;rendering.c: 122:         DisplayBuffer[i] = 0;
+[e = *U + _DisplayBuffer * -> _i `ux -> -> # *U _DisplayBuffer `ui `ux -> -> 0 `i `uc ]
+"123
+[; ;rendering.c: 123:     }
 }
-"265
-[; ;rendering.c: 265: void Renderer(Uint8 left_common_line, Uint8 right_common_line, Uint8 access_line, Render *shift_reg_outputs){
-[v _Renderer `(v ~T0 @X0 1 ef4`uc`uc`uc`*S1 ]
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 26 `i 7  ]
+[e :U 8 ]
+}
+"125
+[; ;rendering.c: 125:     switch (digit){
+[e $U 11  ]
 {
-[e :U _Renderer ]
-[v _left_common_line `uc ~T0 @X0 1 r1 ]
-[v _right_common_line `uc ~T0 @X0 1 r2 ]
-[v _access_line `uc ~T0 @X0 1 r3 ]
-[v _shift_reg_outputs `*S1 ~T0 @X0 1 r4 ]
-[f ]
-"267
-[; ;rendering.c: 267:    if(access_line < 8){
-[e $ ! < -> _access_line `i -> 8 `i 9  ]
-{
-"268
-[; ;rendering.c: 268:       shift_reg_outputs->Access_Line_one = 0b10000000 >> access_line;
-[e = . *U _shift_reg_outputs 2 -> >> -> 128 `i -> _access_line `i `uc ]
-"269
-[; ;rendering.c: 269:       shift_reg_outputs->Access_Line_Two = 0;
-[e = . *U _shift_reg_outputs 3 -> -> 0 `i `uc ]
-"270
-[; ;rendering.c: 270:    }else{
+"126
+[; ;rendering.c: 126:         case 0:
+[e :U 12 ]
+"127
+[; ;rendering.c: 127:             Ptr = Characters->CharacterZero;
+[e = _Ptr -> &U . *U _Characters 0 `*uc ]
+"128
+[; ;rendering.c: 128:         case 1:
+[e :U 13 ]
+"129
+[; ;rendering.c: 129:             Ptr = Characters->CharacterOne;
+[e = _Ptr -> &U . *U _Characters 1 `*uc ]
+"130
+[; ;rendering.c: 130:         case 2:
+[e :U 14 ]
+"131
+[; ;rendering.c: 131:             Ptr = Characters->CharacterTwo;
+[e = _Ptr -> &U . *U _Characters 2 `*uc ]
+"132
+[; ;rendering.c: 132:         case 3:
+[e :U 15 ]
+"133
+[; ;rendering.c: 133:             Ptr = Characters->CharacterThree;
+[e = _Ptr -> &U . *U _Characters 3 `*uc ]
+"134
+[; ;rendering.c: 134:         case 4:
+[e :U 16 ]
+"135
+[; ;rendering.c: 135:             Ptr = Characters->CharacterFour;
+[e = _Ptr -> &U . *U _Characters 4 `*uc ]
+"136
+[; ;rendering.c: 136:         case 5:
+[e :U 17 ]
+"137
+[; ;rendering.c: 137:             Ptr = Characters->CharacterFive;
+[e = _Ptr -> &U . *U _Characters 5 `*uc ]
+"138
+[; ;rendering.c: 138:         case 6:
+[e :U 18 ]
+"139
+[; ;rendering.c: 139:             Ptr = Characters->CharacterSix;
+[e = _Ptr -> &U . *U _Characters 6 `*uc ]
+"140
+[; ;rendering.c: 140:         case 7:
+[e :U 19 ]
+"141
+[; ;rendering.c: 141:             Ptr = Characters->CharacterSeven;
+[e = _Ptr -> &U . *U _Characters 7 `*uc ]
+"142
+[; ;rendering.c: 142:         case 8:
+[e :U 20 ]
+"143
+[; ;rendering.c: 143:             Ptr = Characters->CharacterEight;
+[e = _Ptr -> &U . *U _Characters 8 `*uc ]
+"144
+[; ;rendering.c: 144:         case 9:
+[e :U 21 ]
+"145
+[; ;rendering.c: 145:             Ptr = Characters->CharacterNine;
+[e = _Ptr -> &U . *U _Characters 9 `*uc ]
+"146
+[; ;rendering.c: 146:         case 10:
+[e :U 22 ]
+"147
+[; ;rendering.c: 147:             Ptr = Characters->CharacterDots;
+[e = _Ptr -> . *U _Characters 10 `*uc ]
+"148
+[; ;rendering.c: 148:     }
 }
 [e $U 10  ]
-[e :U 9 ]
-{
-"271
-[; ;rendering.c: 271:       shift_reg_outputs->Access_Line_one = 0;
-[e = . *U _shift_reg_outputs 2 -> -> 0 `i `uc ]
-"272
-[; ;rendering.c: 272:       shift_reg_outputs->Access_Line_Two = 0b10000000 >> (access_line - 8);
-[e = . *U _shift_reg_outputs 3 -> >> -> 128 `i - -> _access_line `i -> 8 `i `uc ]
-"273
-[; ;rendering.c: 273:    }
-}
+[e :U 11 ]
+[e [\ -> _digit `i , $ -> 0 `i 12
+ , $ -> 1 `i 13
+ , $ -> 2 `i 14
+ , $ -> 3 `i 15
+ , $ -> 4 `i 16
+ , $ -> 5 `i 17
+ , $ -> 6 `i 18
+ , $ -> 7 `i 19
+ , $ -> 8 `i 20
+ , $ -> 9 `i 21
+ , $ -> 10 `i 22
+ 10 ]
 [e :U 10 ]
-"275
-[; ;rendering.c: 275:    shift_reg_outputs->Common_Line_One = left_common_line;
-[e = . *U _shift_reg_outputs 0 _left_common_line ]
-"276
-[; ;rendering.c: 276:    shift_reg_outputs->Common_Line_Two = right_common_line;
-[e = . *U _shift_reg_outputs 1 _right_common_line ]
-"278
-[; ;rendering.c: 278: }
-[e :UE 8 ]
+"150
+[; ;rendering.c: 150:     for(Uint8 i = 0; i < 26; i++){
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 26 `i 23  ]
+[e $U 24  ]
+[e :U 23 ]
+{
+"151
+[; ;rendering.c: 151:         DisplayBuffer[i] = Ptr[i];
+[e = *U + _DisplayBuffer * -> _i `ux -> -> # *U _DisplayBuffer `ui `ux *U + _Ptr * -> _i `ux -> -> # *U _Ptr `ui `ux ]
+"152
+[; ;rendering.c: 152:     }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 26 `i 23  ]
+[e :U 24 ]
+}
+"154
+[; ;rendering.c: 154: }
+[e :UE 6 ]
+}
+"157
+[; ;rendering.c: 157: DisplayBrightness BrightnessCTRL(Uint8 AccessLine){
+[v _BrightnessCTRL `(S2 ~T0 @X0 1 ef1`uc ]
+{
+[e :U _BrightnessCTRL ]
+[v _AccessLine `uc ~T0 @X0 1 r1 ]
+[f ]
+[v F89 `S2 ~T0 @X0 1 s ]
+[i F89
+:U ..
+:U ..
+"158
+[; ;rendering.c: 158:     DisplayBrightness LEDBrightness = {
+-> -> 2 `i `uc
+-> -> 3 `i `uc
+..
+..
+]
+[v _LEDBrightness `S2 ~T0 @X0 1 a ]
+[e = _LEDBrightness F89 ]
+"162
+[; ;rendering.c: 162:     if(AccessLine > 5){
+[e $ ! > -> _AccessLine `i -> 5 `i 27  ]
+{
+"163
+[; ;rendering.c: 163:         LEDBrightness.LED_Left_Brightness = 3;
+[e = . _LEDBrightness 0 -> -> 3 `i `uc ]
+"164
+[; ;rendering.c: 164:     }
+}
+[e :U 27 ]
+"165
+[; ;rendering.c: 165:     if(AccessLine == 12){
+[e $ ! == -> _AccessLine `i -> 12 `i 28  ]
+{
+"166
+[; ;rendering.c: 166:         LEDBrightness.LED_Left_Brightness = 1;
+[e = . _LEDBrightness 0 -> -> 1 `i `uc ]
+"167
+[; ;rendering.c: 167:     }
+}
+[e :U 28 ]
+"168
+[; ;rendering.c: 168:     if(AccessLine < 7){
+[e $ ! < -> _AccessLine `i -> 7 `i 29  ]
+{
+"169
+[; ;rendering.c: 169:         LEDBrightness.LED_Right_Brightness = 2;
+[e = . _LEDBrightness 1 -> -> 2 `i `uc ]
+"170
+[; ;rendering.c: 170:     }
+}
+[e :U 29 ]
+"171
+[; ;rendering.c: 171:     if(AccessLine == 0){
+[e $ ! == -> _AccessLine `i -> 0 `i 30  ]
+{
+"172
+[; ;rendering.c: 172:         LEDBrightness.LED_Right_Brightness = 1;
+[e = . _LEDBrightness 1 -> -> 1 `i `uc ]
+"173
+[; ;rendering.c: 173:     }
+}
+[e :U 30 ]
+"174
+[; ;rendering.c: 174:     return LEDBrightness;
+[e ) _LEDBrightness ]
+[e $UE 26  ]
+"175
+[; ;rendering.c: 175: }
+[e :UE 26 ]
+}
+"177
+[; ;rendering.c: 177: Uint8 ReverseByte(Uint8 byte){
+[v _ReverseByte `(uc ~T0 @X0 1 ef1`uc ]
+{
+[e :U _ReverseByte ]
+[v _byte `uc ~T0 @X0 1 r1 ]
+[f ]
+"178
+[; ;rendering.c: 178:     Uint8 ReversedByte = 0;
+[v _ReversedByte `uc ~T0 @X0 1 a ]
+[e = _ReversedByte -> -> 0 `i `uc ]
+"180
+[; ;rendering.c: 180:     for(Uint8 i = 0; i < 8; i++){
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 8 `i 32  ]
+[e $U 33  ]
+[e :U 32 ]
+{
+"181
+[; ;rendering.c: 181:         if(byte & (1 << i)){
+[e $ ! != & -> _byte `i << -> 1 `i -> _i `i -> 0 `i 35  ]
+{
+"182
+[; ;rendering.c: 182:             ReversedByte |= (1 << (7-i));
+[e =| _ReversedByte -> << -> 1 `i - -> 7 `i -> _i `i `uc ]
+"183
+[; ;rendering.c: 183:         }
+}
+[e :U 35 ]
+"184
+[; ;rendering.c: 184:     }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 8 `i 32  ]
+[e :U 33 ]
+}
+"185
+[; ;rendering.c: 185:     return ReversedByte;
+[e ) _ReversedByte ]
+[e $UE 31  ]
+"186
+[; ;rendering.c: 186: }
+[e :UE 31 ]
+}
+"189
+[; ;rendering.c: 189: RendererOutputs Renderer(Uint8 access_line, Uint8 time_Slot, Uint8 *DisplayBuffer){
+[v _Renderer `(S3 ~T0 @X0 1 ef3`uc`uc`*uc ]
+{
+[e :U _Renderer ]
+[v _access_line `uc ~T0 @X0 1 r1 ]
+[v _time_Slot `uc ~T0 @X0 1 r2 ]
+[v _DisplayBuffer `*uc ~T0 @X0 1 r3 ]
+[f ]
+[v F99 `S3 ~T0 @X0 1 s ]
+[i F99
+:U ..
+:U ..
+"191
+[; ;rendering.c: 191: RendererOutputs LED_Data = {
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+:U ..
+:U ..
+-> -> 0 `i `us
+..
+..
+..
+..
+]
+[v _LED_Data `S3 ~T0 @X0 1 a ]
+[e = _LED_Data F99 ]
+[e ; = . _LED_Data 0 -> -> 0 `i `uc ; = . _LED_Data 1 -> -> 0 `i `uc = . . _LED_Data 2 0 -> << -> 1 `i -> _access_line `i `us ]
+[v F101 `uc ~T0 @X0 -> 13 `i s ]
+[i F101
+:U ..
+"198
+[; ;rendering.c: 198: Uint8 Left_DisplayData[13] = {0};
+-> -> 0 `i `uc
+..
+]
+[v _Left_DisplayData `uc ~T0 @X0 -> 13 `i a ]
+[e = _Left_DisplayData F101 ]
+[v F103 `uc ~T0 @X0 -> 13 `i s ]
+[i F103
+:U ..
+"199
+[; ;rendering.c: 199: Uint8 Right_DisplayData[13] = {0};
+-> -> 0 `i `uc
+..
+]
+[v _Right_DisplayData `uc ~T0 @X0 -> 13 `i a ]
+[e = _Right_DisplayData F103 ]
+"201
+[; ;rendering.c: 201: for(Uint8 i = 0; i < 13; i++){
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 13 `i 37  ]
+[e $U 38  ]
+[e :U 37 ]
+{
+"202
+[; ;rendering.c: 202:     Left_DisplayData[i] = DisplayBuffer[i];
+[e = *U + &U _Left_DisplayData * -> _i `ux -> -> # *U &U _Left_DisplayData `ui `ux *U + _DisplayBuffer * -> _i `ux -> -> # *U _DisplayBuffer `ui `ux ]
+"203
+[; ;rendering.c: 203:     Right_DisplayData[i] = DisplayBuffer[i + 13];
+[e = *U + &U _Right_DisplayData * -> _i `ux -> -> # *U &U _Right_DisplayData `ui `ux *U + _DisplayBuffer * -> + -> _i `i -> 13 `i `x -> -> # *U _DisplayBuffer `i `x ]
+"204
+[; ;rendering.c: 204: }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 13 `i 37  ]
+[e :U 38 ]
+}
+"206
+[; ;rendering.c: 206: DisplayBrightness LEDBrightness = BrightnessCTRL(access_line);
+[v _LEDBrightness `S2 ~T0 @X0 1 a ]
+[e = _LEDBrightness ( _BrightnessCTRL (1 _access_line ]
+"208
+[; ;rendering.c: 208: if(LEDBrightness.LED_Left_Brightness >= time_Slot){
+[e $ ! >= -> . _LEDBrightness 0 `i -> _time_Slot `i 40  ]
+{
+"209
+[; ;rendering.c: 209:     LED_Data.Left_Common_Line_Data = Left_DisplayData[access_line];
+[e = . _LED_Data 0 *U + &U _Left_DisplayData * -> _access_line `ux -> -> # *U &U _Left_DisplayData `ui `ux ]
+"211
+[; ;rendering.c: 211: }else{
+}
+[e $U 41  ]
+[e :U 40 ]
+{
+"212
+[; ;rendering.c: 212:     LED_Data.Left_Common_Line_Data = 0;
+[e = . _LED_Data 0 -> -> 0 `i `uc ]
+"213
+[; ;rendering.c: 213: }
+}
+[e :U 41 ]
+"215
+[; ;rendering.c: 215: if(LEDBrightness.LED_Right_Brightness >= time_Slot){
+[e $ ! >= -> . _LEDBrightness 1 `i -> _time_Slot `i 42  ]
+{
+"216
+[; ;rendering.c: 216:     LED_Data.Right_Common_Line_Data = Right_DisplayData[access_line];
+[e = . _LED_Data 1 *U + &U _Right_DisplayData * -> _access_line `ux -> -> # *U &U _Right_DisplayData `ui `ux ]
+"218
+[; ;rendering.c: 218: }else{
+}
+[e $U 43  ]
+[e :U 42 ]
+{
+"219
+[; ;rendering.c: 219:     LED_Data.Right_Common_Line_Data = 0;
+[e = . _LED_Data 1 -> -> 0 `i `uc ]
+"220
+[; ;rendering.c: 220: }
+}
+[e :U 43 ]
+"223
+[; ;rendering.c: 223: LED_Data.Left_Common_Line_Data = ReverseByte(LED_Data.Left_Common_Line_Data);
+[e = . _LED_Data 0 ( _ReverseByte (1 . _LED_Data 0 ]
+"224
+[; ;rendering.c: 224: LED_Data.Right_Common_Line_Data = ReverseByte(LED_Data.Right_Common_Line_Data);
+[e = . _LED_Data 1 ( _ReverseByte (1 . _LED_Data 1 ]
+"225
+[; ;rendering.c: 225: LED_Data.AccessLine.AccessLineMembers.Access_Line_High = ReverseByte(LED_Data.AccessLine.AccessLineMembers.Access_Line_High);
+[e = . . . _LED_Data 2 1 1 ( _ReverseByte (1 . . . _LED_Data 2 1 1 ]
+"226
+[; ;rendering.c: 226: LED_Data.AccessLine.AccessLineMembers.Access_Line_Low = ReverseByte(LED_Data.AccessLine.AccessLineMembers.Access_Line_Low);
+[e = . . . _LED_Data 2 1 0 ( _ReverseByte (1 . . . _LED_Data 2 1 0 ]
+"228
+[; ;rendering.c: 228:     return LED_Data;
+[e ) _LED_Data ]
+[e $UE 36  ]
+"229
+[; ;rendering.c: 229: }
+[e :UE 36 ]
 }

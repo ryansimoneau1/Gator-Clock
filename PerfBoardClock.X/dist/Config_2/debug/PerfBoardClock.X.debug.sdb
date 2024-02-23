@@ -3,10 +3,6 @@
 [d edition pro ]
 [d chip 16LF1826 ]
 [d frameptr 6 ]
-"4 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\lbdiv.c
-[v ___lbdiv __lbdiv `(uc  1 e 1 0 ]
-"4 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\lbmod.c
-[v ___lbmod __lbmod `(uc  1 e 1 0 ]
 "10 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\sprcadd.c
 [v ___fladd __fladd `(d  1 e 4 0 ]
 "4 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\Umul8_16.c
@@ -17,6 +13,10 @@
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
 "65 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/eusart.c
 [v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]
+"103
+[v _EUSART_is_tx_done EUSART_is_tx_done `(a  1 e 1 0 ]
+"138
+[v _EUSART_Write EUSART_Write `(v  1 e 1 0 ]
 "150
 [v _EUSART_DefaultFramingErrorHandler EUSART_DefaultFramingErrorHandler `(v  1 e 1 0 ]
 "152
@@ -41,15 +41,33 @@
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
 "64 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/tmr0.c
 [v _TMR0_Initialize TMR0_Initialize `(v  1 e 1 0 ]
+"96
+[v _TMR0_WriteTimer TMR0_WriteTimer `(v  1 e 1 0 ]
 "108
 [v _TMR0_ISR TMR0_ISR `(v  1 e 1 0 ]
 "125
 [v _TMR0_SetInterruptHandler TMR0_SetInterruptHandler `(v  1 e 1 0 ]
 "129
 [v _TMR0_DefaultInterruptHandler TMR0_DefaultInterruptHandler `(v  1 e 1 0 ]
-"63 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\PerfBoardClock.c
+"88 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\PerfBoardClock.c
 [v _main main `(v  1 e 1 0 ]
-[s S212 . 1 `uc 1 IOCIF 1 0 :1:0 
+"150
+[v _RenderingTimer_ISR RenderingTimer_ISR `(v  1 e 1 0 ]
+"59 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X/rendering.h
+[s S111 DisplayBrightness 2 `uc 1 LED_Left_Brightness 1 0 `uc 1 LED_Right_Brightness 1 1 ]
+"157 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\rendering.c
+[v _BrightnessCTRL BrightnessCTRL `(S111  1 e 2 0 ]
+"177
+[v _ReverseByte ReverseByte `(uc  1 e 1 0 ]
+"64 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X/rendering.h
+"68
+"70
+[s S114 AccessLineMembers 2 `uc 1 Access_Line_Low 1 0 `uc 1 Access_Line_High 1 1 ]
+"189 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\rendering.c
+[u S117 AccessLine 2 `us 1 Full_Access_Line 2 0 `S114 1 AccessLineMembers 2 0 ]
+[s S120 RendererOutputs 4 `uc 1 Left_Common_Line_Data 1 0 `uc 1 Right_Common_Line_Data 1 1 `S117 1 AccessLine 2 2 ]
+[v _Renderer Renderer `(S120  1 e 4 0 ]
+[s S307 . 1 `uc 1 IOCIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 IOCIE 1 0 :1:3 
@@ -59,13 +77,25 @@
 `uc 1 GIE 1 0 :1:7 
 ]
 "374 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC12-16F1xxx_DFP/1.6.241/xc8\pic\include\proc\pic16lf1826.h
-[s S221 . 1 `uc 1 . 1 0 :2:0 
+[s S316 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 T0IE 1 0 :1:5 
 ]
-[u S226 . 1 `S212 1 . 1 0 `S221 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES226  1 e 1 @11 ]
+[u S321 . 1 `S307 1 . 1 0 `S316 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES321  1 e 1 @11 ]
+[s S449 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSP1IF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+`uc 1 TMR1GIF 1 0 :1:7 
+]
+"570
+[u S458 . 1 `S449 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES458  1 e 1 @17 ]
 "660
 [v _TMR0 TMR0 `VEuc  1 e 1 @21 ]
 "1080
@@ -99,6 +129,18 @@
 [v _OSCCON OSCCON `VEuc  1 e 1 @153 ]
 "1895
 [v _LATA LATA `VEuc  1 e 1 @268 ]
+[s S240 . 1 `uc 1 LATA0 1 0 :1:0 
+`uc 1 LATA1 1 0 :1:1 
+`uc 1 LATA2 1 0 :1:2 
+`uc 1 LATA3 1 0 :1:3 
+`uc 1 LATA4 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 LATA6 1 0 :1:6 
+`uc 1 LATA7 1 0 :1:7 
+]
+"1912
+[u S249 . 1 `S240 1 . 1 0 ]
+[v _LATAbits LATAbits `VES249  1 e 1 @268 ]
 "1952
 [v _LATB LATB `VEuc  1 e 1 @269 ]
 "2286
@@ -111,28 +153,54 @@
 [v _ANSELA ANSELA `VEuc  1 e 1 @396 ]
 "2758
 [v _ANSELB ANSELB `VEuc  1 e 1 @397 ]
+"3037
+[v _TXREG TXREG `VEuc  1 e 1 @410 ]
 "3073
 [v _SPBRGL SPBRGL `VEuc  1 e 1 @411 ]
 "3123
 [v _SPBRGH SPBRGH `VEuc  1 e 1 @412 ]
 "3156
 [v _RCSTA RCSTA `VEuc  1 e 1 @413 ]
+[s S491 . 1 `uc 1 RX9D 1 0 :1:0 
+`uc 1 OERR 1 0 :1:1 
+`uc 1 FERR 1 0 :1:2 
+`uc 1 ADDEN 1 0 :1:3 
+`uc 1 CREN 1 0 :1:4 
+`uc 1 SREN 1 0 :1:5 
+`uc 1 RX9 1 0 :1:6 
+`uc 1 SPEN 1 0 :1:7 
+]
+"3173
+[u S500 . 1 `S491 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES500  1 e 1 @413 ]
 "3218
 [v _TXSTA TXSTA `VEuc  1 e 1 @414 ]
+[s S470 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"3235
+[u S479 . 1 `S470 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES479  1 e 1 @414 ]
 "3280
 [v _BAUDCON BAUDCON `VEuc  1 e 1 @415 ]
 "3332
 [v _WPUA WPUA `VEuc  1 e 1 @524 ]
 "3361
 [v _WPUB WPUB `VEuc  1 e 1 @525 ]
-[s S312 . 1 `uc 1 perr 1 0 :1:0 
+[s S403 . 1 `uc 1 perr 1 0 :1:0 
 `uc 1 ferr 1 0 :1:1 
 `uc 1 oerr 1 0 :1:2 
 `uc 1 reserved 1 0 :5:3 
 ]
 "52 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/eusart.c
-[u S317 . 1 `S312 1 . 1 0 `uc 1 status 1 0 ]
-[v _eusartRxLastError eusartRxLastError `VES317  1 e 1 0 ]
+[u S408 . 1 `S403 1 . 1 0 `uc 1 status 1 0 ]
+[v _eusartRxLastError eusartRxLastError `VES408  1 e 1 0 ]
 "57
 [v _EUSART_FramingErrorHandler EUSART_FramingErrorHandler `*.37(v  1 e 2 0 ]
 "58
@@ -143,10 +211,30 @@
 [v _timer0ReloadVal timer0ReloadVal `VEuc  1 e 1 0 ]
 "59
 [v _TMR0_InterruptHandler TMR0_InterruptHandler `*.37(v  1 e 2 0 ]
-"63 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\PerfBoardClock.c
+"52 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\PerfBoardClock.c
+[v _AccessLine AccessLine `uc  1 e 1 0 ]
+"53
+[v _TimeSlot TimeSlot `uc  1 e 1 0 ]
+"54
+[v _DisplayBuffer DisplayBuffer `[26]uc  1 e 26 0 ]
+"88
 [v _main main `(v  1 e 1 0 ]
 {
-"95
+[s S114 AccessLineMembers 2 `uc 1 Access_Line_Low 1 0 `uc 1 Access_Line_High 1 1 ]
+"111
+[u S117 AccessLine 2 `us 1 Full_Access_Line 2 0 `S114 1 AccessLineMembers 2 0 ]
+[s S120 RendererOutputs 4 `uc 1 Left_Common_Line_Data 1 0 `uc 1 Right_Common_Line_Data 1 1 `S117 1 AccessLine 2 2 ]
+[v main@Display Display `S120  1 a 4 0 ]
+"144
+} 0
+"96 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/tmr0.c
+[v _TMR0_WriteTimer TMR0_WriteTimer `(v  1 e 1 0 ]
+{
+[v TMR0_WriteTimer@timerVal timerVal `uc  1 a 1 wreg ]
+[v TMR0_WriteTimer@timerVal timerVal `uc  1 a 1 wreg ]
+"99
+[v TMR0_WriteTimer@timerVal timerVal `uc  1 a 1 1 ]
+"100
 } 0
 "50 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
@@ -166,7 +254,7 @@
 "125
 [v _TMR0_SetInterruptHandler TMR0_SetInterruptHandler `(v  1 e 1 0 ]
 {
-[v TMR0_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 0 ]
+[v TMR0_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 1 ]
 "127
 } 0
 "55 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/pin_manager.c
@@ -187,20 +275,91 @@
 "167
 [v _EUSART_SetOverrunErrorHandler EUSART_SetOverrunErrorHandler `(v  1 e 1 0 ]
 {
-[v EUSART_SetOverrunErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 0 ]
+[v EUSART_SetOverrunErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 1 ]
 "169
 } 0
 "163
 [v _EUSART_SetFramingErrorHandler EUSART_SetFramingErrorHandler `(v  1 e 1 0 ]
 {
-[v EUSART_SetFramingErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 0 ]
+[v EUSART_SetFramingErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 1 ]
 "165
 } 0
 "171
 [v _EUSART_SetErrorHandler EUSART_SetErrorHandler `(v  1 e 1 0 ]
 {
-[v EUSART_SetErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 0 ]
+[v EUSART_SetErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 1 ]
 "173
+} 0
+"64 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X/rendering.h
+"68
+"70
+[s S114 AccessLineMembers 2 `uc 1 Access_Line_Low 1 0 `uc 1 Access_Line_High 1 1 ]
+"189 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\rendering.c
+[u S117 AccessLine 2 `us 1 Full_Access_Line 2 0 `S114 1 AccessLineMembers 2 0 ]
+[s S120 RendererOutputs 4 `uc 1 Left_Common_Line_Data 1 0 `uc 1 Right_Common_Line_Data 1 1 `S117 1 AccessLine 2 2 ]
+[v _Renderer Renderer `(S120  1 e 4 0 ]
+{
+[v Renderer@access_line access_line `uc  1 a 1 wreg ]
+"201
+[v Renderer@i i `uc  1 a 1 31 ]
+"199
+[v Renderer@Right_DisplayData Right_DisplayData `[13]uc  1 a 13 15 ]
+"198
+[v Renderer@Left_DisplayData Left_DisplayData `[13]uc  1 a 13 2 ]
+"191
+[v Renderer@LED_Data LED_Data `S120  1 a 4 32 ]
+[s S111 DisplayBrightness 2 `uc 1 LED_Left_Brightness 1 0 `uc 1 LED_Right_Brightness 1 1 ]
+"206
+[v Renderer@LEDBrightness LEDBrightness `S111  1 a 2 28 ]
+"189
+[v Renderer@access_line access_line `uc  1 a 1 wreg ]
+[v Renderer@time_Slot time_Slot `uc  1 p 1 6 ]
+[v Renderer@DisplayBuffer DisplayBuffer `*.4uc  1 p 1 7 ]
+[v Renderer@F99 F99 `S120  1 s 4 F99 ]
+"191
+[v Renderer@access_line access_line `uc  1 a 1 30 ]
+"229
+} 0
+"177
+[v _ReverseByte ReverseByte `(uc  1 e 1 0 ]
+{
+[v ReverseByte@byte byte `uc  1 a 1 wreg ]
+"180
+[v ReverseByte@i i `uc  1 a 1 5 ]
+"178
+[v ReverseByte@ReversedByte ReversedByte `uc  1 a 1 4 ]
+"177
+[v ReverseByte@byte byte `uc  1 a 1 wreg ]
+[v ReverseByte@byte byte `uc  1 a 1 3 ]
+"186
+} 0
+"59 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X/rendering.h
+[s S111 DisplayBrightness 2 `uc 1 LED_Left_Brightness 1 0 `uc 1 LED_Right_Brightness 1 1 ]
+"157 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\rendering.c
+[v _BrightnessCTRL BrightnessCTRL `(S111  1 e 2 0 ]
+{
+[v BrightnessCTRL@AccessLine AccessLine `uc  1 a 1 wreg ]
+"158
+[v BrightnessCTRL@LEDBrightness LEDBrightness `S111  1 a 2 4 ]
+"157
+[v BrightnessCTRL@AccessLine AccessLine `uc  1 a 1 wreg ]
+[v BrightnessCTRL@F89 F89 `S111  1 s 2 F89 ]
+[v BrightnessCTRL@AccessLine AccessLine `uc  1 a 1 3 ]
+"175
+} 0
+"103 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/eusart.c
+[v _EUSART_is_tx_done EUSART_is_tx_done `(a  1 e 1 0 ]
+{
+"106
+} 0
+"138
+[v _EUSART_Write EUSART_Write `(v  1 e 1 0 ]
+{
+[v EUSART_Write@txData txData `uc  1 a 1 wreg ]
+[v EUSART_Write@txData txData `uc  1 a 1 wreg ]
+"140
+[v EUSART_Write@txData txData `uc  1 a 1 1 ]
+"147
 } 0
 "52 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
@@ -212,7 +371,12 @@
 {
 "122
 } 0
-"129
+"150 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\PerfBoardClock.c
+[v _RenderingTimer_ISR RenderingTimer_ISR `(v  1 e 1 0 ]
+{
+"161
+} 0
+"129 C:\Users\Projects\Documents\GitHub\PerfBoard-Clock-10_23\PerfBoardClock.X\mcc_generated_files/tmr0.c
 [v _TMR0_DefaultInterruptHandler TMR0_DefaultInterruptHandler `(v  1 e 1 0 ]
 {
 "132

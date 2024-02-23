@@ -45,19 +45,44 @@
 #include <xc.h>
 #include <stdio.h>
 #include "rendering.h"
-#include "clock.h"
+// #include "clock.h"
+
+void RenderingTimer_ISR(void);
 
 Uint8 AccessLine  = 0;
 Uint8 TimeSlot    = 0;
+Uint8 DisplayBuffer[26] = {
+  0b10000000,
+  0b10000100,
+  0b10000010,
+  0b11111111,
+  0b10000000,
+  0b10000000,
+  0b11000110,
+  0b10100001,
+  0b10010001,
+  0b10010001,
+  0b10001001,
+  0b10000110,
+  0b01100110,
+  0b01100110,
+  0b01100001,
+  0b10000001,
+  0b10001001,
+  0b10001101,
+  0b10001011,
+  0b01110001,
+  0b01111110,
+  0b10000001,
+  0b10000001,
+  0b10000001,
+  0b10000001,
+  0b01111110
+};
 
 // Defines
 
 // Variables
-
-Uint8 display_num = 0;
-Uint8 char_line = 0;
-Uint8 character_line = 0;
-//Uint8 NumBlockData = 0;
 // Functions
 
 void main() {
@@ -66,30 +91,54 @@ void main() {
     // Initialize EUSART
 //    EUSART_Initialize();
     // Initialize Timer
-//    TMR1_Initialize();
+   TMR0_Initialize();
+   TMR0_SetInterruptHandler(RenderingTimer_ISR);
 
     // When using interrupts, you need to set the Global and Peripheral Interrupt Enable bits
     // Use the following macros to:
 
     // Disable the Global Interrupts
-    //INTERRUPT_GlobalInterruptDisable();
+    // INTERRUPT_GlobalInterruptDisable();
 
     // Disable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptDisable();
     
     // Start Timer 1
-//    TMR1_StartTimer();
-    
-    Uint8 AccessLine = 9;
-    Uint8 Hours = 11;
-    Uint8 Minutes = 35;
+   TMR0_WriteTimer(191);
 
 //    NumBlockData = StructData(&NumberBlocks);
+
+RendererOutputs Display;
 
     
     while (1) {
 
+      Display = Renderer(AccessLine, TimeSlot, DisplayBuffer);
 
+      // SRC Reg Test
+        SRC_OE_SetHigh();
+        SNK_OE_SetHigh();
+        EUSART_Write(Display.AccessLine.AccessLineMembers.Access_Line_High);
+        while(!EUSART_is_tx_done()); // Wait for data to finish sending
+        __delay_us(100);
+        EUSART_Write(Display.AccessLine.AccessLineMembers.Access_Line_Low); 
+        while(!EUSART_is_tx_done()); // Wait for data to finish sending
+        __delay_us(100);
+        EUSART_Write(Display.Right_Common_Line_Data); 
+        while(!EUSART_is_tx_done()); // Wait for data to finish sending
+        __delay_us(100);
+        EUSART_Write(Display.Left_Common_Line_Data); 
+        while(!EUSART_is_tx_done()); // Wait for data to finish sending
+        // Latch in Data
+        SRC_RCLK_SetHigh();
+        SNK_LE_SetHigh();
+        __delay_us(100);
+        SRC_RCLK_SetLow();
+        SNK_LE_SetLow();
+        //Enable Register Output
+        SRC_OE_SetLow();
+        SNK_OE_SetLow();
+        __delay_us(100);
 
     }
 }
@@ -98,7 +147,18 @@ void main() {
  */
 
 // scan period timer interrupt
+void RenderingTimer_ISR(){
 
+    TimeSlot++;
+
+  if(TimeSlot > 4){
+    TimeSlot = 0;
+    AccessLine++;
+    if(AccessLine > 13){
+      AccessLine = 0;
+    }
+  }
+}
 
 
 // time of day timer interrupt
