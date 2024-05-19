@@ -37,6 +37,7 @@
       <itemPath>rendering.c</itemPath>
       <itemPath>clock.c</itemPath>
       <itemPath>PerfBoardClock.c</itemPath>
+      <itemPath>main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

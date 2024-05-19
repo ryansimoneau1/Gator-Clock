@@ -72,8 +72,8 @@ void EUSART_Initialize(void)
     // SPEN enabled; RX9 8-bit; CREN enabled; ADDEN disabled; SREN disabled; 
     RCSTA = 0x90;
 
-    // TX9 8-bit; TX9D 0; SENDB sync_break_complete; TXEN enabled; SYNC synchronous; BRGH hi_speed; CSRC slave; 
-    TXSTA = 0x34;
+    // TX9 8-bit; TX9D 0; SENDB sync_break_complete; TXEN enabled; SYNC synchronous; BRGH hi_speed; CSRC master; 
+    TXSTA = 0xB4;
 
     // SPBRGL 6; 
     SPBRGL = 0x06;

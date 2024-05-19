@@ -264,7 +264,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="EUSART" registerAlias="TXSTA"/>
-         <value>52</value>
+         <value>180</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="EUSART" registerAlias="BAUDCON" settingAlias="ABDEN"/>
@@ -364,7 +364,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="EUSART" registerAlias="TXSTA" settingAlias="CSRC"/>
-         <value>slave</value>
+         <value>master</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="EUSART" registerAlias="TXSTA" settingAlias="SENDB"/>
@@ -2702,7 +2702,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\eusart.c</file>
-         <hash>c000d25d0a90187fbfdaa0d323ac68fc939ca424fdd4a8a2807ed90fc0d79df5</hash>
+         <hash>c852705256a126322693e535d9b0aaf382604c874e136eb01bad7cef65abdb72</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\tmr0.c</file>
